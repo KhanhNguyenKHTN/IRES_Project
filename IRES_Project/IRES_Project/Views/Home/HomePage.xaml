@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:IRES_Project.Controls"
+             x:Class="IRES_Project.Views.Home.HomePage">
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"  x:Name="gridContent">
+            </Grid>
+            <control:Waitting Grid.Row="0" x:Name="waiting"></control:Waitting>
+            <Grid Grid.Row="1">
+                <control:TabMenu x:Name="tmvMainMenu"></control:TabMenu>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

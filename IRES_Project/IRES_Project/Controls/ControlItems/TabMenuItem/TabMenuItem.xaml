@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:IRES_Project.Controls"
+             x:Class="IRES_Project.Controls.ControlItems.TabMenuItem.TabMenuItem">
+    <ContentView.Resources>
+        <Color x:Key="ColorUnSelected">#bdbfbe</Color>
+        <Color x:Key="ColorSelected">#4a9eff</Color>
+        <Color x:Key="buttonTextColor">#ffffff</Color>
+        <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
+            <On Platform="Android" Value="icofont.ttf#icofont" />
+            <On Platform="iOS" Value="icofont" />
+        </OnPlatform>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <control:ButtonWithContent x:Name="CurTabViewItem">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.6*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" FontFamily="{StaticResource FontIcon}" Margin="0,3,0,0" VerticalTextAlignment="End" HorizontalOptions="Center" FontSize="25" Text="{Binding IconFont}" >
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="True">
+                            <Setter Property="TextColor" Value="{StaticResource ColorSelected}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource ColorUnSelected}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label Grid.Row="1" Text="{Binding LabName}" FontSize="12"  HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="True">
+                            <Setter Property="TextColor" Value="{StaticResource ColorSelected}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource ColorUnSelected}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Grid>
+        </control:ButtonWithContent>
+    </ContentView.Content>
+</ContentView>

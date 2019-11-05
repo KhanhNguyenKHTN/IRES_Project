@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IRES_Project.Views.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,13 @@ namespace IRES_Project.Views.Login
 			InitializeComponent ();
             btnSignUp.Clicked += BtnSignUp_Clicked;
             btnForgotPass.Clicked += BtnForgotPass_Clicked;
+            btnLogin.Clicked += BtnLogin_Clicked;
 		}
+
+        private async void BtnLogin_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new HomePage());
+        }
 
         private async void BtnForgotPass_Clicked(object sender, EventArgs e)
         {

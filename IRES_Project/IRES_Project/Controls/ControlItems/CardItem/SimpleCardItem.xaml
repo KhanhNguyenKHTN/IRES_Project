@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control ="clr-namespace:IRES_Project.Controls"
+             x:Class="IRES_Project.Controls.ControlItems.CardItem.SimpleCardItem">
+    <ContentView.Resources>
+        <Color x:Key="ColorUnSelected">#bdbfbe</Color>
+        <Color x:Key="ColorSelected">#4a9eff</Color>
+        <Color x:Key="buttonTextColor">#ffffff</Color>
+        <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
+            <On Platform="Android" Value="icofont.ttf#icofont" />
+            <On Platform="iOS" Value="icofont" />
+        </OnPlatform>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <control:ButtonWithContent WidthRequest="100" x:Name="CurTabViewItem" CornerRadius="10" HorizontalOptions="FillAndExpand" Padding="5,3,3,3" Margin="0,5">
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding LabName}" FontAttributes="Bold" FontSize="13" VerticalOptions="Center" HorizontalOptions="Fill" Grid.Column="0">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="True">
+                            <Setter Property="TextColor" Value="{StaticResource ColorSelected}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource ColorUnSelected}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label FontFamily="{StaticResource FontIcon}" Margin="2,0,0,0" HorizontalTextAlignment="End" Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="25" Text="{Binding IconFont}" >
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="True">
+                            <Setter Property="TextColor" Value="{StaticResource ColorSelected}"></Setter>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource ColorUnSelected}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Grid>
+        </control:ButtonWithContent>
+    </ContentView.Content>
+</ContentView>
