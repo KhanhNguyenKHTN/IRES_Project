@@ -13,7 +13,7 @@
         </OnPlatform>
     </ContentView.Resources>
     <ContentView.Content>
-        <control:ButtonWithContent x:Name="curCard" CornerRadius="10" Margin="0,5">
+        <control:ButtonWithContent x:Name="curCard" IsHasEffect="False" CornerRadius="10" Margin="0,5">
             <Grid WidthRequest="200">
                 <Grid.RowDefinitions>
                     <RowDefinition/>

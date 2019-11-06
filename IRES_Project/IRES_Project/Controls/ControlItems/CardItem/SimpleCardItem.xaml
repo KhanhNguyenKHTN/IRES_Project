@@ -13,7 +13,7 @@
         </OnPlatform>
     </ContentView.Resources>
     <ContentView.Content>
-        <control:ButtonWithContent WidthRequest="100" x:Name="CurTabViewItem" CornerRadius="10" HorizontalOptions="FillAndExpand" Padding="5,3,3,3" Margin="0,5">
+        <control:ButtonWithContent WidthRequest="100" IsHasEffect="False" x:Name="CurTabViewItem" CornerRadius="10" HorizontalOptions="FillAndExpand" Padding="5,3,3,3" Margin="0,5">
             <Grid VerticalOptions="FillAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

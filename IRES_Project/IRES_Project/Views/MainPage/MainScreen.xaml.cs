@@ -22,6 +22,7 @@ namespace IRES_Project.Views.MainPage
 			InitializeComponent ();
             RegisterEvent();
             GenarateData();
+            Button a = new Button();
         }
 
         private void RegisterEvent()
@@ -29,6 +30,30 @@ namespace IRES_Project.Views.MainPage
             lsSimpleCard.SelectionChanged += LsSimpleCard_SelectionChanged;
             lsCard.SelectionChanged += LsCard_SelectionChanged;
             lsCard2.SelectionChanged += LsCard2_SelectionChanged;
+            btnTable.Clicked += BtnTable_Clicked;
+            btnMenu.Clicked += BtnMenu_Clicked;
+            btnScan.Clicked += BtnScan_Clicked;
+            btnCart.Clicked += BtnCart_Clicked;
+        }
+
+        private void BtnCart_Clicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("Cart click");
+        }
+
+        private void BtnScan_Clicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("Scan click");
+        }
+
+        private void BtnMenu_Clicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("Menu click");
+        }
+
+        private void BtnTable_Clicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("Table click");
         }
 
         private void GenarateData()

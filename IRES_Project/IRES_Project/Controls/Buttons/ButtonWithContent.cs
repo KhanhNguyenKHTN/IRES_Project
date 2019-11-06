@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -8,6 +9,20 @@ namespace IRES_Project.Controls
 {
     public class ButtonWithContent: Frame
     {
+        //IsEffect
+        public static readonly BindableProperty IsHasEffectProperty =
+        BindableProperty.Create(
+            nameof(IsHasEffect),
+            typeof(bool),
+            typeof(ButtonWithContent),
+            true);
+
+        public bool IsHasEffect
+        {
+            get { return (bool)GetValue(IsHasEffectProperty); }
+            set { SetValue(IsHasEffectProperty, value); }
+        }
+
         //get comamnd
         public static readonly BindableProperty CommandProperty =
         BindableProperty.Create(
@@ -43,13 +58,12 @@ namespace IRES_Project.Controls
         {
             base.Padding = new Thickness(0);
             base.BorderColor = BackgroundColor;
-
-
             this.GestureRecognizers.Add(new TapGestureRecognizer()
             {
-                Command = new Command(() => {
-                    Clicked?.Invoke(this, EventArgs.Empty);
+                Command = new Command(async() => {
 
+                    await Preferences_Clicked();
+                    Clicked?.Invoke(this, EventArgs.Empty);
                     if (Command != null)
                     {
                         if (Command.CanExecute(CommandParameter))
@@ -57,6 +71,21 @@ namespace IRES_Project.Controls
                     }
                 })
             });
+        }
+        public async Task<bool>  Preferences_Clicked()
+        {
+            if (!IsHasEffect) return true;
+            const int _animationTime = 50;
+            try
+            {
+                await this.FadeTo(0.5, _animationTime);
+                await this.FadeTo(1, _animationTime);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

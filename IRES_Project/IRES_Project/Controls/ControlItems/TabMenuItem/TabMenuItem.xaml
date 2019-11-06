@@ -14,7 +14,7 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <control:ButtonWithContent x:Name="CurTabViewItem">
+        <control:ButtonWithContent x:Name="CurTabViewItem" IsHasEffect="False">
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1.6*"></RowDefinition>

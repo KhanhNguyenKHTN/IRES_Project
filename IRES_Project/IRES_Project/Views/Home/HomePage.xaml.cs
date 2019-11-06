@@ -21,10 +21,15 @@ namespace IRES_Project.Views.Home
 		{
 			InitializeComponent ();
             CreatMenu();
-            LoadMainPage();
+            LoadFirstContent();
             Console.WriteLine("Het Khoi tao!!!!!!!!");
         }
 
+        private async void LoadFirstContent()
+        {
+            await Task.Delay(500);
+            LoadMainPage();
+        }
 
         private void CreatMenu()
         {
@@ -43,7 +48,6 @@ namespace IRES_Project.Views.Home
         {
             var tab = sender as TabMenu;
             gridContent.Children.Clear();
-            waiting.IsEnabled = true;
             switch (tab.SelectedIndex)
             {
                 case 0:
@@ -56,25 +60,27 @@ namespace IRES_Project.Views.Home
                     
                     break;
                 case 3:
-                    
                     break;
                 default:
                     
                     break;
             }
+            Console.WriteLine("Het ham change!!!!!!!!");
         }
-        async void LoadMainPage()
+        void LoadMainPage()
         {
-            waiting.IsEnabled = true;
-            await Task.Delay(1000);
+            waiting.IsVisible = true;
+            //await Task.Delay(1000);
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork +=  (s,z) => {
                 z.Result = new MainPage.MainScreen();
+                Console.WriteLine("Chay background!!!!!!!");
             };
             wk.RunWorkerCompleted += (s, z) =>
             {
                 gridContent.Children.Add(z.Result as MainScreen);
                 waiting.IsVisible = false;
+                Console.WriteLine("Het background!!!!!!!!");
             };
             wk.RunWorkerAsync();
         }
