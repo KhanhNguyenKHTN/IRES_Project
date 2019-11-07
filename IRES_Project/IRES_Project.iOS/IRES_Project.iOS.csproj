@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\Combobox\PickerLessBorderRenderer.cs" />
     <Compile Include="Renderers\EntryRenderers\BorderEntryRender.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />

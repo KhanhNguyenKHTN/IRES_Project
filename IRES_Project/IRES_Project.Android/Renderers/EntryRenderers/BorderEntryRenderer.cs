@@ -60,4 +60,5 @@ namespace IRES_Project.Droid.Renderers
             return TypedValue.ApplyDimension(ComplexUnitType.Dip, valueInDp, metrics);
         }
     }
+
 }

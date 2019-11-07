@@ -61,7 +61,6 @@ namespace IRES_Project.Controls
             this.GestureRecognizers.Add(new TapGestureRecognizer()
             {
                 Command = new Command(async() => {
-
                     await Preferences_Clicked();
                     Clicked?.Invoke(this, EventArgs.Empty);
                     if (Command != null)
