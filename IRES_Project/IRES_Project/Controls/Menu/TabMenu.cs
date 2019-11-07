@@ -12,7 +12,7 @@ namespace IRES_Project.Controls
     public class TabMenu: ContentView
     {
         public static readonly BindableProperty ItemSourceProperty =
-   BindableProperty.Create(
+       BindableProperty.Create(
        nameof(ItemSource),
        typeof(ObservableCollection<object>),
        typeof(TabMenu),

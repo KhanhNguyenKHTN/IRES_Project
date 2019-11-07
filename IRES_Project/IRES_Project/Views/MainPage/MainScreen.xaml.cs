@@ -1,5 +1,6 @@
 ﻿using IRES_Project.Controls;
 using IRES_Project.Controls.ControlItems.CardItem;
+using IRES_Project.Views.Table;
 using Model.Models.Menu;
 using System;
 using System.Collections.Generic;
@@ -51,8 +52,9 @@ namespace IRES_Project.Views.MainPage
             Console.WriteLine("Menu click");
         }
 
-        private void BtnTable_Clicked(object sender, EventArgs e)
+        private async void BtnTable_Clicked(object sender, EventArgs e)
         {
+            await Navigation.PushModalAsync(new TableOrderPage());
             Console.WriteLine("Table click");
         }
 

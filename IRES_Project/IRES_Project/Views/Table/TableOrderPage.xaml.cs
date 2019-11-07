@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace IRES_Project.Views.Table
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class TableOrderPage : ContentPage
+    {
+        public TableOrderPage()
+        {
+            InitializeComponent();
+            cbbListFloor.ItemsSource = new List<string> { "Tầng 1", "Tầng 2", "Tầng 3", "Tầng 4" };
+            btnClick.Clicked += BtnClick_Clicked;
+        }
+
+        private void BtnClick_Clicked(object sender, EventArgs e)
+        {
+            cbbListFloor.Focus();
+        }
+    }
+}
