@@ -15,13 +15,8 @@ namespace IRES_Project.Views.Table
         public TableOrderPage()
         {
             InitializeComponent();
-            cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2", "Tầng 3", "Tầng 4" };
-            btnClick.Clicked += BtnClick_Clicked;
+            cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2", "Tầng 3", "Tầng 4" };                     
         }
-
-        private void BtnClick_Clicked(object sender, EventArgs e)
-        {
-            cbbListFloor.Focus();
-        }
+        
     }
 }

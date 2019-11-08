@@ -33,8 +33,9 @@ namespace IRES_Project.Droid.Renderers
                 // Remove borders
                 GradientDrawable gd = new GradientDrawable();
                 gd.SetStroke(0, Android.Graphics.Color.LightGray);
+                
                 Control.SetBackground(gd);
-                Control.SetPadding(1, 1, 1, 1);
+                Control.SetPadding(1, 1, 35, 1);
             }
         }
     }

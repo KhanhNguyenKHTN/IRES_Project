@@ -10,27 +10,25 @@
                     <RowDefinition Height="auto"/>
                     
                 </Grid.RowDefinitions>
-                <Frame CornerRadius="10" Padding="0">
+                <Frame CornerRadius="10" Padding="5" Margin="5">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35"/>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="35"/>
                             
                         </Grid.RowDefinitions>
-                        <Label Text="Chọn bàn:" FontAttributes="Bold" TextColor="Red"></Label>
+                        <Label Text="Chọn bàn:" FontAttributes="Bold" TextColor="Red" VerticalOptions="Center"></Label>
                         <Grid Grid.Row="1" Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" HeightRequest="30">
-                                <control:Combobox x:Name="cbbListFloor" WidthRequest="150"></control:Combobox>
+                            <Grid Grid.Column="0">
+                                <control:Combobox x:Name="cbbListFloor" WidthRequest="100"></control:Combobox>
                             </Grid>
 
-                            <Grid Grid.Column="2">
-                                <Button x:Name="btnClick" Text="click"></Button>
-                            </Grid>
+                            <control:CheckBoxLabel Grid.Column="2" VerticalOptions="End" Text="Chọn nhiều bàn"/>
                         </Grid>
                     </Grid>
                 </Frame>

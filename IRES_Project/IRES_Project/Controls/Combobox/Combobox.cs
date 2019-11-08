@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -24,21 +25,17 @@ namespace IRES_Project.Controls
 
 
         public PickerLessBorder Picker { get; set; }
-        private bool isFirst = true;
         public Combobox()
         {
-            Padding = new Thickness(5,2,0,2);
-            CornerRadius = 10;
+            base.Padding = 0;
+            Padding = new Thickness(7,0,2,0);
+
+            CornerRadius = 5;
             Grid content = new Grid()
             {
-                ColumnDefinitions = new ColumnDefinitionCollection() { new ColumnDefinition() { Width = GridLength.Star}, new ColumnDefinition() { Width = GridLength.Auto} }
+                ColumnDefinitions = new ColumnDefinitionCollection() { new ColumnDefinition() { Width = GridLength.Star}, new ColumnDefinition() { Width = GridLength.Auto} },
+                ColumnSpacing = 0
             };
-            Picker = new PickerLessBorder()
-            {
-                ItemsSource = ItemSource,                
-            };
-            content.Children.Add(Picker);
-            Grid.SetColumn(Picker, 0);
             Label lb = new Label()
             {
                 FontFamily = Device.RuntimePlatform == Device.Android ? "icofont.ttf#icofont" : "icofont",
@@ -47,24 +44,24 @@ namespace IRES_Project.Controls
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = Color.White,
-                
+                Margin = new Thickness(0)
             };
-            lb.GestureRecognizers.Clear();
-            lb.GestureRecognizers.Add(new TapGestureRecognizer()
-            {
-                Command = new Command(() =>
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        Console.WriteLine("ádddddddddddddddd");
-                        Picker.Focus();
-                    });
-                })
-            });
             content.Children.Add(lb);
             Grid.SetColumn(lb, 0);
+
+            Picker = new PickerLessBorder()
+            {
+                ItemsSource = ItemSource,             
+                WidthRequest = this.Width,
+                HeightRequest = this.Height,
+                FontSize = 17
+            };
+            content.Children.Add(Picker);
+            Grid.SetColumn(Picker, 0);
+            
             Content = content;
             
         }
     }
+
 }
