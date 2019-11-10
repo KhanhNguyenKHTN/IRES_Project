@@ -40,7 +40,7 @@ namespace IRES_Project.Controls
             Children.Add(checkBox);
             lb = new Label()
             {
-                Margin = new Thickness(1,0,0,0),
+                Margin = new Thickness(0),
             };
             Children.Add(lb);
 
@@ -49,7 +49,7 @@ namespace IRES_Project.Controls
                     checkBox.HandleCheck();
                 })
             });
-
+            
         }
 
         private void CheckBox_Checked(object sender, EventArgs e)

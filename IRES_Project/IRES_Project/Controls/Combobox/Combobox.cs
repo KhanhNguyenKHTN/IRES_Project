@@ -46,6 +46,7 @@ namespace IRES_Project.Controls
                 BackgroundColor = Color.White,
                 Margin = new Thickness(0)
             };
+
             content.Children.Add(lb);
             Grid.SetColumn(lb, 0);
 
@@ -54,7 +55,7 @@ namespace IRES_Project.Controls
                 ItemsSource = ItemSource,             
                 WidthRequest = this.Width,
                 HeightRequest = this.Height,
-                FontSize = 17
+                FontSize = 14
             };
             content.Children.Add(Picker);
             Grid.SetColumn(Picker, 0);

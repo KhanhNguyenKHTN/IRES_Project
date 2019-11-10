@@ -154,6 +154,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\IRES_Global\IRES_Global.csproj">
+      <Project>{98fc1589-3a85-454d-ac53-8876bc7bcfa3}</Project>
+      <Name>IRES_Global</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IRES_Project\IRES_Project.csproj">
       <Project>{CAC083E3-D9F1-4F0F-8FAF-6CF271F69F4F}</Project>
       <Name>IRES_Project</Name>

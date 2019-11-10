@@ -24,8 +24,13 @@ namespace IRES_Project.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            IRES_Global.GlobalInfo.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
+            IRES_Global.GlobalInfo.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
             return base.FinishedLaunching(app, options);
+        }
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+        {
+            return UIInterfaceOrientationMask.Portrait;
         }
     }
 }

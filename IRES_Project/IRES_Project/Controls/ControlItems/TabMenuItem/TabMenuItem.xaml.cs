@@ -17,6 +17,9 @@ namespace IRES_Project.Controls.ControlItems.TabMenuItem
         public TabMenuItemModel Data { get => _Data; set { if (value == null) return; _Data = value; BindingContext = Data; } }
 
         public event EventHandler<EventArgs> Clicked;
+
+        private float _CornerRadius = 0;
+        public float CornerRadius { get=> _CornerRadius; set { _CornerRadius = value; CurTabViewItem.CornerRadius = value; } }
         public TabMenuItem ()
 		{
 			InitializeComponent ();

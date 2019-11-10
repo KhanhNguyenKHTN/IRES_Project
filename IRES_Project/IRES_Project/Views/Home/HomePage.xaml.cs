@@ -29,6 +29,7 @@ namespace IRES_Project.Views.Home
         {
             await Task.Delay(500);
             LoadMainPage();
+           // await DisplayAlert( IRES_Global.GlobalInfo.ScreenWidth + ":" + IRES_Global.GlobalInfo.ScreenHeight, "a", "s");
         }
 
         private void CreatMenu()
@@ -62,23 +63,41 @@ namespace IRES_Project.Views.Home
                 case 3:
                     break;
                 default:
-                    
+                    LoadSettingPage();
                     break;
             }
             Console.WriteLine("Het ham change!!!!!!!!");
+            
         }
-        void LoadMainPage()
+
+        private void LoadMainPage()
         {
             waiting.IsVisible = true;
-            //await Task.Delay(1000);
             BackgroundWorker wk = new BackgroundWorker();
-            wk.DoWork +=  (s,z) => {
+            wk.DoWork += (s, z) => {
                 z.Result = new MainPage.MainScreen();
                 Console.WriteLine("Chay background!!!!!!!");
             };
             wk.RunWorkerCompleted += (s, z) =>
             {
                 gridContent.Children.Add(z.Result as MainScreen);
+                waiting.IsVisible = false;
+                Console.WriteLine("Het background!!!!!!!!");
+            };
+            wk.RunWorkerAsync();
+        }
+
+        void LoadSettingPage()
+        {
+            waiting.IsVisible = true;
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork +=  (s,z) => {
+                z.Result = new Settings.SettingPage();
+                Console.WriteLine("Chay background!!!!!!!");
+            };
+            wk.RunWorkerCompleted += (s, z) =>
+            {
+                gridContent.Children.Add(z.Result as Settings.SettingPage);
                 waiting.IsVisible = false;
                 Console.WriteLine("Het background!!!!!!!!");
             };
