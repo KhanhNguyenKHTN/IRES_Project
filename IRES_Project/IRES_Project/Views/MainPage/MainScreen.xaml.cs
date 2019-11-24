@@ -121,7 +121,7 @@ namespace IRES_Project.Views.MainPage
                     AutoRotate = false,
                     UseFrontCameraIfAvailable = false,
                     TryHarder = true,
-                   
+
                 };
 
                 var overlay = new ZXingDefaultOverlay
@@ -130,27 +130,29 @@ namespace IRES_Project.Views.MainPage
                     BottomText = "Align the QR code within the frame"
                 };
                 var grid = new Grid();
-                RowDefinition row1 = new RowDefinition() { Height = 200 };
+                RowDefinition row1 = new RowDefinition() { Height = 150 };
                 RowDefinition row2 = new RowDefinition();
-                RowDefinition row3 = new RowDefinition() { Height = 200 };
+                RowDefinition row3 = new RowDefinition() { Height = 150 };
 
                 grid.RowDefinitions.Add(row1);
                 grid.RowDefinitions.Add(row2);
                 grid.RowDefinitions.Add(row3);
                 Label edit = new Label()
                 {
-                    Text = "Test layout Scan" + Environment.NewLine + "(Mr.Khanh)",
+                    Text = "Đặt mã QR vào khung hình",
                     FontSize = 24,
                     HorizontalTextAlignment = TextAlignment.Center,
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     VerticalTextAlignment = TextAlignment.Center,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
-                    TextColor = Color.Red,
+                    TextColor = Color.Blue,
                 };
-                Grid.SetRow(edit, 0);
-                grid.Children.Add(edit);
+                Grid grid1 = new Grid() { BackgroundColor = Color.Black, Opacity = 0.4f, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
+                grid1.Children.Add(edit);
+                Grid.SetRow(grid1, 0);
+                grid.Children.Add(grid1);
 
-                var QRScanner = new ZXingScannerPage(options, null);
+                var QRScanner = new ZXingScannerPage(options, grid);
 
                 await Navigation.PushModalAsync(QRScanner);
 
