@@ -43,15 +43,26 @@ namespace IRES_Project.Droid.Renderers
                     // set the background of the label
                     Control.SetBackground(_gradientBackground);
 
-
                 }
-
-                // Set padding for the internal text from border
-                Control.SetPadding(
-                    (int)DpToPixels(this.Context, Convert.ToSingle(12)),
-                    Control.PaddingTop,
-                    (int)DpToPixels(this.Context, Convert.ToSingle(12)),
-                    Control.PaddingBottom);
+                if (view.isCustomPading)
+                {
+                    // Set padding for the internal text from border
+                    Control.SetPadding(
+                       view.Left,
+                       view.Top,
+                        view.Right,
+                        view.Bottom);
+                }
+                else
+                {
+                    // Set padding for the internal text from border
+                    Control.SetPadding(
+                        (int)DpToPixels(this.Context, Convert.ToSingle(10)),
+                        Control.PaddingTop,
+                        (int)DpToPixels(this.Context, Convert.ToSingle(10)),
+                        Control.PaddingBottom);
+                }
+                
             }
         }
         public static float DpToPixels(Context context, float valueInDp)

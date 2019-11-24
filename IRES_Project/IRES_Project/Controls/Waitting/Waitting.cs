@@ -27,5 +27,7 @@ namespace IRES_Project.Controls
             Grid.SetRow(ac, 1);
             Content = grid;
         }
+        public void Show() { this.IsVisible = true; }
+        public void Hide() { this.IsVisible = false; }
     }
 }

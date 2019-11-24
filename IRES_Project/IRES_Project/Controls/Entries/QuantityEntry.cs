@@ -18,32 +18,51 @@ namespace IRES_Project.Controls
             Button minus = new Button()
             {
                 FontFamily = Device.RuntimePlatform == Device.Android ? "icofont.ttf#icofont" : "icofont",
-                BackgroundColor = this.BackgroundColor,
+                BackgroundColor = Color.FromHex("#ffdaa6"),
                 Text = "\uef9a",
                 TextColor = Color.FromHex("#00DFF7"),
                 WidthRequest = 35,
-                BorderColor = Color.LightGray
+                BorderColor = Color.LightGray,
+                Padding =2
             };
             minus.Clicked += (s, e) => { if (Quantity != 0) Quantity--; };
             Button add = new Button()
             {
                 FontFamily = Device.RuntimePlatform == Device.Android ? "icofont.ttf#icofont" : "icofont",
-                BackgroundColor = this.BackgroundColor,
+                BackgroundColor = Color.FromHex("#ffdaa6"),
                 Text = "\uefc2",
                 TextColor = Color.FromHex("#00DFF7"),
                 WidthRequest = 35,
-                BorderColor = Color.LightGray
+                BorderColor = Color.LightGray,
+                Padding = 2
             };
             add.Clicked += (s, e) => { Quantity++; };
+            Frame frame = new Frame()
+            {
+                Padding = new Thickness(2),
+                BorderColor = Color.LightGray,
+                HasShadow = false,
+                CornerRadius = 0
+            };
+
             BorderEntry entry = new BorderEntry()
             {
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
                 IsCurvedCornersEnabled = true,
                 CornerRadius = 0,
-                BorderWidth = 1,
+                BorderWidth = 0,
                 BorderColor = add.BorderColor,
-                HorizontalTextAlignment = TextAlignment.Center,    
-                Keyboard = Keyboard.Numeric
+                HorizontalTextAlignment = TextAlignment.Center,
+                FontSize = 14,
+                isCustomPading = true,
+                Top = 2,
+                Left = 5,
+                Right = 5,
+                Bottom = 2,
+                Keyboard = Keyboard.Numeric,
             };
+            frame.Content = entry;
             
             entry.SetBinding(Entry.TextProperty, new Binding() {Source  = this, Path="Quantity", Mode=BindingMode.TwoWay});
 
@@ -53,8 +72,8 @@ namespace IRES_Project.Controls
             this.Children.Add(add);
             Grid.SetColumn(add, 2);
 
-            this.Children.Add(entry);
-            Grid.SetColumn(entry, 1);
+            this.Children.Add(frame);
+            Grid.SetColumn(frame, 1);
 
         }
     }

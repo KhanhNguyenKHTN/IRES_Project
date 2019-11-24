@@ -20,7 +20,6 @@ namespace IRES_Project.Views.Home
 		public HomePage ()
 		{
 			InitializeComponent ();
-            CreatMenu();
             LoadFirstContent();
             Console.WriteLine("Het Khoi tao!!!!!!!!");
         }
@@ -28,6 +27,8 @@ namespace IRES_Project.Views.Home
         private async void LoadFirstContent()
         {
             await Task.Delay(500);
+            waiting.IsVisible = true;
+            CreatMenu();
             LoadMainPage();
            // await DisplayAlert( IRES_Global.GlobalInfo.ScreenWidth + ":" + IRES_Global.GlobalInfo.ScreenHeight, "a", "s");
         }

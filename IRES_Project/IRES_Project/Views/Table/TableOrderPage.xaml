@@ -59,6 +59,8 @@
                         </ScrollView>-->
                     </Grid>
                 </Frame>
+
+                <control:Waitting x:Name="waitting" Grid.RowSpan="3" IsVisible="False"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

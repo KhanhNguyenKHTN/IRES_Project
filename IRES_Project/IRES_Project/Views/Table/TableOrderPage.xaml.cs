@@ -16,6 +16,14 @@ namespace IRES_Project.Views.Table
         public TableOrderPage()
         {
             InitializeComponent();
+            CreateContent();
+        }
+
+        public async void CreateContent()
+        {
+           
+            await Task.Delay(200);
+            waitting.IsVisible = true;
             cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2", "Tầng 3", "Tầng 4" };
             cbbListFloor.Picker.SelectedIndex = 0;
             tableMap.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 1" },
@@ -34,7 +42,7 @@ namespace IRES_Project.Views.Table
                 //new TabMenuItemModel() { IconFont = "\ueea3", LabName= "Thông báo" },
                 //new TabMenuItemModel() { IconFont = "\uecfd", LabName= "Tài khoản"}
                 };
+            waitting.IsVisible = false;
         }
-        
     }
 }

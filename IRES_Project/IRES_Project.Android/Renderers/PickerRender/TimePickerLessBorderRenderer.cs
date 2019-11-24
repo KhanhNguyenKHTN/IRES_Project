@@ -23,7 +23,7 @@ namespace IRES_Project.Droid.Renderers
                 gd.SetStroke(0, Android.Graphics.Color.LightGray);
 
                 Control.SetBackground(gd);
-                Control.SetPadding(50, 1, 1, 1);
+                Control.SetPadding(55, 1, 1, 1);
             }
         }
     }
