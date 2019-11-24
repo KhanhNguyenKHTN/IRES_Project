@@ -12,18 +12,21 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZXing.Mobile;
+using ZXing.Net.Mobile.Forms;
 
 namespace IRES_Project.Views.MainPage
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainScreen : ContentView
 	{
+        //public event EventHandler<EventArgs> ScanSuccessEvent;
 		public MainScreen ()
 		{
 			InitializeComponent ();
             RegisterEvent();
             GenarateData();
-            Button a = new Button();
+            Button a = new Button();            
         }
 
         private void RegisterEvent()
@@ -44,7 +47,7 @@ namespace IRES_Project.Views.MainPage
 
         private void BtnScan_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine("Scan click");
+            Scan();
         }
 
         private void BtnMenu_Clicked(object sender, EventArgs e)
@@ -108,5 +111,89 @@ namespace IRES_Project.Views.MainPage
         {
             scrListSimpleCard.ScrollToAsync((sender as TabMenu).SelectedViewItem as SimpleCardItem, ScrollToPosition.Start, true);
         }
+
+        public async void Scan()
+        {
+            try
+            {
+                var options = new MobileBarcodeScanningOptions
+                {
+                    AutoRotate = false,
+                    UseFrontCameraIfAvailable = false,
+                    TryHarder = true,
+                   
+                };
+
+                var overlay = new ZXingDefaultOverlay
+                {
+                    TopText = "Please scan QR code",
+                    BottomText = "Align the QR code within the frame"
+                };
+                var grid = new Grid();
+                RowDefinition row1 = new RowDefinition() { Height = 200 };
+                RowDefinition row2 = new RowDefinition();
+                RowDefinition row3 = new RowDefinition() { Height = 200 };
+
+                grid.RowDefinitions.Add(row1);
+                grid.RowDefinitions.Add(row2);
+                grid.RowDefinitions.Add(row3);
+                Label edit = new Label()
+                {
+                    Text = "Test layout Scan" + Environment.NewLine + "(Mr.Khanh)",
+                    FontSize = 24,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalTextAlignment = TextAlignment.Center,
+                    VerticalOptions = LayoutOptions.CenterAndExpand,
+                    TextColor = Color.Red,
+                };
+                Grid.SetRow(edit, 0);
+                grid.Children.Add(edit);
+
+                var QRScanner = new ZXingScannerPage(options, null);
+
+                await Navigation.PushModalAsync(QRScanner);
+
+                QRScanner.OnScanResult += (result) =>
+                {
+                    // Stop scanning
+                    QRScanner.IsScanning = false;
+                    
+                    // Pop the page and show the result
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        try
+                        {
+                            MessagingCenter.Send<MainScreen>(this, result.Text);
+                            Console.WriteLine("daaaaaaaaaaaaaaaa" + result.Text);
+                            await Navigation.PopModalAsync(true);
+                            //strAccessToken.Text = result.Text.ToUpper().Trim();
+                            // DisplayAlert("Scanned Barcode", result.Text, "OK");
+                           // txtBarcode.Text = result.Text;
+                            //Navigation.PushModalAsync(new ScanQRPage() { txtBarcode.Text = result.Text;});
+                        }
+                        catch
+                        {
+                            MessagingCenter.Send<MainScreen>(this, result.Text);
+                            Console.WriteLine("daaaaaaaaaaaaaaaa" + result.Text);
+                            await Navigation.PopModalAsync(true);
+                        }
+
+
+                    });
+
+                };
+
+            }
+            catch (Exception ex)
+            {
+                // GlobalScript.SeptemberDebugMessages("ERROR", "BtnScanQR_Clicked", "Opening ZXing Failed: " + ex);
+                Device.BeginInvokeOnMainThread(() => {
+                   
+                   // DisplayAlert("Scanned Barcode", ex.ToString(), "OK");
+                });
+            }
+        }
+        
     }
 }

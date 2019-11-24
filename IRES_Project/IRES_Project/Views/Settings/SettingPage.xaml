@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IRES_Project.Views.Settings.SettingPage">
   <ContentView.Content>
-        <AbsoluteLayout BackgroundColor="YellowGreen"></AbsoluteLayout>
+        <AbsoluteLayout BackgroundColor="YellowGreen">
+            
+        </AbsoluteLayout>
   </ContentView.Content>
 </ContentView>

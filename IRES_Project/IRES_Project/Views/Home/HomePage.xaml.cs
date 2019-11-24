@@ -43,6 +43,7 @@ namespace IRES_Project.Views.Home
                 new TabMenuItemModel() { IconFont = "\uecfd", LabName= "Tài khoản"}
             };
             tmvMainMenu.SelectionChanged += TmvMainMenu_SelectionChanged;
+            
         }
 
         private void TmvMainMenu_SelectionChanged(object sender, EventArgs e)
