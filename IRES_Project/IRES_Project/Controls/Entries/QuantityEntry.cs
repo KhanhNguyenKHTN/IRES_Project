@@ -55,11 +55,7 @@ namespace IRES_Project.Controls
                 BorderColor = add.BorderColor,
                 HorizontalTextAlignment = TextAlignment.Center,
                 FontSize = 14,
-                isCustomPading = true,
-                Top = 2,
-                Left = 5,
-                Right = 5,
-                Bottom = 2,
+                Padding = new Thickness(5,2,5,2),
                 Keyboard = Keyboard.Numeric,
             };
             frame.Content = entry;

@@ -44,25 +44,17 @@ namespace IRES_Project.Droid.Renderers
                     Control.SetBackground(_gradientBackground);
 
                 }
-                if (view.isCustomPading)
-                {
-                    // Set padding for the internal text from border
-                    Control.SetPadding(
-                       view.Left,
-                       view.Top,
-                        view.Right,
-                        view.Bottom);
-                }
-                else
-                {
-                    // Set padding for the internal text from border
-                    Control.SetPadding(
-                        (int)DpToPixels(this.Context, Convert.ToSingle(10)),
-                        Control.PaddingTop,
-                        (int)DpToPixels(this.Context, Convert.ToSingle(10)),
-                        Control.PaddingBottom);
-                }
-                
+                Control.SetPadding(
+                       (int)DpToPixels(this.Context, Convert.ToSingle((int)view.Padding.Left)),
+                       (int)DpToPixels(this.Context, Convert.ToSingle((int)view.Padding.Top)),
+                       (int)DpToPixels(this.Context, Convert.ToSingle((int)view.Padding.Right)),
+                       (int)DpToPixels(this.Context, Convert.ToSingle((int)view.Padding.Bottom)));
+                //Control.SetPadding(
+                //       (int)DpToPixels(this.Context, Convert.ToSingle(10)),
+                //       Control.PaddingTop,
+                //       (int)DpToPixels(this.Context, Convert.ToSingle(10)),
+                //       Control.PaddingBottom);
+
             }
         }
         public static float DpToPixels(Context context, float valueInDp)

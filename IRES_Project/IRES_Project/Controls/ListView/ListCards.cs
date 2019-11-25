@@ -9,20 +9,6 @@ namespace IRES_Project.Controls
 {
     public class ListCards: TabMenu
     {
-       // public static readonly BindableProperty ItemSourceProperty =
-       //BindableProperty.Create(
-       //nameof(ItemSource),
-       //typeof(ObservableCollection<object>),
-       //typeof(TabMenu),
-       //new ObservableCollection<object>());
-
-       // public View Content
-       // {
-       //     get { return (ObservableCollection<object>)GetValue(ItemSourceProperty); }
-       //     set { SetValue(ItemSourceProperty, value); DrawItems(); }
-       // }
-
-
         protected override void DrawItems()
         {
             StackLayout stack = new StackLayout() { Orientation = StackOrientation.Horizontal };

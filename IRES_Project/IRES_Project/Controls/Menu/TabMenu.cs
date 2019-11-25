@@ -21,10 +21,16 @@ namespace IRES_Project.Controls
         public ObservableCollection<object> ItemSource
         {
             get { return (ObservableCollection<object>)GetValue(ItemSourceProperty); }
-            set { SetValue(ItemSourceProperty, value); DrawItems(); }
+            set { SetValue(ItemSourceProperty, value);
+                DrawItems(); value.CollectionChanged += ItemSource_CollectionChanged;
+            }
         }
 
-
+        public event EventHandler<System.Collections.Specialized.NotifyCollectionChangedEventArgs> ItemSourceChange;
+        private void ItemSource_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            ItemSourceChange?.Invoke(sender, e);
+        }
 
         protected virtual void DrawItems()
         {

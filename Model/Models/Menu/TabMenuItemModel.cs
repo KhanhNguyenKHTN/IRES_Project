@@ -17,5 +17,8 @@ namespace Model.Models.Menu
         public string LabName { get => _LabName; set { _LabName = value; OnPropertyChanged(); } }
 
         public object Tag { get; set; }
+
+        private bool _IsSelected;
+        public bool IsSelected { get => _IsSelected; set { _IsSelected = value; OnPropertyChanged(); } }
     }
 }

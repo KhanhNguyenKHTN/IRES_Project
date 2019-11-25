@@ -11,5 +11,11 @@ namespace Model.Models.Menu
         public int Likes { get; set; }
 
         public string ImagesSource { get; set; }
+
+        public string Cost { get; set; } // temp for food menu
+
+        private bool _IsSoldOut;
+        public bool IsSoldOut { get => _IsSoldOut; set { _IsSoldOut = value; OnPropertyChanged(); } }
+
     }
 }

@@ -61,12 +61,26 @@ namespace IRES_Project.Controls
             typeof(BorderEntry),
             true);
 
-        public bool isCustomPading { get; set; }
+        public static readonly BindableProperty PaddingProperty =
+        BindableProperty.Create(
+            nameof(Padding),
+            typeof(Thickness),
+            typeof(BorderEntry),
+            new Thickness(12));
 
-        public int Top { get; set; }
-        public int Left { get; set; }
-        public int Right { get; set; }
-        public int Bottom { get; set; }
+        // Gets or sets CornerRadius value
+        public Thickness Padding
+        {
+            get { return (Thickness)GetValue(PaddingProperty); }
+            set { SetValue(PaddingProperty, value); }
+        }
+        //public bool isCustomPading { get; set; }
+
+        //public int Top { get; set; }
+        //public int Left { get; set; }
+        //public int Right { get; set; }
+        //public int Bottom { get; set; }
+
         // Gets or sets IsCurvedCornersEnabled value
         public bool IsCurvedCornersEnabled
         {
