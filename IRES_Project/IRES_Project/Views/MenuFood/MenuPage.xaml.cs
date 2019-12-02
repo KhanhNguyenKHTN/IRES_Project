@@ -23,21 +23,19 @@ namespace IRES_Project.Views.MenuFood
            // layoutTest.Children.Add(new StackLayout() { BackgroundColor = Color.Black, HeightRequest = 100 });
         }
 
-        public async void LoadData()
+        public void LoadData()
         {
-            await Task.Delay(500);
-            waiting.Show();
-            BackgroundWorker wk = new BackgroundWorker();
-            wk.DoWork += (x, z) => {
-                GenerateData();
-            };
-            wk.RunWorkerCompleted += (x, z) =>
-            {
-            };
-            wk.RunWorkerAsync();
+            GenerateData();
         }
         private void GenerateData()
         {
+            var listBanner = new ObservableCollection<object>()
+            {
+                 new CardItemModel() { IsActived = true, LabName= "Tất cả" , ImagesSource = "bannerFood1.jpg" },
+                        new CardItemModel() {  LabName="Khai vị", ImagesSource = "bannerFood2.jpg"},
+                         new CardItemModel() { LabName= "Món chính" , ImagesSource = "bannerFood3.jpg"},
+                         new CardItemModel() { LabName= "Tráng miệng", ImagesSource = "bannerFood4.jpg"},
+            };
             var listSimpleCard = new ObservableCollection<object>()
             {
                  new TabMenuItemModel() { IsActived = true, LabName= "Tất cả" },
@@ -98,11 +96,12 @@ namespace IRES_Project.Views.MenuFood
             lsFoodCard4.ItemSource = listFood4;
             lsListCatagory.ItemSource = listSimpleCard;
             lsListType.ItemSource = listType;
-            lsFoodCard1.UpdateUI();
-            lsFoodCard2.UpdateUI();
-            lsFoodCard3.UpdateUI();
-            lsFoodCard4.UpdateUI();
-            waiting.Hide();
+            banner.ItemSource = listBanner;
+            //lsFoodCard1.UpdateUI();
+            //lsFoodCard2.UpdateUI();
+            //lsFoodCard3.UpdateUI();
+            //lsFoodCard4.UpdateUI();
+            //waiting.Hide();
         }
 
         private  void ButtonWithContent_Clicked(object sender, EventArgs e)

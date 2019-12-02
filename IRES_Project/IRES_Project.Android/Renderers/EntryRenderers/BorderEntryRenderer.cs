@@ -49,12 +49,6 @@ namespace IRES_Project.Droid.Renderers
                        (int)DpToPixels(this.Context, Convert.ToSingle((int)view.Padding.Top)),
                        (int)DpToPixels(this.Context, Convert.ToSingle((int)view.Padding.Right)),
                        (int)DpToPixels(this.Context, Convert.ToSingle((int)view.Padding.Bottom)));
-                //Control.SetPadding(
-                //       (int)DpToPixels(this.Context, Convert.ToSingle(10)),
-                //       Control.PaddingTop,
-                //       (int)DpToPixels(this.Context, Convert.ToSingle(10)),
-                //       Control.PaddingBottom);
-
             }
         }
         public static float DpToPixels(Context context, float valueInDp)

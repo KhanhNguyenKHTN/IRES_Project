@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:IRES_Project.Controls"
+             x:Class="IRES_Project.Views.NotificationPage.NotificationPage">
+    <ContentView.Resources>
+        <Color x:Key="MarkYellow">#fcae03</Color>
+        <Color x:Key="MarkBlue">#1a2849</Color>
+        <Color x:Key="MarkNearGreen">#f01179</Color>
+        <Color x:Key="ColorStartGradient">#fcae03</Color>
+        <Color x:Key="ColorEndGradient">#011647</Color>
+        <!--<gradient:GradientMode x:Key="GrandientIconMode">ToLeft</gradient:GradientMode>-->
+
+        <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="icofont" />
+            <On Platform="Android" Value="icofont.ttf#icofont" />
+        </OnPlatform>
+
+        <Style TargetType="Frame" x:Key="FrameCircle">
+            <Setter Property="BorderColor" Value="{StaticResource ColorEndGradient}"></Setter>
+            <Setter Property="HeightRequest" Value="45"></Setter>
+            <Setter Property="WidthRequest" Value="45"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+        </Style>
+
+
+
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout>
+            <Frame Margin="-1" Padding="20">
+                <Label Text="Thông Báo"  HorizontalOptions="Center" FontAttributes="Bold" FontSize="18"></Label>
+            </Frame>
+            <ListView x:Name="lvThongBao" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowSpacing="2" ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0"  Grid.RowSpan="2" FontFamily="{StaticResource FontIcon}" Text="&#xef63;" FontSize="30"
+                                                       VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"></Label>
+
+                                <Label Grid.Row="0" Grid.Column="1" Margin="0,5,0,0" Text="{Binding Lable}" FontAttributes="Bold" LineBreakMode="TailTruncation"></Label>
+                                <Label Grid.Row="1" Grid.Column="1" Margin="0,2,0,5" Text="{Binding Description}" LineBreakMode="TailTruncation"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,5 +1,6 @@
 ﻿using IRES_Project.Controls;
 using IRES_Project.Controls.ControlItems.CardItem;
+using IRES_Project.Controls.Pages;
 using IRES_Project.Views.MenuFood;
 using IRES_Project.Views.Table;
 using Model.Models.Menu;
@@ -53,7 +54,16 @@ namespace IRES_Project.Views.MainPage
 
         private async void BtnMenu_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new ContentPage() { Content = new MenuPage() });
+            //var grid = new Grid();
+            //grid.Children.Add(new Waitting());
+            //grid.Children.Add(new MenuPage());
+            //var page = new ContentPage() { Content =   };
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += (s, z) =>
+            {
+                z.Result = new MenuFood.MenuPage();
+            };
+            await Navigation.PushModalAsync(new LoadingPageWithContent(wk));
         }
 
         private async void BtnTable_Clicked(object sender, EventArgs e)

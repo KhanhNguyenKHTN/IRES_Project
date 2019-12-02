@@ -57,12 +57,13 @@ namespace IRES_Project.Views.Home
                     LoadMainPage();
                     break;
                 case 1:
-                    
+                    LoadDiscoverPage();
                     break;
                 case 2:
-                    
+                    LoadGiftPage();
                     break;
                 case 3:
+                    LoadNotificationPage();
                     break;
                 default:
                     LoadSettingPage();
@@ -70,6 +71,45 @@ namespace IRES_Project.Views.Home
             }
             Console.WriteLine("Het ham change!!!!!!!!");
             
+        }
+
+        private void LoadDiscoverPage()
+        {
+           
+        }
+
+        private void LoadNotificationPage()
+        {
+            waiting.IsVisible = true;
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += (s, z) => {
+                z.Result = new NotificationPage.NotificationPage();
+                Console.WriteLine("Chay background!!!!!!!");
+            };
+            wk.RunWorkerCompleted += (s, z) =>
+            {
+                gridContent.Children.Add(z.Result as NotificationPage.NotificationPage);
+                waiting.IsVisible = false;
+                Console.WriteLine("Het background!!!!!!!!");
+            };
+            wk.RunWorkerAsync();
+        }
+
+        private void LoadGiftPage()
+        {
+            waiting.IsVisible = true;
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += (s, z) => {
+                z.Result = new GiftPage.GiftPage();
+                Console.WriteLine("Chay background!!!!!!!");
+            };
+            wk.RunWorkerCompleted += (s, z) =>
+            {
+                gridContent.Children.Add(z.Result as GiftPage.GiftPage);
+                waiting.IsVisible = false;
+                Console.WriteLine("Het background!!!!!!!!");
+            };
+            wk.RunWorkerAsync();
         }
 
         private void LoadMainPage()

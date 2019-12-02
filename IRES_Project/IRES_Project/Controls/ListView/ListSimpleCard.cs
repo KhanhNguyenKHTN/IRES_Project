@@ -11,7 +11,7 @@ namespace IRES_Project.Controls
     {
         protected override void DrawItems()
         {
-            StackLayout stack = new StackLayout() { Orientation = StackOrientation.Horizontal };
+            StackLayout stack = new StackLayout() { Orientation = StackOrientation.Horizontal, Margin=new Thickness(5,0,0,0) };
             for (int i = 0; i < ItemSource.Count; i++)
             {
                 var curItem = ItemSource[i] as TabMenuItemModel;

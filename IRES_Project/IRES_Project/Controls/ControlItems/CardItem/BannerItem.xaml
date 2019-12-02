@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IRES_Project.Controls.ControlItems.CardItem.BannerItem">
+  <ContentView.Content>
+        <!--<Frame CornerRadius="10" Padding="0">
+            <Frame.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_Swiped"></SwipeGestureRecognizer>
+                <SwipeGestureRecognizer Direction="Right" Swiped="SwipeGestureRecognizer_Swiped_1"></SwipeGestureRecognizer>
+            </Frame.GestureRecognizers>
+            <Grid>
+                <Image Source="{Binding ImagesSource}" Aspect="AspectFill"></Image>
+            </Grid>
+        </Frame>-->
+        <Frame HeightRequest="10" WidthRequest="10" CornerRadius="100" Padding="0">
+            <Frame.Triggers>
+                <DataTrigger TargetType="Frame" Binding="{Binding IsActived}" Value="True">
+                    <Setter Property="BackgroundColor" Value="LightGray"></Setter>
+                    <Setter Property="BorderColor" Value="LightGray"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Frame" Binding="{Binding IsActived}" Value="False">
+                    <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                    <Setter Property="BorderColor" Value="LightGray"/>
+                </DataTrigger>
+            </Frame.Triggers>
+        </Frame>
+  </ContentView.Content>
+</ContentView>

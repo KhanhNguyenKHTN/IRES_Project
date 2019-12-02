@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:IRES_Project.Controls"
+             x:Class="IRES_Project.Views.GiftPage.GiftPage">
+    <ContentView.Resources>
+        <Color x:Key="MarkYellow">#fcae03</Color>
+        <Color x:Key="MarkBlue">#1a2849</Color>
+        <Color x:Key="MarkNearGreen">#f01179</Color>
+        <Color x:Key="ColorStartGradient">#fcae03</Color>
+        <Color x:Key="ColorEndGradient">#011647</Color>
+        <!--<gradient:GradientMode x:Key="GrandientIconMode">ToLeft</gradient:GradientMode>-->
+
+        <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="icofont" />
+            <On Platform="Android" Value="icofont.ttf#icofont" />
+        </OnPlatform>
+
+        <Style TargetType="Frame" x:Key="FrameCircle">
+            <Setter Property="BorderColor" Value="{StaticResource ColorEndGradient}"></Setter>
+            <Setter Property="HeightRequest" Value="45"></Setter>
+            <Setter Property="WidthRequest" Value="45"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+        </Style>
+
+        <!--<Style x:Key="labelIcon" TargetType="control:GradientLabel">
+            <Setter Property="FontFamily" Value="{StaticResource FontIcon}"></Setter>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Mode" Value="{StaticResource  GrandientIconMode}"/>
+            <Setter Property="StartColor" Value="{StaticResource ColorEndGradient}"/>
+            <Setter Property="EndColor" Value="{StaticResource ColorEndGradient}"/>
+        </Style>
+
+        <Style x:Key="labelTextDes" TargetType="control:GradientLabel">
+            <Setter Property="Mode" Value="{StaticResource GrandientIconMode}"></Setter>
+            <Setter Property="StartColor" Value="{StaticResource ColorStartGradient}"></Setter>
+            <Setter Property="EndColor" Value="{StaticResource ColorEndGradient}"></Setter>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>-->
+        <!--</Style>-->
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout>
+            <control:ListSimpleCard Grid.Row="0" Margin="5,0" x:Name="lsSimpleCard" HeightRequest="50" VerticalOptions="Start" BackgroundColor="White">
+            </control:ListSimpleCard>
+
+            <ListView x:Name="lvGilf" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <!--<Grid RowSpacing="2" ColumnSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Image ></Image>
+                                -->
+                            <!--<control:GradientLabel Grid.Row="0"  Grid.RowSpan="2" FontFamily="{StaticResource FontIcon}" Text="&#xef63;" FontSize="30"
+                                                       VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"></control:GradientLabel>-->
+                            <!--
+
+                                <Label Grid.Row="0" Grid.Column="1" Margin="0,5,0,0" Text="{Binding Lable}" FontAttributes="Bold" LineBreakMode="TailTruncation"></Label>
+                                <Label Grid.Row="1" Grid.Column="1" Margin="0,2,0,5" Text="{Binding Decripton}" LineBreakMode="TailTruncation"></Label>
+                            </Grid>-->
+                            <Frame Padding="5" CornerRadius="10" Margin="10">
+                                <Grid HeightRequest="250">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout Grid.Row="0">
+                                        <Image HeightRequest="150" Margin="-5" Source="{Binding ImagesSource}" Aspect="AspectFill"></Image>
+                                        <Label Margin="5" Text="{Binding Description}"></Label>
+                                    </StackLayout>
+
+                                    <Grid Grid.Row="1" Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label FontFamily="{StaticResource FontIcon}" Text="&#xef6e;"></Label>
+                                            <Label Margin="5,0" Text="{Binding Likes}"></Label>
+                                        </StackLayout>
+
+                                        <Label Grid.Column="2" FontFamily="{StaticResource FontIcon}" Text="&#xef4e;"></Label>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,10 +1,143 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:IRES_Project.Controls"
              x:Class="IRES_Project.Views.Settings.SettingPage">
-  <ContentView.Content>
-        <AbsoluteLayout BackgroundColor="YellowGreen">
-            
-        </AbsoluteLayout>
-  </ContentView.Content>
+    <ContentView.Resources>
+        <Color x:Key="MarkYellow">#fcae03</Color>
+        <Color x:Key="MarkBlue">#1a2849</Color>
+        <Color x:Key="MarkNearGreen">#f01179</Color>
+        <Color x:Key="ColorStartGradient">#03fc8c</Color>
+        <Color x:Key="ColorEndGradient">#03fce7</Color>
+        <!--<gradient:GradientMode x:Key="GrandientIconMode">ToLeft</gradient:GradientMode>-->
+
+        <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="icofont" />
+            <On Platform="Android" Value="icofont.ttf#icofont" />
+        </OnPlatform>
+
+        <Style TargetType="Frame" x:Key="FrameCircle">
+            <Setter Property="BorderColor" Value="{StaticResource ColorEndGradient}"></Setter>
+            <Setter Property="HeightRequest" Value="45"></Setter>
+            <Setter Property="WidthRequest" Value="45"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+        </Style>
+
+        <!--<Style x:Key="labelIcon" TargetType="control:GradientLabel">
+            <Setter Property="FontFamily" Value="{StaticResource FontIcon}"></Setter>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Mode" Value="{StaticResource  GrandientIconMode}"/>
+            <Setter Property="StartColor" Value="{StaticResource ColorEndGradient}"/>
+            <Setter Property="EndColor" Value="{StaticResource ColorEndGradient}"/>
+        </Style>
+
+        <Style x:Key="labelTextDes" TargetType="control:GradientLabel">
+            <Setter Property="Mode" Value="{StaticResource GrandientIconMode}"></Setter>
+            <Setter Property="StartColor" Value="{StaticResource ColorStartGradient}"></Setter>
+            <Setter Property="EndColor" Value="{StaticResource ColorEndGradient}"></Setter>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+        </Style>-->
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout>
+            <Frame Margin="-5" Padding="10" HeightRequest="100" BackgroundColor="{StaticResource ColorStartGradient}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                        <Frame CornerRadius="100" BorderColor="{StaticResource MarkYellow}" HeightRequest="45" WidthRequest="45" VerticalOptions="End" Padding="5">
+                            <Label VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" 
+                                   FontFamily="{StaticResource FontIcon}" Text="&#xecfc;" FontSize="35" TextColor="{StaticResource MarkYellow}"></Label>
+
+                        </Frame>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Label x:Name="txbUserName"  VerticalOptions="End" FontSize="23" FontAttributes="Bold" Text="Khanh" HorizontalOptions="Start" Margin="5,0,0,10"></Label>
+                        <Label FontFamily="{StaticResource FontIcon}" FontSize="23" Text="&#xebef;" VerticalOptions="End"  HorizontalOptions="End" Margin="0,0,10,10" ></Label>
+                    </Grid>
+                </Grid>
+            </Frame>
+            <Frame Margin="-5" BorderColor="LightGray" Padding="10">
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Text="&#xec83;" FontSize="23"/>
+                        <Label Margin="5,0,0,0" Text="Thiết lập tài khoản" FontSize="20" />
+                    </StackLayout>
+                    <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Text="&#xeaca;" HorizontalOptions="End" Margin="0,0,0,10" FontSize="23"/>
+                </Grid>
+            </Frame>
+
+            <Frame Margin="-5" BorderColor="LightGray" Padding="10">
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Text="&#xeef4;" FontSize="23"/>
+                        <Label Margin="5,0,0,0" Text="Dịch vụ liên kết" FontSize="20" />
+                    </StackLayout>
+                    <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Text="&#xeaca;" HorizontalOptions="End" Margin="0,0,0,10" FontSize="23"/>
+                </Grid>
+            </Frame>
+
+            <Frame Margin="-5" BorderColor="LightGray" Padding="10" HorizontalOptions="FillAndExpand">
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Text="&#xef3c;" FontSize="23"/>
+                        <Label Margin="5,0,0,0" Text="Danh sách quà tặng" FontSize="20" />
+                    </StackLayout>
+                    <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Text="&#xeaca;" HorizontalOptions="End" Margin="0,0,0,10" FontSize="23"/>
+                </Grid>
+            </Frame>
+            <Frame Margin="-5" BorderColor="LightGray" Padding="10">
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Text="&#xea36;" FontSize="23"/>
+                        <Label Margin="5,0,0,0" Text="Trung tâm hỗ trợ" FontSize="20" />
+                    </StackLayout>
+                    <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Text="&#xeaca;" HorizontalOptions="End" Margin="0,0,0,10" FontSize="23"/>
+                </Grid>
+            </Frame>
+            <Frame Margin="-5" BorderColor="LightGray" Padding="10">
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" Margin="5,0,0,0" TextColor="Red" Text="&#xec76;" FontSize="23"/>
+                        <Label Margin="5,0,0,0" Text="Đăng xuất" TextColor="Red"  FontSize="20" />
+                    </StackLayout>
+                    <Label Grid.Column="1" FontFamily="{StaticResource FontIcon}" TextColor="Red"  Text="&#xeaca;" HorizontalOptions="End" Margin="0,0,0,10" FontSize="23"/>
+                </Grid>
+            </Frame>
+
+        </StackLayout>
+    </ContentView.Content>
 </ContentView>
