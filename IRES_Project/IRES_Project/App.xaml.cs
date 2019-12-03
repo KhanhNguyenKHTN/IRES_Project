@@ -1,4 +1,5 @@
-﻿using IRES_Project.Views.Login;
+﻿using DLToolkit.Forms.Controls;
+using IRES_Project.Views.Login;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +12,7 @@ namespace IRES_Project
         public App()
         {
             InitializeComponent();
-
+            FlowListView.Init();
             MainPage = new LoginPage();
         }
 

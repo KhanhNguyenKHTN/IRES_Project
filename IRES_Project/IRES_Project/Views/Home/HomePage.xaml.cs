@@ -75,7 +75,19 @@ namespace IRES_Project.Views.Home
 
         private void LoadDiscoverPage()
         {
-           
+            waiting.IsVisible = true;
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += (s, z) => {
+                z.Result = new DiscoveryPage.DiscoveryPage();
+                Console.WriteLine("Chay background!!!!!!!");
+            };
+            wk.RunWorkerCompleted += (s, z) =>
+            {
+                gridContent.Children.Add(z.Result as DiscoveryPage.DiscoveryPage);
+                waiting.IsVisible = false;
+                Console.WriteLine("Het background!!!!!!!!");
+            };
+            wk.RunWorkerAsync();
         }
 
         private void LoadNotificationPage()

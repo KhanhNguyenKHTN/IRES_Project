@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             x:Class="IRES_Project.Views.DiscoveryPage.DiscoveryPage">
+    <ContentView.Resources>
+        <Color x:Key="MarkYellow">#fcae03</Color>
+        <Color x:Key="MarkBlue">#1a2849</Color>
+        <Color x:Key="MarkNearGreen">#f01179</Color>
+        <Color x:Key="ColorStartGradient">#fcae03</Color>
+        <Color x:Key="ColorEndGradient">#011647</Color>
+
+        <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="icofont" />
+            <On Platform="Android" Value="icofont.ttf#icofont" />
+        </OnPlatform>
+
+        <Style TargetType="Frame" x:Key="FrameCircle">
+            <Setter Property="BorderColor" Value="{StaticResource ColorEndGradient}"></Setter>
+            <Setter Property="HeightRequest" Value="45"></Setter>
+            <Setter Property="WidthRequest" Value="45"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+        </Style>
+
+    </ContentView.Resources>
+    <ContentView.Content>
+      <StackLayout>
+            <!--FlowColumnCount="2"-->
+            <flv:FlowListView  SeparatorVisibility="None" HasUnevenRows="True" HeightRequest="250"
+                               FlowColumnCount="2"
+	                FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}"
+	                FlowItemsSource="{Binding Items}" >
+
+                <flv:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <Frame Margin="5" Padding="0" CornerRadius="10">
+                            <Grid WidthRequest="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.Row="0">
+                                    <Image HeightRequest="120" Source="{Binding ImagesSource}" Aspect="AspectFill"></Image>
+                                    <Label FontAttributes="Bold" Margin="5,0" Text="{Binding LabName}"></Label>
+                                    <Label FontAttributes="Bold" Margin="5,0" Text="{Binding Cost}" TextColor="Red"></Label>
+                                </StackLayout>
+
+                                <Grid Grid.Row="1">
+                                    <Button FontFamily="{StaticResource FontIcon}" Clicked="Button_Clicked" BindingContext="{Binding}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="Red"></Setter>
+                                                <Setter Property="Text" Value="&#xee09;      Xóa"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="False">
+                                                <Setter Property="BackgroundColor" Value="#03ecfc"></Setter>
+                                                <Setter Property="Text" Value="&#xec48;       Thêm"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </flv:FlowListView.FlowColumnTemplate>
+
+            </flv:FlowListView>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>
