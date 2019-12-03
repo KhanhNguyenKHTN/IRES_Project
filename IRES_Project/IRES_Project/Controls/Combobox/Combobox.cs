@@ -10,19 +10,59 @@ namespace IRES_Project.Controls
 {
     public class Combobox: Frame
     {
-        public static readonly BindableProperty ItemSourceProperty =
+        public static BindableProperty ItemSourceProperty =
         BindableProperty.Create(
         nameof(ItemSource),
         typeof(ObservableCollection<object>),
         typeof(Combobox),
-        new ObservableCollection<object>());
+        new ObservableCollection<object>(),
+        propertyChanged: OnItemSourceChanged);
+
+        static void OnItemSourceChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var cbb = bindable as Combobox;
+            if (cbb == null) return;
+            if (cbb.Picker != null) cbb.Picker.ItemsSource = cbb.ItemSource;
+        }
 
         public ObservableCollection<object> ItemSource
         {
             get { return (ObservableCollection<object>)GetValue(ItemSourceProperty); }
-            set { SetValue(ItemSourceProperty, value); Picker.ItemsSource = value; }
+            set { SetValue(ItemSourceProperty, value);}
         }
 
+        //public static BindableProperty SelectedIndexProperty =
+        //BindableProperty.Create(
+        //nameof(SelectedIndex),
+        //typeof(int),
+        //typeof(Combobox),
+        //0);
+
+        //public int SelectedIndex
+        //{
+        //    get { return (int)GetValue(SelectedIndexProperty); }
+        //    set { SetValue(SelectedIndexProperty, value); if (Picker != null) Picker.SelectedIndex = value; }
+        //}
+
+        public static BindableProperty SelectedItemProperty =
+        BindableProperty.Create(
+        nameof(SelectedItem),
+        typeof(object),
+        typeof(Combobox),
+        0,
+        propertyChanged: OnSelectedItemChanged);
+
+        static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var cbb = bindable as Combobox;
+            if (cbb == null) return;
+            if (cbb.Picker != null) cbb.Picker.SelectedItem = cbb.SelectedItem;
+        }
+        public object SelectedItem
+        {
+            get { return (object)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
 
         public PickerLessBorder Picker { get; set; }
         public Combobox()
@@ -51,8 +91,7 @@ namespace IRES_Project.Controls
             Grid.SetColumn(lb, 0);
 
             Picker = new PickerLessBorder()
-            {
-                ItemsSource = ItemSource,             
+            {        
                 WidthRequest = this.Width,
                 HeightRequest = this.Height,
                 FontSize = 14

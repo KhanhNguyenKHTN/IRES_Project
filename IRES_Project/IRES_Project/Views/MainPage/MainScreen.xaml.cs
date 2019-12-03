@@ -63,8 +63,8 @@ namespace IRES_Project.Views.MainPage
             {
                 z.Result = new MenuFood.MenuPage();
             };
-            // new LoadingPageWithContent(wk)
-            await Navigation.PushModalAsync(new ContentPage() { Content = new MenuFood.MenuPage()});
+            
+            await Navigation.PushModalAsync(new LoadingPageWithContent(wk));
         }
 
         private async void BtnTable_Clicked(object sender, EventArgs e)

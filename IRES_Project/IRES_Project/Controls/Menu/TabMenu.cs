@@ -11,18 +11,59 @@ namespace IRES_Project.Controls
 {
     public class TabMenu: ContentView
     {
-        public static readonly BindableProperty ItemSourceProperty =
+       public static BindableProperty ItemSourceProperty =
        BindableProperty.Create(
        nameof(ItemSource),
        typeof(ObservableCollection<object>),
        typeof(TabMenu),
-       new ObservableCollection<object>());
+       new ObservableCollection<object>(), propertyChanged: OnItemSourceChanged);
+
+        static void OnItemSourceChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            // Property changed implementation goes here
+            // DrawItems(); value.CollectionChanged += ItemSource_CollectionChanged;
+            // ItemSourceBindingChange?.Invoke(null,null);
+            var type = bindable.GetType();
+            
+            if (type == typeof(Banner))
+            {
+                var tab = bindable as Banner;
+                if (tab == null)
+                {
+                    return;
+                }
+                tab.DrawItems();
+                tab.ItemSource.CollectionChanged += tab.ItemSource_CollectionChanged;
+            }
+            else if (type == typeof(ListBanner))
+            {
+                var tab = bindable as ListBanner;
+                if (tab == null)
+                {
+                    return;
+                }
+                tab.DrawItems();
+                tab.ItemSource.CollectionChanged += tab.ItemSource_CollectionChanged;
+            }
+            else
+            {
+                var tab = bindable as TabMenu;
+                if (tab == null)
+                {
+                    return;
+                }
+                tab.DrawItems();
+                tab.ItemSource.CollectionChanged += tab.ItemSource_CollectionChanged;
+            }
+        }
+
 
         public ObservableCollection<object> ItemSource
         {
             get { return (ObservableCollection<object>)GetValue(ItemSourceProperty); }
             set { SetValue(ItemSourceProperty, value);
-                DrawItems(); value.CollectionChanged += ItemSource_CollectionChanged;
+                //DrawItems();
+                //value.CollectionChanged += ItemSource_CollectionChanged;
             }
         }
 

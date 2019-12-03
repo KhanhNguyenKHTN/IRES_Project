@@ -20,8 +20,8 @@ namespace IRES_Project.Views.GiftPage
             lsSimpleCard.ItemSource = new ObservableCollection<object>
             {
                 new TabMenuItemModel() { IconFont = "\ue8e2", IsActived = true, LabName= "Tất cả" },
-                new TabMenuItemModel() { IconFont = "\uee26",  LabName="Xe số"},
-                new TabMenuItemModel() { IconFont = "\uee31", LabName= "Tay ga" }
+                new TabMenuItemModel() { IconFont = "\uee26",  LabName="Khuyến mãi"},
+                new TabMenuItemModel() { IconFont = "\uee31", LabName= "Của tôi" }
             };
             lvGilf.ItemsSource = new ObservableCollection<object>
                     {
