@@ -45,6 +45,16 @@ namespace IRES_Project.Controls
                 tab.DrawItems();
                 tab.ItemSource.CollectionChanged += tab.ItemSource_CollectionChanged;
             }
+            else if (type == typeof(ListFoodCards))
+            {
+                var tab = bindable as ListFoodCards;
+                if (tab == null)
+                {
+                    return;
+                }
+                tab.DrawItems();
+                tab.ItemSource.CollectionChanged += tab.ItemSource_CollectionChanged;
+            }
             else
             {
                 var tab = bindable as TabMenu;

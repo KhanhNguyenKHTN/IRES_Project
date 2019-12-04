@@ -47,7 +47,7 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <Label Grid.Row="0"  Grid.RowSpan="2" FontFamily="{StaticResource FontIcon}" Text="&#xef63;" FontSize="30"
+                                <Label Grid.Row="0"  Grid.RowSpan="2" FontFamily="{StaticResource FontIcon}" Text="&#xef63;" FontSize="30" TextColor="Blue"
                                                        VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"></Label>
 
                                 <Label Grid.Row="0" Grid.Column="1" Margin="0,5,0,0" Text="{Binding Lable}" FontAttributes="Bold" LineBreakMode="TailTruncation"></Label>

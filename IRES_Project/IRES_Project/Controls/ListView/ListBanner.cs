@@ -23,13 +23,13 @@ namespace IRES_Project.Controls
         }
     }
 
-    public class Banner: TabMenu
+    public class Banner : TabMenu
     {
         ListBanner banner;
         Image image;
         protected override void DrawItems()
         {
-            banner = new ListBanner() { ItemSource = this.ItemSource, VerticalOptions = LayoutOptions.End , Margin = new Thickness(0,5), HorizontalOptions = LayoutOptions.Center };
+            banner = new ListBanner() { ItemSource = this.ItemSource, VerticalOptions = LayoutOptions.End, Margin = new Thickness(0, 5), HorizontalOptions = LayoutOptions.Center };
             var first = this.ItemSource.FirstOrDefault(x => (x as CardItemModel).IsActived == true);
             Frame fr = new Frame()
             {
@@ -42,7 +42,7 @@ namespace IRES_Project.Controls
             var right = new SwipeGestureRecognizer() { Direction = SwipeDirection.Right };
             right.Swiped += Right_Swiped;
 
-            image  = new Image()
+            image = new Image()
             {
                 Aspect = Aspect.AspectFill,
                 Source = (first as CardItemModel).ImagesSource
@@ -51,7 +51,7 @@ namespace IRES_Project.Controls
             Grid gr = new Grid();
             gr.Children.Add(image);
             gr.Children.Add(banner);
-            var gridMa = new Grid() { VerticalOptions = LayoutOptions.Fill, HorizontalOptions = LayoutOptions.Fill};
+            var gridMa = new Grid() { VerticalOptions = LayoutOptions.Fill, HorizontalOptions = LayoutOptions.Fill };
             gr.Children.Add(gridMa);
             gridMa.GestureRecognizers.Add(left);
             gridMa.GestureRecognizers.Add(right);
@@ -66,7 +66,7 @@ namespace IRES_Project.Controls
             });
             base.SelectionChanged += Banner_SelectionChanged;
         }
-
+    
         private void Banner_SelectionChanged(object sender, EventArgs e)
         {
             image.Source = (base.SelectedItem as CardItemModel).ImagesSource;

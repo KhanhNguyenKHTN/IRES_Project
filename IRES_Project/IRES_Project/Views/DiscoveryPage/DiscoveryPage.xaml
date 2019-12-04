@@ -2,6 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:control="clr-namespace:IRES_Project.Controls"
              x:Class="IRES_Project.Views.DiscoveryPage.DiscoveryPage">
     <ContentView.Resources>
         <Color x:Key="MarkYellow">#fcae03</Color>
@@ -26,8 +27,75 @@
 
     </ContentView.Resources>
     <ContentView.Content>
-      <StackLayout>
-            <!--FlowColumnCount="2"-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid HorizontalOptions="FillAndExpand" Grid.Row="0" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <control:BorderEntry Grid.Row="0" Padding="10,10,45,10" Margin="0,0,0,5" CornerRadius="15" Placeholder="Tìm kiếm..." PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"></control:BorderEntry>
+                <control:ButtonWithContent Clicked="ButtonWithContent_Clicked" Grid.Row="0" HorizontalOptions="End" Padding="10" BorderColor="Transparent" BackgroundColor="Transparent" Margin="0,0,15,5" VerticalOptions="Center">
+                    <Label FontFamily="{StaticResource FontIcon}" Text="&#xed12;"></Label>
+                </control:ButtonWithContent>
+            </Grid>
+            <ScrollView Grid.Row="1">
+                <StackLayout>
+                    <Grid HeightRequest="40" Margin="5,0,5,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <control:Combobox x:Name="lsListCatagory" Padding="10,0,0,0" ItemSource="{Binding ListCatogorys}" SelectedItem="{Binding SelectedCatagory,Mode=TwoWay}"></control:Combobox>
+                        <control:Combobox Grid.Column="1"  Padding="10,0,0,0" x:Name="lsListType" ItemSource="{Binding ListTypes}"  SelectedItem="{Binding SelectedType,Mode=TwoWay}"></control:Combobox>
+                    </Grid>
+                    <StackLayout>
+                        <Frame Margin="5" Padding="5" CornerRadius="10">
+                            <StackLayout>
+                                <Label Text="Gỏi" FontAttributes="Bold" Margin="5"></Label>
+                                <ScrollView x:Name="scrollMix1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                                    <control:ListFoodCards Margin="2,0,0,0" ItemSource="{Binding ListObjects}" x:Name="lsFoodCard1"></control:ListFoodCards>
+                                </ScrollView>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Margin="5" Padding="5" CornerRadius="10">
+                            <StackLayout>
+                                <Label Text="Cơm" FontAttributes="Bold" Margin="5"></Label>
+                                <ScrollView x:Name="scrollMix2" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                                    <control:ListFoodCards Margin="2,0,0,0"  ItemSource="{Binding ListObjects}" x:Name="lsFoodCard2"></control:ListFoodCards>
+                                </ScrollView>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="5" Margin="5" CornerRadius="10">
+                            <StackLayout>
+                                <Label Text="Lẩu" FontAttributes="Bold" Margin="5"></Label>
+                                <ScrollView x:Name="scrollMix3" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                                    <control:ListFoodCards Margin="2,0,0,0" ItemSource="{Binding ListObjects}" x:Name="lsFoodCard3"></control:ListFoodCards>
+                                </ScrollView>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="5" Margin="5" CornerRadius="10">
+                            <StackLayout>
+                                <Label Text="Súp" FontAttributes="Bold" Margin="5"></Label>
+                                <ScrollView x:Name="scrollMix4" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                                    <control:ListFoodCards Margin="2,0,0,0" ItemSource="{Binding ListObjects}" x:Name="lsFoodCard4"></control:ListFoodCards>
+                                </ScrollView>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+                
+                
+            </ScrollView>
+            
+        </Grid>
+      <!--<StackLayout>
+            --><!--FlowColumnCount="2"--><!--
             <flv:FlowListView  SeparatorVisibility="None" HasUnevenRows="True" HeightRequest="250"
                                FlowColumnCount="2"
 	                FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}"
@@ -67,6 +135,6 @@
                 </flv:FlowListView.FlowColumnTemplate>
 
             </flv:FlowListView>
-        </StackLayout>
+        </StackLayout>-->
   </ContentView.Content>
 </ContentView>

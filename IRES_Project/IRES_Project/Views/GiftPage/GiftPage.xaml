@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:banner="clr-namespace:IRES_Project.Controls"
              xmlns:control="clr-namespace:IRES_Project.Controls"
              x:Class="IRES_Project.Views.GiftPage.GiftPage">
     <ContentView.Resources>
@@ -45,56 +46,48 @@
     </ContentView.Resources>
     <ContentView.Content>
         <StackLayout>
-            <control:ListSimpleCard Grid.Row="0" Margin="5,0" x:Name="lsSimpleCard" HeightRequest="50" VerticalOptions="Start" BackgroundColor="White">
+            <control:ListSimpleCard Grid.Row="0" Margin="5,0" x:Name="lsSimpleCard" HeightRequest="60" VerticalOptions="Start" BackgroundColor="White">
             </control:ListSimpleCard>
 
+
             <ListView x:Name="lvGilf" HasUnevenRows="True">
-                <ListView.ItemTemplate>
+                <ListView.Header>
+                    <control:Banner Margin="5,5,5,0" x:Name="banner" HeightRequest="200"></control:Banner>
+                </ListView.Header>
+                    <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <!--<Grid RowSpacing="2" ColumnSpacing="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                            <ViewCell.View>
+                                <ContentView BackgroundColor="#ffffff">
+                                    <Frame Padding="5" CornerRadius="10" Margin="10">
+                                        <Grid HeightRequest="250">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition Height="auto"/>
+                                            </Grid.RowDefinitions>
+                                            <StackLayout Grid.Row="0">
+                                                <Image HeightRequest="150" Margin="-5" Source="{Binding ImagesSource}" Aspect="AspectFill"></Image>
+                                                <Label Margin="5" Text="{Binding Description}"></Label>
+                                            </StackLayout>
 
-                                <Image ></Image>
-                                -->
-                            <!--<control:GradientLabel Grid.Row="0"  Grid.RowSpan="2" FontFamily="{StaticResource FontIcon}" Text="&#xef63;" FontSize="30"
-                                                       VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"></control:GradientLabel>-->
-                            <!--
+                                            <Grid Grid.Row="1" Margin="5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="1" Margin="0,5,0,0" Text="{Binding Lable}" FontAttributes="Bold" LineBreakMode="TailTruncation"></Label>
-                                <Label Grid.Row="1" Grid.Column="1" Margin="0,2,0,5" Text="{Binding Decripton}" LineBreakMode="TailTruncation"></Label>
-                            </Grid>-->
-                            <Frame Padding="5" CornerRadius="10" Margin="10">
-                                <Grid HeightRequest="250">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                                    <StackLayout Grid.Row="0">
-                                        <Image HeightRequest="150" Margin="-5" Source="{Binding ImagesSource}" Aspect="AspectFill"></Image>
-                                        <Label Margin="5" Text="{Binding Description}"></Label>
-                                    </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontFamily="{StaticResource FontIcon}" Text="&#xef6e;"></Label>
+                                                    <Label Margin="5,0" Text="{Binding Likes}"></Label>
+                                                </StackLayout>
 
-                                    <Grid Grid.Row="1" Margin="5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label FontFamily="{StaticResource FontIcon}" Text="&#xef6e;"></Label>
-                                            <Label Margin="5,0" Text="{Binding Likes}"></Label>
-                                        </StackLayout>
-
-                                        <Label Grid.Column="2" FontFamily="{StaticResource FontIcon}" Text="&#xef4e;"></Label>
-                                    </Grid>
-                                </Grid>
-                            </Frame>
-
+                                                <Label Grid.Column="2" FontFamily="{StaticResource FontIcon}" Text="&#xef4e;"></Label>
+                                            </Grid>
+                                        </Grid>
+                                    </Frame>
+                                </ContentView>
+                            </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

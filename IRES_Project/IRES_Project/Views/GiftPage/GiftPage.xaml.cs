@@ -20,8 +20,8 @@ namespace IRES_Project.Views.GiftPage
             lsSimpleCard.ItemSource = new ObservableCollection<object>
             {
                 new TabMenuItemModel() { IconFont = "\ue8e2", IsActived = true, LabName= "Tất cả" },
-                new TabMenuItemModel() { IconFont = "\uee26",  LabName="Khuyến mãi"},
-                new TabMenuItemModel() { IconFont = "\uee31", LabName= "Của tôi" }
+                new TabMenuItemModel() { IconFont = "\uefa7",  LabName="New"},
+                new TabMenuItemModel() { IconFont = "\uec8e", LabName= "Của tôi" }
             };
             lvGilf.ItemsSource = new ObservableCollection<object>
                     {
@@ -36,6 +36,14 @@ namespace IRES_Project.Views.GiftPage
                         new CardItemModel() { IconFont = "\ue96f", LabName= "Deal" , Likes = 123,ImagesSource="banner3.jpg", Description="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
                         new CardItemModel() { IconFont = "\ueec1", LabName= "Tổng hợp", Likes = 123,ImagesSource="banner1.jpg", Description="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" }
                     };
+
+            banner.ItemSource  = new ObservableCollection<object>()
+            {
+                 new CardItemModel() { IsActived = true, LabName= "Tất cả" , ImagesSource = "bannerFood1.jpg" },
+                 new CardItemModel() {  LabName="Khai vị", ImagesSource = "bannerFood2.jpg"},
+                 new CardItemModel() { LabName= "Món chính" , ImagesSource = "bannerFood3.jpg"},
+                 new CardItemModel() { LabName= "Tráng miệng", ImagesSource = "bannerFood4.jpg"},
+            };
         }
 	}
 }

@@ -66,7 +66,7 @@ namespace IRES_Project.Controls
             nameof(Padding),
             typeof(Thickness),
             typeof(BorderEntry),
-            new Thickness(12));
+            new Thickness(10));
 
         // Gets or sets CornerRadius value
         public Thickness Padding

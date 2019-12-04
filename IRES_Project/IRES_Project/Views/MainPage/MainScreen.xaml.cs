@@ -23,6 +23,7 @@ namespace IRES_Project.Views.MainPage
 	public partial class MainScreen : ContentView
 	{
         //public event EventHandler<EventArgs> ScanSuccessEvent;
+        public event EventHandler HasAlert;
 		public MainScreen ()
 		{
 			InitializeComponent ();
@@ -42,9 +43,15 @@ namespace IRES_Project.Views.MainPage
             btnCart.Clicked += BtnCart_Clicked;
         }
 
-        private void BtnCart_Clicked(object sender, EventArgs e)
+        private async void BtnCart_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine("Cart click");
+            if(IRES_Global.GlobalClass.ListOrders.Count == 0)
+            {
+                HasAlert?.Invoke("Bạn chưa chọn món!", null);
+                return;
+            }
+            await Navigation.PushModalAsync(new ContentPage() { Content = new CartPage.MainCartPage() });
+            //LoadingPageWithContent.Instance.PushPage(wk);
         }
 
         private void BtnScan_Clicked(object sender, EventArgs e)
@@ -54,17 +61,19 @@ namespace IRES_Project.Views.MainPage
 
         private async void BtnMenu_Clicked(object sender, EventArgs e)
         {
-            //var grid = new Grid();
-            //grid.Children.Add(new Waitting());
-            //grid.Children.Add(new MenuPage());
-            //var page = new ContentPage() { Content =   };
+            if (string.IsNullOrEmpty(IRES_Global.GlobalClass.TableCode))
+            {
+                HasAlert?.Invoke("Bạn chưa chọn bàn!", null);
+                return;
+            }
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) =>
             {
                 z.Result = new MenuFood.MenuPage();
             };
-            
-            await Navigation.PushModalAsync(new LoadingPageWithContent(wk));
+            MultiContentPages.Instance.ClearAll();
+            await Navigation.PushModalAsync(MultiContentPages.Instance);
+            MultiContentPages.Instance.PushPage(wk);
         }
 
         private async void BtnTable_Clicked(object sender, EventArgs e)
@@ -142,7 +151,7 @@ namespace IRES_Project.Views.MainPage
                     BottomText = "Align the QR code within the frame"
                 };
                 var grid = new Grid();
-                RowDefinition row1 = new RowDefinition() { Height = 150 };
+                RowDefinition row1 = new RowDefinition() { Height = 100 };
                 RowDefinition row2 = new RowDefinition();
                 RowDefinition row3 = new RowDefinition() { Height = 150 };
 
@@ -157,7 +166,7 @@ namespace IRES_Project.Views.MainPage
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     VerticalTextAlignment = TextAlignment.Center,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
-                    TextColor = Color.Blue,
+                    TextColor = Color.Red,
                 };
                 Grid grid1 = new Grid() { BackgroundColor = Color.Black, Opacity = 0.4f, VerticalOptions = LayoutOptions.FillAndExpand, HorizontalOptions = LayoutOptions.FillAndExpand };
                 grid1.Children.Add(edit);
@@ -178,19 +187,22 @@ namespace IRES_Project.Views.MainPage
                     {
                         try
                         {
-                            MessagingCenter.Send<MainScreen>(this, result.Text);
-                            Console.WriteLine("daaaaaaaaaaaaaaaa" + result.Text);
-                            await Navigation.PopModalAsync(true);
-                            //strAccessToken.Text = result.Text.ToUpper().Trim();
-                            // DisplayAlert("Scanned Barcode", result.Text, "OK");
-                           // txtBarcode.Text = result.Text;
-                            //Navigation.PushModalAsync(new ScanQRPage() { txtBarcode.Text = result.Text;});
+                           
+                            await Navigation.PopModalAsync(false);
+                            if (result.Text.Contains("TABLE"))
+                            {
+                                IRES_Global.GlobalClass.TableCode = result.Text;
+                                BtnMenu_Clicked(null, null);
+                            }
                         }
                         catch
                         {
-                            MessagingCenter.Send<MainScreen>(this, result.Text);
-                            Console.WriteLine("daaaaaaaaaaaaaaaa" + result.Text);
-                            await Navigation.PopModalAsync(true);
+                            await Navigation.PopModalAsync(false);
+                            if (result.Text.Contains("TABLE"))
+                            {
+                                IRES_Global.GlobalClass.TableCode = result.Text;
+                                BtnMenu_Clicked(null, null);
+                            }
                         }
 
 

@@ -1,4 +1,5 @@
-﻿using Model.Models.Menu;
+﻿using IRES_Project.Controls.Pages;
+using Model.Models.Menu;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,6 +47,26 @@ namespace IRES_Project.Views.MenuFood
             var card = button.BindingContext as CardItemModel;
 
             card.IsSelected = !card.IsSelected;
+        }
+
+        private void BtnCheckInClick(object sender, EventArgs e)
+        {
+            var list = viewModel.GetSelectedFood();
+            if(list.Count == 0)
+            {
+                var check = Navigation.ModalStack[Navigation.ModalStack.Count - 1] as MultiContentPages;
+                if(check != null)
+                {
+                    MultiContentPages.Instance.DisplayAlert("Thông báo!", "Vui lòng chọn món!", "OK");
+                }
+                return;
+            }
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += (s, z) =>
+            {
+                z.Result = new CartPage.CartPage(list);
+            };
+            MultiContentPages.Instance.PushPage(wk);
         }
     }
 }

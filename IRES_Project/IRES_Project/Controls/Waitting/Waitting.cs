@@ -9,7 +9,7 @@ namespace IRES_Project.Controls
     {
         public Waitting()
         {
-            Grid grid = new Grid();
+            Grid grid = new Grid() { };
 
             grid.RowDefinitions.Clear();
             grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Star });

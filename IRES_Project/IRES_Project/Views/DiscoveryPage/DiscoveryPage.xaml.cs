@@ -12,11 +12,14 @@ namespace IRES_Project.Views.DiscoveryPage
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DiscoveryPage : ContentView
-	{
-		public DiscoveryPage ()
+    {
+        FoodMenuViewModel viewModel;
+        public DiscoveryPage ()
 		{
 			InitializeComponent ();
-            BindingContext = new FoodMenuViewModel();
+            viewModel = new FoodMenuViewModel();
+            viewModel.LoadData();
+            BindingContext = viewModel;
 		}
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -25,6 +28,11 @@ namespace IRES_Project.Views.DiscoveryPage
             var card = button.BindingContext as CardItemModel;
 
             card.IsSelected = !card.IsSelected;
+
+        }
+
+        private void ButtonWithContent_Clicked(object sender, EventArgs e)
+        {
 
         }
     }

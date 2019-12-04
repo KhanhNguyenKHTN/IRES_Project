@@ -129,8 +129,12 @@ namespace IRES_Project.Views.Home
             waiting.IsVisible = true;
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) => {
-                z.Result = new MainPage.MainScreen();
-                Console.WriteLine("Chay background!!!!!!!");
+                var item = new MainPage.MainScreen();
+                item.HasAlert += async (mess, e) =>
+                {
+                    await DisplayAlert("Thông báo", mess.ToString(), "OK");
+                };
+                z.Result = item;
             };
             wk.RunWorkerCompleted += (s, z) =>
             {

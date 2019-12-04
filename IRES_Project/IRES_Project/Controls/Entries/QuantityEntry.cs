@@ -9,8 +9,30 @@ namespace IRES_Project.Controls
 {
     public class QuantityEntry: Grid, INotifyPropertyChanged
     {
-        private int _Quantity = 1;
-        public int Quantity { get => _Quantity;set { _Quantity = value; OnPropertyChanged(); } }
+        public static BindableProperty QuantityProperty =
+       BindableProperty.Create(
+       nameof(Quantity),
+       typeof(int),
+       typeof(QuantityEntry),
+       1, propertyChanged: OnItemSourceChanged);
+
+        static void OnItemSourceChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var entry = bindable as QuantityEntry;
+            entry.QuantityChange?.Invoke(null, null);
+        }
+
+
+        public int Quantity
+        {
+            get { return (int)GetValue(QuantityProperty); }
+            set
+            {
+                SetValue(QuantityProperty, value);
+            }
+        }
+        public event EventHandler QuantityChange;
+
         public QuantityEntry()
         {
             this.ColumnSpacing = 0;
@@ -18,23 +40,25 @@ namespace IRES_Project.Controls
             Button minus = new Button()
             {
                 FontFamily = Device.RuntimePlatform == Device.Android ? "icofont.ttf#icofont" : "icofont",
-                BackgroundColor = Color.FromHex("#ffdaa6"),
+                BackgroundColor = Color.LightCyan,
                 Text = "\uef9a",
                 TextColor = Color.FromHex("#00DFF7"),
                 WidthRequest = 35,
                 BorderColor = Color.LightGray,
-                Padding =2
+                Padding =2,
+                BorderWidth =1
             };
-            minus.Clicked += (s, e) => { if (Quantity != 0) Quantity--; };
+            minus.Clicked += (s, e) => { if (Quantity != 1) Quantity--; };
             Button add = new Button()
             {
                 FontFamily = Device.RuntimePlatform == Device.Android ? "icofont.ttf#icofont" : "icofont",
-                BackgroundColor = Color.FromHex("#ffdaa6"),
+                BackgroundColor = Color.LightCyan,
                 Text = "\uefc2",
                 TextColor = Color.FromHex("#00DFF7"),
                 WidthRequest = 35,
                 BorderColor = Color.LightGray,
-                Padding = 2
+                Padding = 2,
+                BorderWidth = 1
             };
             add.Clicked += (s, e) => { Quantity++; };
             Frame frame = new Frame()
