@@ -50,7 +50,8 @@ namespace IRES_Project.Views.MainPage
                 HasAlert?.Invoke("Bạn chưa chọn món!", null);
                 return;
             }
-            await Navigation.PushModalAsync(new ContentPage() { Content = new CartPage.MainCartPage() });
+            SingleContentPage.Instance.Content = new CartPage.MainCartPage();
+            await Navigation.PushModalAsync(SingleContentPage.Instance);
             //LoadingPageWithContent.Instance.PushPage(wk);
         }
 

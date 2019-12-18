@@ -25,24 +25,6 @@
             <Setter Property="HorizontalOptions" Value="Center"></Setter>
             <Setter Property="Padding" Value="0"></Setter>
         </Style>
-
-        <!--<Style x:Key="labelIcon" TargetType="control:GradientLabel">
-            <Setter Property="FontFamily" Value="{StaticResource FontIcon}"></Setter>
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="Mode" Value="{StaticResource  GrandientIconMode}"/>
-            <Setter Property="StartColor" Value="{StaticResource ColorEndGradient}"/>
-            <Setter Property="EndColor" Value="{StaticResource ColorEndGradient}"/>
-        </Style>
-
-        <Style x:Key="labelTextDes" TargetType="control:GradientLabel">
-            <Setter Property="Mode" Value="{StaticResource GrandientIconMode}"></Setter>
-            <Setter Property="StartColor" Value="{StaticResource ColorStartGradient}"></Setter>
-            <Setter Property="EndColor" Value="{StaticResource ColorEndGradient}"></Setter>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>-->
-        <!--</Style>-->
     </ContentView.Resources>
     <ContentView.Content>
         <StackLayout>

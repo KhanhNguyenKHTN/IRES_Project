@@ -15,10 +15,10 @@
                 <RowDefinition/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackLayout BackgroundColor="#348feb">
-                <Label Margin="10,0,0,0" FontFamily="{StaticResource FontIcon}" Text="Hóa đơn" FontAttributes="Bold" VerticalOptions="Center"
+            <Grid BackgroundColor="#348feb">
+                <Label FontFamily="{StaticResource FontIcon}" Text="Hóa đơn" FontAttributes="Bold" VerticalOptions="Center"
                        HorizontalOptions="Center" BackgroundColor="Transparent" TextColor="White"></Label>
-            </StackLayout>
+            </Grid>
             <StackLayout Grid.Row="1">
                 <ListView HasUnevenRows="True" SeparatorColor="Black" x:Name="lsFoods">
                     <ListView.ItemTemplate>
@@ -73,6 +73,54 @@
                 <Button Grid.Row="1"  FontFamily="{StaticResource FontIcon}" Text="&#xf024;      Thanh toán"  BackgroundColor="#20aef5" Clicked="BtnPay">
                     
                 </Button>
+            </Grid>
+
+            <Grid x:Name="PopUp" Grid.RowSpan="3" IsVisible="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" BackgroundColor="Black" Opacity="0.7"></Grid>
+                <Grid Grid.Row="1" BackgroundColor="White">
+                    <ListView HasUnevenRows="True" SeparatorColor="Black" x:Name="paymentMethod" ItemSelected="PaymentMethod_ItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.ContextActions>
+                                        <MenuItem IsDestructive="True" Text="Delete " Clicked="DeleteButton_Clicked" />
+                                    </ViewCell.ContextActions>
+                                    <ViewCell.View>
+                                        <ContentView BackgroundColor="#ffffff">
+                                            <StackLayout Orientation="Horizontal" HeightRequest="60">
+                                                <Frame Padding="0" HeightRequest="25" WidthRequest="25" VerticalOptions="Center" CornerRadius="100" Margin="10,0,0,0" BorderColor="LightGray">
+                                                    <Frame.Triggers>
+                                                        <DataTrigger TargetType="Frame" Binding="{Binding IsSelected}" Value="True">
+                                                            <Setter Property="BackgroundColor" Value="#3480eb"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Frame" Binding="{Binding IsSelected}" Value="False">
+                                                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                                                        </DataTrigger>
+                                                    </Frame.Triggers>
+                                                </Frame>
+                                                <Label Text="{Binding IconFont}" Margin="10,0,0,0" FontSize="30" TextColor="#3480eb" FontFamily="{StaticResource FontIcon}" VerticalOptions="Center"></Label>
+                                                <Label Text="{Binding LabName}" Margin="10,0,0,0" FontSize="22" TextColor="#3480eb" VerticalOptions="Center"></Label>
+                                            </StackLayout>
+                                        </ContentView>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid Grid.Row="2" ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" BackgroundColor="#eb3449" Clicked="CancelPaymentClick" Text="Quay lại"></Button>
+                    <Button Grid.Column="1" BackgroundColor="LightGreen" Clicked="AcceptPaymentClick" Text="Thanh toán"></Button>
+                </Grid>
             </Grid>
         </Grid>
     </ContentView.Content>
