@@ -29,7 +29,12 @@ namespace IRES_Project.Views.MainPage
 			InitializeComponent ();
             RegisterEvent();
             GenarateData();
-            Button a = new Button();            
+            MultiContentPages.Instance.CloseAllEvent += Instance_CloseAllEvent;
+        }
+
+        private async void Instance_CloseAllEvent(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
         }
 
         private void RegisterEvent()
@@ -79,7 +84,15 @@ namespace IRES_Project.Views.MainPage
 
         private async void BtnTable_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new TableOrderPage());
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += (s, z) =>
+            {
+                z.Result = new TableOrderView();
+            };
+            MultiContentPages.Instance.ClearAll();
+            await Navigation.PushModalAsync(MultiContentPages.Instance);
+            MultiContentPages.Instance.PushPage(wk);
+            //await Navigation.PushModalAsync(new TableOrderPage());
             Console.WriteLine("Table click");
         }
 

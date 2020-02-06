@@ -27,6 +27,9 @@ namespace IRES_Project.Controls.Pages
                 return _Instance;
             }
         }
+
+        public event EventHandler<EventArgs> CloseAllEvent;
+        
         private MultiContentPages()
         {
             waiting = new Waitting() { IsVisible = true };
@@ -61,6 +64,7 @@ namespace IRES_Project.Controls.Pages
 
         private void setDisplayPage()
         {
+            
             if (DisplayIndex == -1) return;
             mainGrid.Children.Clear();
             mainGrid.Children.Add(ListPages[DisplayIndex] as ContentView);
@@ -68,24 +72,40 @@ namespace IRES_Project.Controls.Pages
 
         public void BackPage()
         {
-            if (DisplayIndex < 1) return;
-            DisplayIndex--;
-            setDisplayPage();
+            try
+            {
+                if (DisplayIndex < 1) return;
+                DisplayIndex--;
+                setDisplayPage();
+            }
+            catch { }
         }
         public void PopPage()
         {
-            if (DisplayIndex < 1) return;
-            ListPages.Remove(ListPages[ListPages.Count - 1]);
-            DisplayIndex--;
-            setDisplayPage();
+            try
+            {
+                if (DisplayIndex < 1) return;
+                ListPages.Remove(ListPages[ListPages.Count - 1]);
+                DisplayIndex--;
+                setDisplayPage();
+            }
+            catch { }
+
         }
         public void ClearAll()
         {
-            if (ListPages == null || ListPages.Count == 0) return;
-            IsLoading = true;
-            //mainGrid.Children.Clear();
-            //mainGrid.BackgroundColor = Color.White;
-            ListPages.Clear();
+            try
+            {
+                if (ListPages == null || ListPages.Count == 0) return;
+                IsLoading = true;
+                //mainGrid.Children.Clear();
+                //mainGrid.BackgroundColor = Color.White;
+
+                ListPages.Clear();
+                CloseAllEvent?.Invoke(null, null);
+            }
+            catch { }
+
         }
         
     }

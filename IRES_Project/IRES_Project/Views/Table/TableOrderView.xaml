@@ -1,9 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:control ="clr-namespace:IRES_Project.Controls"
-             x:Class="IRES_Project.Views.Table.TableOrderPage">
-    <ContentPage.Resources>
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:IRES_Project.Controls"
+             mc:Ignorable="d"
+             x:Class="IRES_Project.Views.Table.TableOrderView">
+    <ContentView.Resources>
         <Color x:Key="MarkYellow">#fcae03</Color>
         <Color x:Key="MarkBlue">#1a2849</Color>
         <Color x:Key="MarkNearGreen">#f01179</Color>
@@ -31,8 +34,8 @@
             <Setter Property="Padding" Value="0"></Setter>
         </Style>
 
-    </ContentPage.Resources>
-    <ContentPage.Content>
+    </ContentView.Resources>
+    <ContentView.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -122,14 +125,16 @@
                     </Grid>
                 </Frame>
 
-           
+                <!--<control:Waitting x:Name="waitting" Grid.RowSpan="3" IsVisible="False"/>-->
             </Grid>
 
             <Grid Grid.Row="1">
                 <Button Text="Đặt món trước?"
                         HorizontalOptions="End" VerticalOptions="Start" Margin="0,0,10,0"
                         x:Name="btnForgotPass" Style="{StaticResource ButtonLessBorder}"></Button>
-                <Button FontFamily="{StaticResource FontIcon}" VerticalOptions="End" BackgroundColor="#41cc48" Text="Đặt ngay!" TextColor="White"></Button>
+                <Button FontFamily="{StaticResource FontIcon}" VerticalOptions="End" 
+                        Clicked="btnOrderClick"
+                        BackgroundColor="#41cc48" Text="Đặt ngay!" TextColor="White"></Button>
             </Grid>
 
             <control:Waitting x:Name="waitting" Grid.RowSpan="2" IsVisible="False"/>
@@ -140,9 +145,8 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid x:Name="contentQrCode"></Grid>
-
-                <Button Grid.Row="1" x:Name="btnComplete" Text="Ok" TextColor="White" BackgroundColor="#41cc48"></Button>
+                <Button Grid.Row="1" x:Name="btnComplete" Text="Ok" TextColor="White" BackgroundColor="#41cc48" Clicked="btnOkClick"></Button>
             </Grid>
         </Grid>
-    </ContentPage.Content>
-</ContentPage>
+    </ContentView.Content>
+</ContentView>

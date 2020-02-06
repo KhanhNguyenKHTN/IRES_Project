@@ -1,4 +1,5 @@
-﻿using Model.Models.Menu;
+﻿using IRES_Project.Controls.Pages;
+using Model.Models.Menu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,23 +9,25 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZXing;
+using ZXing.Net.Mobile.Forms;
+using ZXing.QrCode;
 
 namespace IRES_Project.Views.Table
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TableOrderPage : ContentPage
+    public partial class TableOrderView : ContentView
     {
-        public TableOrderPage()
+        public TableOrderView()
         {
             InitializeComponent();
-            
             CreateContent();
         }
 
 
         public async void CreateContent()
         {
-           
+
             await Task.Delay(200);
             waitting.IsVisible = true;
             BackgroundWorker wk = new BackgroundWorker();
@@ -50,6 +53,37 @@ namespace IRES_Project.Views.Table
                 waitting.IsVisible = false;
             };
             wk.RunWorkerAsync();
+        }
+
+        private void btnOrderClick(object sender, EventArgs e)
+        {
+            contentQrCode.Children.Add(GenerateQR("Demo Code"));
+            qrCode.IsVisible = true;
+        }
+
+        ZXingBarcodeImageView GenerateQR(string codeValue)
+        {
+            var qrCode = new ZXingBarcodeImageView
+            {
+                BarcodeFormat = BarcodeFormat.QR_CODE,
+                BarcodeOptions = new QrCodeEncodingOptions
+                {
+                    Height = 350,
+                    Width = 350
+                },
+                BarcodeValue = codeValue,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.CenterAndExpand
+            };
+            // Workaround for iOS
+            qrCode.WidthRequest = 350;
+            qrCode.HeightRequest = 350;
+            return qrCode;
+        }
+
+        private void btnOkClick(object sender, EventArgs e)
+        {
+            MultiContentPages.Instance.ClearAll();
         }
     }
 }

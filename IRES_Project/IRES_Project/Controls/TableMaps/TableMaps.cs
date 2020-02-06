@@ -97,7 +97,7 @@ namespace IRES_Project.Controls
         {
             var Item = sender as TabMenuItem;
 
-            if (Item.Data.IsActived) { Item.Data.IsActived = !Item.Data.IsActived; ListSelectedItems.Remove(Item); SelectedItem = null; return; }
+            if (Item.Data.IsActived) { Item.Data.IsActived = !Item.Data.IsActived; ListSelectedItems.Remove(Item); return; }
             var first = ItemSource.FirstOrDefault(x => (x as TabMenuItemModel).IsActived == true) as TabMenuItemModel;
             if (MultiSelect)
             {
@@ -114,7 +114,7 @@ namespace IRES_Project.Controls
             else
             {
                 if (first != null) first.IsActived = false;
-                SelectedItem = Item;
+                //SelectedItem = Item;
             }
             Item.Data.IsActived = !Item.Data.IsActived;
         }
