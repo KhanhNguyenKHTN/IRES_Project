@@ -28,10 +28,12 @@
                                 <control:Combobox x:Name="cbbListFloor" WidthRequest="100"></control:Combobox>
                             </Grid>
 
-                            <control:CheckBoxLabel Grid.Column="2" Margin="0,0,10,0" VerticalOptions="End" Text="Chọn nhiều bàn"/>
+                            <control:CheckBoxLabel x:Name="cbMultiSelect" Grid.Column="2" Margin="0,0,10,0" VerticalOptions="End" Text="Chọn nhiều bàn"/>
                         </Grid>
                         <ScrollView  Grid.Row="2">
-                            <control:TableMaps x:Name="tableMap" Margin="10" MarginItem="10" HeightItem="50" WidthItem="50" Spacing="10" HorizontalOptions="FillAndExpand"/>
+                            <control:TableMaps x:Name="tableMap" Margin="10" MarginItem="10" HeightItem="50"
+                                               BindingContext="{x:Reference cbMultiSelect}" MultiSelect="{Binding Path=IsChecked}"
+                                               WidthItem="50" Spacing="10" HorizontalOptions="FillAndExpand"/>
                         </ScrollView>
                     </Grid>
                 </Frame>

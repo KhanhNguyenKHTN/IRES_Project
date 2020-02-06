@@ -20,5 +20,17 @@ namespace Model.Models.Menu
 
         private bool _IsSelected;
         public bool IsSelected { get => _IsSelected; set { _IsSelected = value; OnPropertyChanged(); } }
+
+        private string _Status;
+        public string Status { get => _Status; set { _Status = value; OnPropertyChanged(); } }
+
+        private int _IntStatus;
+        public int IntStatus { get => _IntStatus; set { _IntStatus = value; OnPropertyChanged(); } }
+
+        private int _Number;
+        public int Number { get => _Number; set { _Number = value; OnPropertyChanged(); } }
+        
+        public string Name { get { return "Bàn " + Number;} }
+
     }
 }

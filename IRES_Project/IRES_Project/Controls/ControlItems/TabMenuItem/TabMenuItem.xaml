@@ -15,6 +15,11 @@
             <Setter Property="Content">
                 <Setter.Value>
                     <Grid RowSpacing="0">
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid" Binding="{Binding IntStatus}" Value="1">
+                                <Setter Property="BackgroundColor" Value="#f0244d"></Setter>
+                            </DataTrigger>
+                        </Grid.Triggers>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1.6*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
@@ -29,7 +34,7 @@
                                 </DataTrigger>
                             </Label.Triggers>
                         </Label>
-                        <Label Grid.Row="1" Text="{Binding LabName}" FontSize="12"  HorizontalOptions="Center">
+                        <Label Grid.Row="1" Text="{Binding Name,Mode=OneWay}" FontSize="12"  HorizontalOptions="Center">
                             <Label.Triggers>
                                 <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="True">
                                     <Setter Property="TextColor" Value="{StaticResource ColorSelected}"></Setter>

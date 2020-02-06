@@ -1,6 +1,7 @@
 ﻿using IRES_Project.Controls.ControlItems.TabMenuItem;
 using Model.Models.Menu;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
@@ -25,7 +26,7 @@ namespace IRES_Project.Controls
 
         private int _Spacing = 5;
         public int Spacing { get => _Spacing; set { _Spacing = value; } }
-
+        public event EventHandler<EventArgs> ShowMessage;
         public int MarginItem { get; set; }
         protected override void DrawItems()
         {
@@ -76,9 +77,46 @@ namespace IRES_Project.Controls
             Content = tempGrid;
         }
 
+        public static readonly BindableProperty MultiSelectProperty =
+        BindableProperty.Create(
+        nameof(MultiSelect),
+        typeof(bool),
+        typeof(TableMaps),
+        false);
+
+        public bool MultiSelect
+        {
+            get { return (bool)GetValue(MultiSelectProperty); }
+            set { SetValue(MultiSelectProperty, value);  }
+        }
+
+        private List<object> _ListSelectedItems;
+        public List<object> ListSelectedItems { get => _ListSelectedItems; set { _ListSelectedItems = value; OnPropertyChanged(); } }
+
         private void Item_Clicked(object sender, EventArgs e)
         {
-           // throw new NotImplementedException();
+            var Item = sender as TabMenuItem;
+
+            if (Item.Data.IsActived) { Item.Data.IsActived = !Item.Data.IsActived; ListSelectedItems.Remove(Item); SelectedItem = null; return; }
+            var first = ItemSource.FirstOrDefault(x => (x as TabMenuItemModel).IsActived == true) as TabMenuItemModel;
+            if (MultiSelect)
+            {
+                if(first != null)
+                {
+                    if( Math.Abs( first.Number - Item.Data.Number) == 1)
+                    {
+                        ListSelectedItems.Add(Item);
+                        Item.Data.IsActived = !Item.Data.IsActived; return;
+                    }
+                    else { ShowMessage?.Invoke("Làm ơn chọn bàn gần nhau!", EventArgs.Empty); return; }
+                }
+            }
+            else
+            {
+                if (first != null) first.IsActived = false;
+                SelectedItem = Item;
+            }
+            Item.Data.IsActived = !Item.Data.IsActived;
         }
     }
 }

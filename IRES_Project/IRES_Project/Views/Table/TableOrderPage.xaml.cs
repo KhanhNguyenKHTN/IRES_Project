@@ -16,6 +16,7 @@ namespace IRES_Project.Views.Table
         public TableOrderPage()
         {
             InitializeComponent();
+            
             CreateContent();
         }
 
@@ -24,7 +25,7 @@ namespace IRES_Project.Views.Table
            
             await Task.Delay(200);
             waitting.IsVisible = true;
-            cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2", "Tầng 3", "Tầng 4" };
+            cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2"};
             cbbListFloor.Picker.SelectedIndex = 0;
             tableMap.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 1" },
                 new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 2" },

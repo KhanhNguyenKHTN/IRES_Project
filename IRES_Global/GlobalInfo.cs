@@ -8,5 +8,9 @@ namespace IRES_Global
     {
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
+
+        public static string URL = @"";
+
+
     }
 }
