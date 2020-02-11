@@ -31,7 +31,7 @@ namespace IRES_Project.Views.Table
             wk.DoWork += (s, z) => {
                 cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2" };
                 cbbListFloor.Picker.SelectedIndex = 0;
-                tableMap.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 1" },
+                lsMenu.FlowItemsSource = new System.Collections.ObjectModel.ObservableCollection<object> { new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 1" },
                 new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 2" },
                 new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 3" },
                 new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 4" },

@@ -63,7 +63,7 @@ namespace IRES_Project.Controls
             get { return (object)GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
-
+        public event EventHandler<EventArgs> SelectionChanged;
         public PickerLessBorder Picker { get; set; }
         public Combobox()
         {
@@ -96,11 +96,19 @@ namespace IRES_Project.Controls
                 HeightRequest = this.Height,
                 FontSize = 14
             };
+            Picker.SelectedIndexChanged += Picker_SelectedIndexChanged;
             content.Children.Add(Picker);
             Grid.SetColumn(Picker, 0);
             
             Content = content;
             
+        }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ItemSource != null) SelectedItem = ItemSource[Picker.SelectedIndex];
+
+            SelectionChanged?.Invoke(SelectedItem, null);
         }
     }
 

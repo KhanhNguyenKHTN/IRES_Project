@@ -96,7 +96,6 @@ namespace IRES_Project.Controls
         private void Item_Clicked(object sender, EventArgs e)
         {
             var Item = sender as TabMenuItem;
-
             if (Item.Data.IsActived) { Item.Data.IsActived = !Item.Data.IsActived; ListSelectedItems.Remove(Item); return; }
             var first = ItemSource.FirstOrDefault(x => (x as TabMenuItemModel).IsActived == true) as TabMenuItemModel;
             if (MultiSelect)

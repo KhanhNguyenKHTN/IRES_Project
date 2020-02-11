@@ -30,7 +30,8 @@ namespace Model.Models.Menu
         private int _Number;
         public int Number { get => _Number; set { _Number = value; OnPropertyChanged(); } }
         
-        public string Name { get { return "Bàn " + Number;} }
+
+        public string Name { get { if (Number == 0) return LabName; return "Bàn " + Number;} }
 
     }
 }

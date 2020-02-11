@@ -13,7 +13,7 @@ namespace IRES_Project.Controls
         protected override void DrawItems()
         {
             StackLayout st = new StackLayout() { Orientation = StackOrientation.Horizontal };
-
+            if (ItemSource == null) return;
             foreach (var item in ItemSource)
             {
                 var add = new BannerItem() { BindingContext = item };

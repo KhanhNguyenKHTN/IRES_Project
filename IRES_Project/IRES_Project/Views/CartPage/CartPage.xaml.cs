@@ -16,8 +16,8 @@ namespace IRES_Project.Views.CartPage
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CartPage : ContentView
 	{
-        ObservableCollection<CardItemModel> currentList;
-        public CartPage (ObservableCollection<CardItemModel> selectedFood)
+        ObservableCollection<Food> currentList;
+        public CartPage (ObservableCollection<Food> selectedFood)
 		{
 			InitializeComponent ();
             currentList = selectedFood;
@@ -72,7 +72,7 @@ namespace IRES_Project.Views.CartPage
 
             if (button != null)
             {
-                var item = button.BindingContext as CardItemModel;
+                var item = button.BindingContext as Food;
                 this.currentList.Remove(item);
                 LoadTotal();
             }

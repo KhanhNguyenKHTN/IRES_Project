@@ -42,13 +42,15 @@
                             
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <control:Combobox x:Name="lsListCatagory" Padding="10,0,0,0" ItemSource="{Binding ListCatogorys}" SelectedItem="{Binding SelectedCatagory,Mode=TwoWay}"></control:Combobox>
-                        <control:Combobox Grid.Column="1"  Padding="10,0,0,0" x:Name="lsListType" ItemSource="{Binding ListTypes}"  SelectedItem="{Binding SelectedType,Mode=TwoWay}"></control:Combobox>
+                        <control:Combobox x:Name="lsListCatagory" Padding="10,0,0,0" ItemSource="{Binding ListCatogorys}" 
+                                          SelectedItem="{Binding SelectedCatagory,Mode=TwoWay}"></control:Combobox>
+                        <control:Combobox Grid.Column="1"  Padding="10,0,0,0" x:Name="lsListType" ItemSource="{Binding ListTypes}" 
+                                          SelectedItem="{Binding SelectedType,Mode=TwoWay}"></control:Combobox>
                     </Grid>
 
                     <StackLayout x:Name="contentList" VerticalOptions="FillAndExpand" BindingContext="{Binding}">
-                        <flv:FlowListView  SeparatorVisibility="None" HasUnevenRows="True" HeightRequest="250"
-                               FlowColumnCount="2" FlowIsLoadingInfiniteEnabled="True"
+                        <flv:FlowListView  SeparatorVisibility="None" HasUnevenRows="True" HeightRequest="250" IsRefreshing="{Binding IsRefresh}"
+                               FlowColumnCount="2" FlowIsLoadingInfiniteEnabled="True" FlowIsLoadingInfinite="True" x:Name="lsMenu"
 	                FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}"
 	                FlowItemsSource="{Binding ListFoods}" >
                             <flv:FlowListView.Header>

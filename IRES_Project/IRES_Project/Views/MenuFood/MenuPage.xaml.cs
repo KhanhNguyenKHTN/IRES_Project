@@ -23,8 +23,14 @@ namespace IRES_Project.Views.MenuFood
             viewModel = new FoodMenuViewModel();
             GenerateData();
             //LoadData();
+            lsListCatagory.SelectionChanged += LsListCatagory_SelectionChanged;
             BindingContext = viewModel;
             // layoutTest.Children.Add(new StackLayout() { BackgroundColor = Color.Black, HeightRequest = 100 });
+        }
+
+        private void LsListCatagory_SelectionChanged(object sender, EventArgs e)
+        {
+            viewModel.GetFoodByType();
         }
 
         //public void LoadData()
@@ -34,6 +40,7 @@ namespace IRES_Project.Views.MenuFood
         private void GenerateData()
         {
             viewModel.LoadData();
+            
         }
 
         private  void ButtonWithContent_Clicked(object sender, EventArgs e)
@@ -44,7 +51,7 @@ namespace IRES_Project.Views.MenuFood
         private void Button_Clicked(object sender, EventArgs e)
         {
             var button = sender as Button;
-            var card = button.BindingContext as CardItemModel;
+            var card = button.BindingContext as Food;
 
             card.IsSelected = !card.IsSelected;
         }

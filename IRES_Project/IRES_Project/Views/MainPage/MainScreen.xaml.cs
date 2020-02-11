@@ -11,7 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ViewModel.ViewModel.Table;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ZXing.Mobile;
@@ -50,11 +50,11 @@ namespace IRES_Project.Views.MainPage
 
         private async void BtnCart_Clicked(object sender, EventArgs e)
         {
-            if(IRES_Global.GlobalClass.ListOrders.Count == 0)
-            {
-                HasAlert?.Invoke("Bạn chưa chọn món!", null);
-                return;
-            }
+            //if(IRES_Global.GlobalClass.ListOrders.Count == 0)
+            //{
+            //    HasAlert?.Invoke("Bạn chưa chọn món!", null);
+            //    return;
+            //}
             SingleContentPage.Instance.Content = new CartPage.MainCartPage();
             await Navigation.PushModalAsync(SingleContentPage.Instance);
             //LoadingPageWithContent.Instance.PushPage(wk);
@@ -67,11 +67,11 @@ namespace IRES_Project.Views.MainPage
 
         private async void BtnMenu_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(IRES_Global.GlobalClass.TableCode))
-            {
-                HasAlert?.Invoke("Bạn chưa chọn bàn!", null);
-                return;
-            }
+            //if (string.IsNullOrEmpty(IRES_Global.GlobalClass.TableCode))
+            //{
+            //    HasAlert?.Invoke("Bạn chưa chọn bàn!", null);
+            //    return;
+            //}
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) =>
             {
@@ -199,6 +199,7 @@ namespace IRES_Project.Views.MainPage
                     // Pop the page and show the result
                     Device.BeginInvokeOnMainThread(async () =>
                     {
+                        TableOrderViewModel model = new TableOrderViewModel();
                         try
                         {
                            
@@ -206,6 +207,8 @@ namespace IRES_Project.Views.MainPage
                             if (result.Text.Contains("TABLE"))
                             {
                                 IRES_Global.GlobalClass.TableCode = result.Text;
+                                string s = result.Text.Replace("TABLE", "");                                
+                                var res = await model.OrderTable(int.Parse(s), DateTime.Now);
                                 BtnMenu_Clicked(null, null);
                             }
                         }
@@ -215,6 +218,8 @@ namespace IRES_Project.Views.MainPage
                             if (result.Text.Contains("TABLE"))
                             {
                                 IRES_Global.GlobalClass.TableCode = result.Text;
+                                string s = result.Text.Replace("TABLE", "");
+                                var res = await model.OrderTable(int.Parse(s), DateTime.Now);
                                 BtnMenu_Clicked(null, null);
                             }
                         }

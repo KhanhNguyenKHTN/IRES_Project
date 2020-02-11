@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control ="clr-namespace:IRES_Project.Controls"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:controlItem="clr-namespace:IRES_Project.Controls.ControlItems.TabMenuItem"
              x:Class="IRES_Project.Views.Table.TableOrderPage">
     <ContentPage.Resources>
         <Color x:Key="MarkYellow">#fcae03</Color>
@@ -9,7 +11,8 @@
         <Color x:Key="MarkNearGreen">#f01179</Color>
         <Color x:Key="ColorStartGradient">#fcae03</Color>
         <Color x:Key="ColorEndGradient">#011647</Color>
-
+        <Color x:Key="ColorUnSelected">#bdbfbe</Color>
+        <Color x:Key="ColorSelected">#4a9eff</Color>
         <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
             <On Platform="iOS" Value="icofont" />
             <On Platform="Android" Value="icofont.ttf#icofont" />
@@ -63,11 +66,55 @@
 
                             <control:CheckBoxLabel x:Name="cbMultiSelect" Grid.Column="2" Margin="0,0,10,0" VerticalOptions="End" Text="Chọn nhiều bàn"/>
                         </Grid>
-                        <ScrollView  Grid.Row="2">
+                        <!--<ScrollView  Grid.Row="2">
                             <control:TableMaps x:Name="tableMap" Margin="10" MarginItem="10" HeightItem="50"
                                                BindingContext="{x:Reference cbMultiSelect}" MultiSelect="{Binding Path=IsChecked}"
                                                WidthItem="50" Spacing="10" HorizontalOptions="FillAndExpand"/>
-                        </ScrollView>
+                        </ScrollView>-->
+                        <Grid Grid.Row="2">
+                            
+                            <flv:FlowListView  SeparatorVisibility="None" HasUnevenRows="True" HeightRequest="250" IsRefreshing="{Binding IsRefresh}"
+                                               FlowColumnCount="4" FlowIsLoadingInfiniteEnabled="True" FlowIsLoadingInfinite="True" x:Name="lsMenu"
+	                                           FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}"
+	                                            >
+                            <flv:FlowListView.FlowColumnTemplate>
+                                <DataTemplate>
+                                        <Grid RowSpacing="0">
+                                            <Grid.Triggers>
+                                                <DataTrigger TargetType="Grid" Binding="{Binding IntStatus}" Value="1">
+                                                    <Setter Property="BackgroundColor" Value="#f0244d"></Setter>
+                                                </DataTrigger>
+                                            </Grid.Triggers>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1.6*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" FontFamily="{StaticResource FontIcon}" Margin="0,3,0,0" VerticalTextAlignment="End" HorizontalOptions="Center" FontSize="25" Text="{Binding IconFont}" >
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="True">
+                                                        <Setter Property="TextColor" Value="{StaticResource ColorSelected}"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="False">
+                                                        <Setter Property="TextColor" Value="{StaticResource ColorUnSelected}"></Setter>
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                            <Label Grid.Row="1" Text="{Binding Name,Mode=OneWay}" FontSize="12"  HorizontalOptions="Center">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="True">
+                                                        <Setter Property="TextColor" Value="{StaticResource ColorSelected}"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsActived}" Value="False">
+                                                        <Setter Property="TextColor" Value="{StaticResource ColorUnSelected}"></Setter>
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </Grid>
+                                    </DataTemplate>
+                            </flv:FlowListView.FlowColumnTemplate>
+
+                            </flv:FlowListView>
+                        </Grid>
                     </Grid>
                 </Frame>
                 <Frame Grid.Row="1" CornerRadius="10" Padding="5,5,5,10" Margin="5">

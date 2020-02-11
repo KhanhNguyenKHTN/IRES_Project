@@ -40,21 +40,22 @@ namespace IRES_Project.Controls
             Button minus = new Button()
             {
                 FontFamily = Device.RuntimePlatform == Device.Android ? "icofont.ttf#icofont" : "icofont",
-                BackgroundColor = Color.LightCyan,
+                BackgroundColor = Color.LightGray,
                 Text = "\uef9a",
-                TextColor = Color.FromHex("#00DFF7"),
+                TextColor = Color.Black,//.FromHex("#00DFF7"),
                 WidthRequest = 35,
+                FontAttributes = FontAttributes.Bold,
                 BorderColor = Color.LightGray,
                 Padding =2,
-                BorderWidth =1
+                BorderWidth = 1
             };
             minus.Clicked += (s, e) => { if (Quantity != 1) Quantity--; };
             Button add = new Button()
             {
                 FontFamily = Device.RuntimePlatform == Device.Android ? "icofont.ttf#icofont" : "icofont",
-                BackgroundColor = Color.LightCyan,
+                BackgroundColor = Color.LightGray,
                 Text = "\uefc2",
-                TextColor = Color.FromHex("#00DFF7"),
+                TextColor = Color.Black,//.FromHex("#00DFF7"),
                 WidthRequest = 35,
                 BorderColor = Color.LightGray,
                 Padding = 2,

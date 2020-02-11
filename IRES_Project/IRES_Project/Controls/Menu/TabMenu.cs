@@ -20,6 +20,7 @@ namespace IRES_Project.Controls
 
         static void OnItemSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            
             // Property changed implementation goes here
             // DrawItems(); value.CollectionChanged += ItemSource_CollectionChanged;
             // ItemSourceBindingChange?.Invoke(null,null);
@@ -28,6 +29,7 @@ namespace IRES_Project.Controls
             if (type == typeof(Banner))
             {
                 var tab = bindable as Banner;
+                if (tab.ItemSource == null) return;
                 if (tab == null)
                 {
                     return;
@@ -38,6 +40,7 @@ namespace IRES_Project.Controls
             else if (type == typeof(ListBanner))
             {
                 var tab = bindable as ListBanner;
+                if (tab.ItemSource == null) return;
                 if (tab == null)
                 {
                     return;
@@ -48,6 +51,7 @@ namespace IRES_Project.Controls
             else if (type == typeof(ListFoodCards))
             {
                 var tab = bindable as ListFoodCards;
+                if (tab.ItemSource == null) return;
                 if (tab == null)
                 {
                     return;
@@ -58,6 +62,7 @@ namespace IRES_Project.Controls
             else
             {
                 var tab = bindable as TabMenu;
+                if (tab.ItemSource == null) return;
                 if (tab == null)
                 {
                     return;

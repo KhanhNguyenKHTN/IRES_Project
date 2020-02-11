@@ -8,7 +8,7 @@ namespace IRES_Global
 {
     public static class GlobalClass
     {
-        public static ObservableCollection<CardItemModel> ListOrders = new ObservableCollection<CardItemModel>();
+        public static ObservableCollection<Food> ListOrders = new ObservableCollection<Food>();
 
         public static string TableCode;
         

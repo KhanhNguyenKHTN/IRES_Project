@@ -10,8 +10,9 @@ namespace ViewModel.ViewModel.FoodMenu
 {
     public class FoodMenuViewModel: BaseViewModel
     {
-        private ObservableCollection<CardItemModel> _ListFoods;
-        public ObservableCollection<CardItemModel> ListFoods { get => _ListFoods; set { _ListFoods = value; OnPropertyChanged(); } }
+        WebServices.Services.MenuService service;
+        private ObservableCollection<Food> _ListFoods;
+        public ObservableCollection<Food> ListFoods { get => _ListFoods; set { _ListFoods = value; OnPropertyChanged(); } }
 
         private ObservableCollection<object> _ListCatogorys;
 
@@ -43,7 +44,8 @@ namespace ViewModel.ViewModel.FoodMenu
         {
             get { return _SelectedCatagory; }
             set {
-                _SelectedCatagory = value; OnPropertyChanged(); }
+                _SelectedCatagory = value; OnPropertyChanged();
+            }
         }
 
         private string _SelectedType;
@@ -54,9 +56,9 @@ namespace ViewModel.ViewModel.FoodMenu
             set { _SelectedType = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<CardItemModel> GetSelectedFood()
+        public ObservableCollection<Food> GetSelectedFood()
         {
-            var result = new ObservableCollection<CardItemModel>();
+            var result = new ObservableCollection<Food>();
             var list = ListFoods.Where(x => x.IsSelected == true);
             foreach (var item in list)
             {
@@ -76,49 +78,17 @@ namespace ViewModel.ViewModel.FoodMenu
             get { return _ListObjects; }
             set { _ListObjects = value; OnPropertyChanged(); }
         }
+        private bool _IsRefresh;
+        public bool IsRefresh { get => _IsRefresh; set { _IsRefresh = value; OnPropertyChanged(); } }
 
         public FoodMenuViewModel()
         {
-            
+            service = new WebServices.Services.MenuService();
         }
 
         public void LoadData()
         {
-            ListFoods = new ObservableCollection<CardItemModel>()
-            {
-                new CardItemModel() { IconFont = "\uef2b",  LabName="Gỏi cuốn", Likes = 21,ImagesSource="bannerFood1.jpg", RealCost=5000, Unit = "đ/dĩa",
-                            Description ="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uefa6", LabName= "Cơm chiên" , ImagesSource="bannerFood2.jpg", RealCost=10000, Unit = "đ/dĩa"
-                             , Likes = 123, Description ="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uec9e", LabName= "Rau xào", Likes = 123,ImagesSource="food1.jpg",  RealCost=15000, Unit = "đ/dĩa",
-                             Description ="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lênTừ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-
-                new CardItemModel() { IconFont = "\uee4a", LabName= "Tôm chiên" , Likes = 123,ImagesSource="food1.jpg", RealCost=35000, Unit = "đ/cái" ,Description="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uef2b",  LabName="Lẩu thái", Likes = 21,ImagesSource="bannerFood1.jpg",  RealCost=150000, Unit = "đ/cái",
-                            Description ="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uefa6", LabName= "Lẩu hải sản" , ImagesSource="bannerFood2.jpg", RealCost=175000, Unit = "đ/cái"
-                             , Likes = 123, Description ="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uec9e", LabName= "Gỏi tôm yump", Likes = 123,ImagesSource="food1.jpg",  RealCost=55000, Unit = "đ/dĩa", Description="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lênTừ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uee4a", LabName= "Bún thêm" , Likes = 123,ImagesSource="food1.jpg",  RealCost=5000, Unit = "đ/dĩa" ,Description="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uef2b",  LabName="Gỏi đu đủ", Likes = 21,ImagesSource="bannerFood1.jpg", RealCost=45000, Unit = "đ/cái",
-                            Description ="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uefa6", LabName= "Lẩu cá lóc" , ImagesSource="bannerFood2.jpg",  RealCost=215000, Unit = "đ/cái"
-                             , Likes = 123, Description ="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uec9e", LabName= "Heo quay", Likes = 123,ImagesSource="food1.jpg",  RealCost=500000, Unit = "đ/con", Description="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lênTừ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-                new CardItemModel() { IconFont = "\uee4a", LabName= "Vịt quay" , Likes = 123,ImagesSource="food1.jpg", RealCost=350000, Unit = "đ/con" ,Description="Từ ngày 20/10 - 20/11 khuyến mãi đặc biệt dành cho khách hàng thuê xe ô tô 4 chỗ trở lên" },
-
-            };
+            IsRefresh = true;
             ListObjects = new ObservableCollection<object>()
             {
                new CardItemModel() { IconFont = "\uefa6", LabName= "Lẩu hải sản" , ImagesSource="bannerFood2.jpg", RealCost=175000, Unit = "đ/cái"
@@ -159,6 +129,22 @@ namespace ViewModel.ViewModel.FoodMenu
                  "Rau củ",
             };
             SelectedType = ListTypes[0].ToString();
+
+
+            IsRefresh = false;
+        }
+        public async void GetAll()
+        {
+            ListFoods = await service.GetAllFood();
+        }
+
+        public async void GetFoodByType()
+        {
+            IsRefresh = true;
+            if (SelectedCatagory == null) return;
+            if (SelectedCatagory.ToString() == "Tất cả") GetAll();
+            else ListFoods = await service.GetFoodByType(SelectedCatagory.ToString().ToUpper());
+            IsRefresh = false;
         }
     }
 }
