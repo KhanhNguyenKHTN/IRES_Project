@@ -102,8 +102,8 @@ namespace IRES_Project.Views.MainPage
                     {
                         new TabMenuItemModel() { IconFont = "\ue8e2", IsActived = true, LabName= "Tất cả" },
                         new TabMenuItemModel() { IconFont = "\uef2b",  LabName="Hot"},
-                         new TabMenuItemModel() { IconFont = "\uefa6", LabName= "Tin tức" },
-                         new TabMenuItemModel() { IconFont = "\uec9e", LabName= "Giải trí"},
+                         new TabMenuItemModel() { IconFont = "\uefa6", LabName= "Dùng nhiều" },
+                         new TabMenuItemModel() { IconFont = "\uec9e", LabName= "Khuyến mãi"},
                         new TabMenuItemModel() { IconFont = "\uee4a", LabName= "Đia điểm" },
                         new TabMenuItemModel() { IconFont = "\ue96f", LabName= "Deal" },
                         new TabMenuItemModel() { IconFont = "\ueec1", LabName= "Tổng hợp"}

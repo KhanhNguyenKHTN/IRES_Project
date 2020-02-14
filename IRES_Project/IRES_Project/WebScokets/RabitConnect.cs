@@ -26,6 +26,7 @@ namespace IRES_Project.WebScokets
                 Console.WriteLine("connecting to listen");
                 consumer.Received += (model, ea) =>
                 {
+                    var tag = ea.ConsumerTag;
                     var body = ea.Body;
                     var message = Encoding.UTF8.GetString(body);
 
@@ -34,7 +35,17 @@ namespace IRES_Project.WebScokets
                        
                     }
                 };
-                channel.BasicConsume(queue: "cashier_queue",
+                channel.BasicConsume(queue: "chef_queue",
+                                     autoAck: true,
+                                     consumer: consumer);
+
+                channel.BasicConsume(queue: "cook01",
+                                     autoAck: true,
+                                     consumer: consumer);
+                channel.BasicConsume(queue: "cook02",
+                                     autoAck: true,
+                                     consumer: consumer);
+                channel.BasicConsume(queue: "cook03",
                                      autoAck: true,
                                      consumer: consumer);
 
