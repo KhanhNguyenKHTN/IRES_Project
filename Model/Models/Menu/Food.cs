@@ -34,6 +34,10 @@ namespace Model.Models.Menu
         [JsonProperty("dishCategory")]
         public Category Category { get; set; }
 
+        private string _Note;
+        public string Note { get => _Note; set { _Note = value; OnPropertyChanged(); } }
+
+
         private bool _IsSelected;
         public bool IsSelected { get => _IsSelected; set { _IsSelected = value; OnPropertyChanged(); } }
 

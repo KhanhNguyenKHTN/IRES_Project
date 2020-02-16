@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using Model.Models.Order;
+using System.Threading.Tasks;
 
 namespace ViewModel.ViewModel.FoodMenu
 {
-    public class FoodMenuViewModel: BaseViewModel
+    public class FoodMenuViewModel : BaseViewModel
     {
         WebServices.Services.MenuService service;
         private ObservableCollection<Food> _ListFoods;
@@ -59,7 +61,7 @@ namespace ViewModel.ViewModel.FoodMenu
         public ObservableCollection<Food> GetSelectedFood()
         {
             var result = new ObservableCollection<Food>();
-            var list = ListFoods.Where(x => x.IsSelected == true);
+            var list = ListFoods?.Where(x => x.IsSelected == true);
             foreach (var item in list)
             {
                 result.Add(item);
@@ -83,6 +85,7 @@ namespace ViewModel.ViewModel.FoodMenu
 
         public FoodMenuViewModel()
         {
+            ListFoods = new ObservableCollection<Food>();
             service = new WebServices.Services.MenuService();
         }
 
@@ -145,6 +148,22 @@ namespace ViewModel.ViewModel.FoodMenu
             if (SelectedCatagory.ToString() == "Tất cả") GetAll();
             else ListFoods = await service.GetFoodByType(SelectedCatagory.ToString().ToUpper());
             IsRefresh = false;
+        }
+
+        public async void GetFoodByName(string name)
+        {
+            IsRefresh = true;
+            ListFoods = await service.GetFoodByName(name);
+            IsRefresh = false;
+        }
+
+        public async Task<Order> PutOrder()
+        {
+            Order order = new Order()
+            {
+                
+            };
+            return await service.PutOrder(order);
         }
     }
 }

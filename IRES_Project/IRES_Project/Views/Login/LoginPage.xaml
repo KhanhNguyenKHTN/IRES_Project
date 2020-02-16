@@ -79,7 +79,7 @@
 
 
             <control:BorderEntry Grid.Row="4" Placeholder="Password" PlaceholderColor="{StaticResource PlaceHolderColor}"
-                        IsCurvedCornersEnabled="True"  HorizontalTextAlignment="Center"
+                        IsCurvedCornersEnabled="True"  HorizontalTextAlignment="Center" x:Name="txbPass"
                         BorderColor="{StaticResource BorderEntryColorWhite}"  CornerRadius="25"
                         BorderWidth="2"  TextColor="{StaticResource TextLoginEntryColor}"
                         IsPassword="True"/>
@@ -97,6 +97,10 @@
                      BackgroundColor="{StaticResource buttonBackground}" Grid.Row="8" Text="Login"></Button>
 
         </Grid>
+        <ActivityIndicator IsRunning="True" IsVisible="False" Grid.Row="1" Grid.Column="1" x:Name="loading" WidthRequest="200" HeightRequest="200"
+                           VerticalOptions="Center" HorizontalOptions="Center">
+            
+        </ActivityIndicator>
 
         <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,5">
             <Label Margin="5,0,0,0" Text="Don't have an account?" VerticalTextAlignment="Center" TextColor="{StaticResource TextLoginEntryColor}" VerticalOptions="Center" FontSize="17"/>

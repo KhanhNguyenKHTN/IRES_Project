@@ -43,32 +43,36 @@ namespace IRES_Project.Views.Table
             wk.DoWork += (s, z) => {
                 cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2"};
                 cbbListFloor.Picker.SelectedIndex = 0;
-                //lsMenu.FlowItemsSource = new System.Collections.ObjectModel.ObservableCollection<object> { new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 1" , Number  = 1},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 2", Number  = 1 },
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 3", Number  = 2 },
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 4" , Number  = 3},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 5", Number  = 4},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 6" , Number  = 5},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 7" , Number  = 6},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 8" , Number  = 7},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 9" , Number  = 8},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 10", Number  = 9},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 11" , Number  = 10},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 12" , Number  = 11},
-                //new TabMenuItemModel() { IconFont = "\ueb60", LabName= "Bàn 13" , Number  = 12}
-                //};
                 waitting.IsVisible = false;
             };
             wk.RunWorkerAsync();
         }
 
-        private void btnOrderClick(object sender, EventArgs e)
+        private async void btnOrderClick(object sender, EventArgs e)
         {
-            contentQrCode.Children.Add(GenerateQR("Demo Code"));
             DateTime dt = new DateTime(pkDatePicker.Picker.Date.Year, pkDatePicker.Picker.Date.Month, pkDatePicker.Picker.Date.Day,
-                pkTime.Picker.Time.Hours, pkTime.Picker.Time.Minutes, pkTime.Picker.Time.Seconds );
+                        pkTime.Picker.Time.Hours, pkTime.Picker.Time.Minutes, pkTime.Picker.Time.Seconds);
+
+            var order = await viewModel.OrderTable(dt, quantityPeople.Quantity);
+            if(order == null)
+            {
+                await MultiContentPages.Instance.DisplayAlert("Thông báo", "Order không thành công?", "Không");
+            }
+            else
+            {
+                contentQrCode.Children.Add(GenerateQR("ORDER" + order.code));
+            }
+            var res =  await MultiContentPages.Instance.DisplayAlert("Thông báo", "Bạn có muốn đặt món trước không?", "Có", "Không");
+            if(res == true)
+            {
+                BackgroundWorker wk = new BackgroundWorker();
+                wk.DoWork += (s, z) =>
+                {
+                    z.Result = new MenuFood.MenuPage(true);
+                };
+                MultiContentPages.Instance.PushPage(wk);
+            }
             
-            viewModel.OrderTable(dt);
             qrCode.IsVisible = true;
         }
 
@@ -131,6 +135,16 @@ namespace IRES_Project.Views.Table
         private async void DisplayAlert(string v)
         {
             await MultiContentPages.Instance.DisplayAlert("Thông báo", v, "Ok");
+        }
+
+        private void btnDatMonTrcClicked(object sender, EventArgs e)
+        {
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += (s, z) =>
+            {
+                z.Result = new MenuFood.MenuPage(true);
+            };
+            MultiContentPages.Instance.PushPage(wk);
         }
     }
 }

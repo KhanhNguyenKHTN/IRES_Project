@@ -1,4 +1,5 @@
 ﻿using Model.Models.Menu;
+using Model.Models.Table;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,7 +31,7 @@ namespace Model.Models.Order
         public string address { get; set; }
         public string avatarUrl { get; set; }
         public string displayName { get; set; }
-        public DateTime dob { get; set; }
+        //public DateTime dob { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
         //public role { get; set; }
@@ -60,21 +61,21 @@ namespace Model.Models.Order
         public int quantity { get; set; }
         public string status { get; set; }
     }
-
-    public class Table
-    {
-        public string code { get; set; }
-        public string description { get; set; }
-        public int number { get; set; }
-        public string position { get; set; }
-        public string status { get; set; }
-        public int tableId { get; set; }
-    }
+    
 
     public class Order
     {
         public string code { get; set; }
         public Customer customer { get; set; }
+
+        private DateTime _DateCheck;
+
+        public DateTime DateCheck
+        {
+            get { return _DateCheck; }
+            set { _DateCheck = value; dateCheckin = _DateCheck.ToString("yyyy-MM-dd HH:mm:ss"); timeCheckin = _DateCheck.ToString("yyyy-MM-dd HH:mm:ss"); }
+        }
+
         public string dateCheckin { get; set; }
         public string description { get; set; }
         public string name { get; set; }
@@ -83,7 +84,7 @@ namespace Model.Models.Order
         public int price { get; set; }
         public int quantity { get; set; }
         public string status { get; set; }
-        public List<Table> tables { get; set; }
+        public List<TableModel> tables { get; set; }
         public string timeCheckin { get; set; }
         public string type { get; set; }
     }

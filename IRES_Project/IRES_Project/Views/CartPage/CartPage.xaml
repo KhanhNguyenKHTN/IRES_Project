@@ -24,6 +24,7 @@
                     <Label Margin="10,0,0,0" FontFamily="{StaticResource FontIcon}" Text="&#xea9d; Back" BackgroundColor="Transparent" TextColor="White"></Label>
                 </control:ButtonWithContent>
             </StackLayout>
+            <Entry BackgroundColor="White" x:Name="lbNote" IsVisible="False" Grid.Row="0" Text="{Binding Note,Mode=TwoWay}" Unfocused="LbNote_Unfocused"></Entry>
             <StackLayout Grid.Row="1">
                 <ListView HasUnevenRows="True" SeparatorColor="Black" x:Name="lsFoods">
                     <ListView.ItemTemplate>
@@ -34,11 +35,12 @@
                                 </ViewCell.ContextActions>
                                 <ViewCell.View>
                                     <ContentView BackgroundColor="#ffffff">
-                                        <StackLayout Orientation="Horizontal" HeightRequest="120">
-                                            <Image VerticalOptions="Center" Source="{Binding ImagesSource}" Aspect="AspectFill" Margin="5,5" HeightRequest="100" WidthRequest="150"></Image>
+                                        <StackLayout Orientation="Horizontal" HeightRequest="160">
+                                            <Image VerticalOptions="Center" Source="{Binding ImagesSource}" Aspect="AspectFill" Margin="5,5" HeightRequest="140" WidthRequest="140"></Image>
 
-                                            <Grid Margin="10,0,0,0" RowSpacing="0" ColumnSpacing="10">
+                                            <Grid Margin="10,0,10,0" RowSpacing="0" ColumnSpacing="10">
                                                 <Grid.RowDefinitions>
+                                                    <RowDefinition/>
                                                     <RowDefinition/>
                                                     <RowDefinition/>
                                                     <RowDefinition/>
@@ -50,11 +52,18 @@
                                                 <Label Grid.Row="0" Grid.Column="0" Text="Tên:" VerticalOptions="Center"></Label>
                                                 <Label Grid.Row="1" Grid.Column="0" Text="Giá:" VerticalOptions="Center"></Label>
                                                 <Label Grid.Row="2" Grid.Column="0" Text="Số lượng:"  VerticalOptions="Center"></Label>
-
-                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding LabName}"  VerticalOptions="Center"></Label>
-                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Cost}"  VerticalOptions="Center"></Label>
+                                                <Label Grid.Row="3" Grid.Column="0" Text="Ghi chú:" VerticalOptions="Center"></Label>
+                                                
+                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding LabName}"  VerticalOptions="Center" LineBreakMode="TailTruncation"></Label>
+                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Cost}"  VerticalOptions="Center" LineBreakMode="TailTruncation"></Label>
                                                 <control:QuantityEntry Grid.Row="2" Grid.Column="1" Quantity="{Binding OrderQuantity,Mode=TwoWay}" QuantityChange="QuantityChange"
-                                                                   Margin="0,0,0,5" HorizontalOptions="FillAndExpand" WidthRequest="120" VerticalOptions="Center"></control:QuantityEntry>
+                                                                   Margin="0,0,0,5" HorizontalOptions="Start" WidthRequest="120" VerticalOptions="Center"></control:QuantityEntry>
+
+                                                <Label Grid.Row="3" Grid.Column="1" FontFamily="{StaticResource FontIcon}" BindingContext="{Binding}" Text="&#xebef;" Margin="0,5" >
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="itemTaped"></TapGestureRecognizer>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
                                             </Grid>
                                         </StackLayout>
                                     </ContentView>

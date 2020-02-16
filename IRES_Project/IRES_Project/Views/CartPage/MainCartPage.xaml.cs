@@ -44,6 +44,15 @@ namespace IRES_Project.Views.CartPage
             paymentMethod.ItemsSource = listItem;
             LoadTotal();
 		}
+        bool IsOrder = false;
+        public MainCartPage(bool isOrder)
+        {
+            InitializeComponent();
+            lsFoods.ItemsSource = IRES_Global.GlobalClass.ListOrders;
+            gridDefault.IsVisible = false;
+            gridOrder.IsVisible = true;
+            LoadTotal();
+        }
 
         private void LoadTotal()
         {
@@ -84,6 +93,11 @@ namespace IRES_Project.Views.CartPage
         {
             await SingleContentPage.Instance.DisplayAlert("Thông báo!", "Yêu cầu thanh toán được gửi đi. Vui lòng đợi nhân viên xác nhận", "OK");
             await Navigation.PopModalAsync();
+        }
+
+        private void OkOrderClicked(object sender, EventArgs e)
+        {
+            MultiContentPages.Instance.DisplayPage(0);
         }
     }
 }

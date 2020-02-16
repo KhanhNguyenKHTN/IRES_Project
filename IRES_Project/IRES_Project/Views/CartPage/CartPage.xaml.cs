@@ -17,12 +17,15 @@ namespace IRES_Project.Views.CartPage
 	public partial class CartPage : ContentView
 	{
         ObservableCollection<Food> currentList;
-        public CartPage (ObservableCollection<Food> selectedFood)
+        
+        bool IsOrder = false;
+        public CartPage(ObservableCollection<Food> selectedFood, bool isOrder = false)
 		{
 			InitializeComponent ();
             currentList = selectedFood;
             lsFoods.ItemsSource = currentList;
             LoadTotal();
+            IsOrder = isOrder;
 		}
 
         private void QuantityChange(object sender, EventArgs e)
@@ -41,20 +44,32 @@ namespace IRES_Project.Views.CartPage
             lbTotal.Text = total.ToString("C").Remove(total.ToString("C").Length - 2, 2);
         }
 
-        private void BtnCheckInClick(object sender, EventArgs e)
+        private async void BtnCheckInClick(object sender, EventArgs e)
         {
             foreach (var item in currentList)
             {
-                var check = IRES_Global.GlobalClass.ListOrders.FirstOrDefault(x => x.LabName == item.LabName);
+                var check = IRES_Global.GlobalInfo.ListOrders.FirstOrDefault(x => x.LabName == item.LabName);
                 if (check == null)
-                    IRES_Global.GlobalClass.ListOrders.Add(item);
-                else check.Quantity += item.Quantity;
+                    IRES_Global.GlobalInfo.ListOrders.Add(item);
+                else check.OrderQuantity += item.OrderQuantity;
             }
+           // var order = await 
+
             BackgroundWorker wk = new BackgroundWorker();
-            wk.DoWork += (s, z) =>
+            if (IsOrder)
             {
-                z.Result = new MainCartPage();
-            };
+                wk.DoWork += (s, z) =>
+                {
+                    z.Result = new MainCartPage(true);
+                };
+            }
+            else
+            {
+                wk.DoWork += (s, z) =>
+                {
+                    z.Result = new MainCartPage();
+                };
+            }
             MultiContentPages.Instance.PushPage(wk);
             //MultiContentPages.Instance.ClearAll();
             //MultiContentPages.Instance.PopModalAsync();
@@ -75,6 +90,35 @@ namespace IRES_Project.Views.CartPage
                 var item = button.BindingContext as Food;
                 this.currentList.Remove(item);
                 LoadTotal();
+            }
+        }
+
+        int Index = -1;
+        private void itemTaped(object sender, EventArgs e)
+        {
+            var label = sender as Label;
+
+            var data = label.BindingContext as Food;
+            Index = currentList.IndexOf(data);
+
+            lbNote.Text = data.Note;
+
+            lbNote.IsVisible = true;
+            lbNote.Focus();
+
+        }
+        
+        private void LbNote_Unfocused(object sender, FocusEventArgs e)
+        {
+            if (Index == -1) return;
+            try
+            {
+                currentList[Index].Note = lbNote.Text;
+                lbNote.IsVisible = false;
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

@@ -48,12 +48,12 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Frame CornerRadius="10" Padding="5" Margin="5">
+                <Frame CornerRadius="10" Padding="5" Margin="5" BorderColor="Black">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35"/>
                             <RowDefinition Height="30"/>
-                            <RowDefinition Height="250"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <Label Text="Chọn bàn" Font="20" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Red" VerticalOptions="Center"></Label>
                         <Grid Grid.Row="1" Margin="10,0,0,0">
@@ -70,7 +70,7 @@
                         </Grid>
                         <Grid Grid.Row="2">
 
-                            <flv:FlowListView  SeparatorVisibility="None" HasUnevenRows="True" HeightRequest="250" IsRefreshing="{Binding IsRefresh}"
+                            <flv:FlowListView  SeparatorVisibility="None" HasUnevenRows="True" HeightRequest="280" IsRefreshing="{Binding IsRefresh}"
                                                FlowColumnCount="6" FlowIsLoadingInfiniteEnabled="True" FlowIsLoadingInfinite="True" x:Name="lsMenu"
 	                                           FlowItemsSource="{Binding ListTables}" FlowItemTapped="Itemtaped" >
                                 <flv:FlowListView.FlowColumnTemplate>
@@ -81,7 +81,7 @@
                                                     <Setter Property="BackgroundColor" Value="White"></Setter>
                                                 </DataTrigger>
                                                 <DataTrigger TargetType="Frame" Binding="{Binding Status}" Value="ĐANG DÙNG">
-                                                    <Setter Property="BackgroundColor" Value="#ff9e9e"></Setter>
+                                                    <Setter Property="BackgroundColor" Value="#f72a2a"></Setter>
                                                 </DataTrigger>
                                             </Frame.Triggers>
                                             <Grid RowSpacing="0">
@@ -120,7 +120,7 @@
                         </Grid>
                     </Grid>
                 </Frame>
-                <Frame Grid.Row="1" CornerRadius="10" Padding="5,5,5,10" Margin="5">
+                <Frame Grid.Row="1" CornerRadius="10" Padding="5,5,5,10" Margin="5"  BorderColor="Black">
                     <Grid RowSpacing="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35"/>
@@ -154,7 +154,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label FontFamily="{StaticResource FontIcon}" FontSize="20" Text="&#xecf8;" VerticalOptions="Center" ></Label>
-                                <control:QuantityEntry Grid.Column="1"></control:QuantityEntry>
+                                <control:QuantityEntry Grid.Column="1" x:Name="quantityPeople"></control:QuantityEntry>
                             </Grid>
 
                             <Grid Grid.Column="2">
@@ -163,7 +163,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Label FontFamily="{StaticResource FontIcon}" FontSize="20" Text="&#xecf7;" VerticalOptions="Center" ></Label>
-                                <control:QuantityEntry Grid.Column="1"></control:QuantityEntry>
+                                <control:QuantityEntry Grid.Column="1" x:Name="quantityChildren"></control:QuantityEntry>
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="3" Margin="10,0,10,5">
@@ -177,7 +177,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <Button Text="Đặt món trước?"
+                <Button IsVisible="False" Text="Đặt món trước?" Clicked="btnDatMonTrcClicked"
                         HorizontalOptions="End" VerticalOptions="Start" Margin="0,0,10,0"
                         x:Name="btnForgotPass" Style="{StaticResource ButtonLessBorder}"></Button>
                 <Button FontFamily="{StaticResource FontIcon}" VerticalOptions="End" 

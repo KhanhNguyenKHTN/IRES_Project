@@ -1,4 +1,5 @@
-﻿using Model.Models.Table;
+﻿using Model.Models.Order;
+using Model.Models.Table;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -45,18 +46,21 @@ namespace WebServices.Services.Table
                 return null;
             }
         }
-        public async Task<bool> PostOrder(string tableList, DateTime dt)
+        public async Task<Order> PostOrder(Order t)
         {
             string url = @"/order";
-            var json = @"{  ""dateCheckin"" : """+ dt.ToString("yyyy-MM-dd HH:mm:ss") + @""",  ""timeCheckin"" : """ + dt.ToString("yyyy-MM-dd HH:mm:ss") + @""",  ""tables"": [ " + tableList + "  ]}";
+            var json = JsonConvert.SerializeObject(t);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(url, content);
             if (response.IsSuccessStatusCode)
             {
-                return true;
+                var resContent = await response.Content.ReadAsStringAsync();
+
+                var detach = JsonConvert.DeserializeObject<JsonOrderDetach>(resContent);
+                return detach.Data;
 
             }
-            return false;
+            return null;
         }
     }
 }

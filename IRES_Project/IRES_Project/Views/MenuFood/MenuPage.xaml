@@ -25,7 +25,9 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 
-                <control:BorderEntry Grid.Row="0" Padding="10,10,45,10" Margin="0,0,0,5" CornerRadius="15" Placeholder="Tìm kiếm..." PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"></control:BorderEntry>
+                <control:BorderEntry Grid.Row="0" Padding="10,10,45,10" Margin="0,0,0,5" CornerRadius="15" Placeholder="Tìm kiếm..."
+                                     Completed="txbSearchReturn" x:Name="txbSearch"
+                                     PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"></control:BorderEntry>
                 <control:ButtonWithContent Clicked="ButtonWithContent_Clicked" Grid.Row="0" HorizontalOptions="End" Padding="10" BorderColor="Transparent" BackgroundColor="Transparent" Margin="0,0,15,5" VerticalOptions="Center">
                     <Label FontFamily="{StaticResource FontIcon}" Text="&#xed12;"></Label>
                 </control:ButtonWithContent>
@@ -40,12 +42,12 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             
-                            <ColumnDefinition/>
+                            <!--<ColumnDefinition/>-->
                         </Grid.ColumnDefinitions>
                         <control:Combobox x:Name="lsListCatagory" Padding="10,0,0,0" ItemSource="{Binding ListCatogorys}" 
                                           SelectedItem="{Binding SelectedCatagory,Mode=TwoWay}"></control:Combobox>
-                        <control:Combobox Grid.Column="1"  Padding="10,0,0,0" x:Name="lsListType" ItemSource="{Binding ListTypes}" 
-                                          SelectedItem="{Binding SelectedType,Mode=TwoWay}"></control:Combobox>
+                        <!--<control:Combobox Grid.Column="1"  Padding="10,0,0,0" x:Name="lsListType" ItemSource="{Binding ListTypes}" 
+                                          SelectedItem="{Binding SelectedType,Mode=TwoWay}"></control:Combobox>-->
                     </Grid>
 
                     <StackLayout x:Name="contentList" VerticalOptions="FillAndExpand" BindingContext="{Binding}">
@@ -96,7 +98,8 @@
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
-            <Button Grid.Row="2"  FontFamily="{StaticResource FontIcon}" Text="&#xec48;       Giỏ hàng"  BackgroundColor="#00c95e" Clicked="BtnCheckInClick"></Button>
+            <Button Grid.Row="2"  FontFamily="{StaticResource FontIcon}" Text="&#xec48;       Giỏ hàng"  BackgroundColor="#00c95e" Clicked="BtnCheckInClick">
+            </Button>
         </Grid>
     </ContentView.Content>
 </ContentView>

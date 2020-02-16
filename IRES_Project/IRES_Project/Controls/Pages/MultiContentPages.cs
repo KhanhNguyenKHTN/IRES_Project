@@ -12,6 +12,7 @@ namespace IRES_Project.Controls.Pages
         public List<object> ListPages { get; set; }
 
         public int DisplayIndex = 0;
+        public bool CanGoBack { get; set; }
 
         private Waitting waiting { get; set; }
         private Grid mainGrid { get; set; }
@@ -23,13 +24,13 @@ namespace IRES_Project.Controls.Pages
         {
             get
             {
-                if (_Instance == null) _Instance = new MultiContentPages();
+                if (_Instance == null) _Instance = new MultiContentPages() { CanGoBack = true};
                 return _Instance;
             }
         }
 
         public event EventHandler<EventArgs> CloseAllEvent;
-        
+
         private MultiContentPages()
         {
             waiting = new Waitting() { IsVisible = true };
@@ -57,18 +58,60 @@ namespace IRES_Project.Controls.Pages
             action.RunWorkerAsync();
         }
 
+
         internal async void PopModalAsync()
         {
             await Navigation.PopModalAsync();
         }
+        public void DisplayPage(int index)
+        {
+            IsLoading = true;
+            try
+            {
+                DisplayIndex = index;
+                setDisplayPage();
+            }
+            catch
+            {
+
+            }
+            IsLoading = false;
+        }
+
+        public void DisplayPage(object obj)
+        {
+            IsLoading = true;
+            try
+            {
+                int index = ListPages.IndexOf(obj);
+                if(index != -1)
+                {
+                    DisplayIndex = index;
+                    setDisplayPage();
+                }
+            }
+            catch
+            {
+
+            }
+            IsLoading = false;
+        }
 
         private void setDisplayPage()
         {
-            
-            if (DisplayIndex == -1) return;
-            mainGrid.Children.Clear();
-            mainGrid.Children.Add(ListPages[DisplayIndex] as ContentView);
+            try
+            {
+                if (DisplayIndex == -1 || DisplayIndex >= ListPages.Count) return;
+                mainGrid.Children.Clear();
+                mainGrid.Children.Add(ListPages[DisplayIndex] as ContentView);
+            }
+            catch
+            {
+
+            }
         }
+
+        
 
         public void BackPage()
         {
@@ -101,12 +144,26 @@ namespace IRES_Project.Controls.Pages
                 //mainGrid.Children.Clear();
                 //mainGrid.BackgroundColor = Color.White;
 
-                ListPages.Clear();
+                ListPages?.Clear();
                 CloseAllEvent?.Invoke(null, null);
             }
             catch { }
 
         }
-        
+
+        protected override bool OnBackButtonPressed()
+        {
+            if(CanGoBack)
+            {
+                ClearAll();
+                return true;
+            }
+            else
+            {
+                ClearAll();
+                //await Navigation.PopAsync(true);
+                return false;
+            }
+        }
     }
 }

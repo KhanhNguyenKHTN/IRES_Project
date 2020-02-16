@@ -78,7 +78,7 @@ namespace IRES_Project.Views.MainPage
                 z.Result = new MenuFood.MenuPage();
             };
             MultiContentPages.Instance.ClearAll();
-            await Navigation.PushModalAsync(MultiContentPages.Instance);
+            await Navigation.PushModalAsync(MultiContentPages.Instance as Page);
             MultiContentPages.Instance.PushPage(wk);
         }
 
@@ -92,8 +92,6 @@ namespace IRES_Project.Views.MainPage
             MultiContentPages.Instance.ClearAll();
             await Navigation.PushModalAsync(MultiContentPages.Instance);
             MultiContentPages.Instance.PushPage(wk);
-            //await Navigation.PushModalAsync(new TableOrderPage());
-            Console.WriteLine("Table click");
         }
 
         private void GenarateData()

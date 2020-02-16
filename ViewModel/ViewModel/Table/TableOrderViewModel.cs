@@ -8,6 +8,7 @@ using System.Text;
 using WebServices.Services.Table;
 using System.Threading.Tasks;
 using System;
+using Model.Models.Order;
 
 namespace ViewModel.ViewModel.Table
 {
@@ -33,29 +34,34 @@ namespace ViewModel.ViewModel.Table
             ListTables = await service.GetTableByPos(v);
             IsRefresh = false;
         }
-        public async Task<bool> OrderTable(int id, DateTime dt)
+        public async Task<Order> OrderTable(int id, DateTime dt)
         {
-            var s = @"{ ""tableId"" : " + id + @"  }";
-            return await service.PostOrder(s, dt);
+            Order order = new Order()
+            {
+                tables = new List<TableModel>() { new TableModel() { Id = id} },
+                customer = IRES_Global.GlobalInfo.CustomerCurrent,
+                DateCheck = dt
+            };
+            var resOrder = await service.PostOrder(order);
+            IRES_Global.GlobalInfo.Order = resOrder;
+
+            return resOrder;
         }
-        public async Task<bool> OrderTable( DateTime dt)
+        public async Task<Order> OrderTable(DateTime dt, int quantity)
         {
             var items = ListTables.Where(x => x.IsActived == true).ToList();
             string s = "";
-            //{    "tableId" : 1   }
-            for (int i = 0; i < items.Count; i++)
-            {
-                if(i == items.Count - 1)
-                {
-                    s += @"{ ""tableId"" : " + items[i].Id + @"  }";
-                }
-                else
-                {
-                    s += @"{ ""tableId"" : " + items[i].Id + @"  },";
-                }
-            }
 
-            return await service.PostOrder(s, dt);
+            Order order = new Order() {
+                tables = items,
+                customer = IRES_Global.GlobalInfo.CustomerCurrent,
+                DateCheck = dt,
+                quantity = quantity
+            };
+            var resOrder = await service.PostOrder(order);
+            IRES_Global.GlobalInfo.Order = resOrder;
+
+            return resOrder;
         }
     }
 }

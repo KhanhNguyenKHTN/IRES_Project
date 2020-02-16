@@ -17,7 +17,7 @@ namespace IRES_Project.Views.MenuFood
 	public partial class MenuPage : ContentView
 	{
         FoodMenuViewModel viewModel;
-        public MenuPage ()
+        public MenuPage()
 		{
 			InitializeComponent ();
             viewModel = new FoodMenuViewModel();
@@ -27,6 +27,19 @@ namespace IRES_Project.Views.MenuFood
             BindingContext = viewModel;
             // layoutTest.Children.Add(new StackLayout() { BackgroundColor = Color.Black, HeightRequest = 100 });
         }
+        bool order = false;
+        public MenuPage(bool isOrder)
+        {
+            order = true;
+            InitializeComponent();
+            viewModel = new FoodMenuViewModel();
+            GenerateData();
+            //LoadData();
+            lsListCatagory.SelectionChanged += LsListCatagory_SelectionChanged;
+            BindingContext = viewModel;
+            // layoutTest.Children.Add(new StackLayout() { BackgroundColor = Color.Black, HeightRequest = 100 });
+        }
+
 
         private void LsListCatagory_SelectionChanged(object sender, EventArgs e)
         {
@@ -61,19 +74,27 @@ namespace IRES_Project.Views.MenuFood
             var list = viewModel.GetSelectedFood();
             if(list.Count == 0)
             {
-                var check = Navigation.ModalStack[Navigation.ModalStack.Count - 1] as MultiContentPages;
-                if(check != null)
-                {
-                    MultiContentPages.Instance.DisplayAlert("Thông báo!", "Vui lòng chọn món!", "OK");
-                }
+                //var check = Navigation.ModalStack[Navigation.ModalStack.Count - 1] as MultiContentPages;
+                //if(check != null)
+                //{
+                //    MultiContentPages.Instance.DisplayAlert("Thông báo!", "Vui lòng chọn món!", "OK");
+                //}
+                MultiContentPages.Instance.DisplayAlert("Thông báo!", "Vui lòng chọn món!", "OK");
                 return;
             }
+
+            //if (order) { IRES_Global.GlobalClass.ListOrders = list; MultiContentPages.Instance.PopPage(); return; }
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) =>
             {
-                z.Result = new CartPage.CartPage(list);
+                z.Result = new CartPage.CartPage(list, order);
             };
             MultiContentPages.Instance.PushPage(wk);
+        }
+
+        private void txbSearchReturn(object sender, EventArgs e)
+        {
+            viewModel.GetFoodByName(txbSearch.Text);
         }
     }
 }

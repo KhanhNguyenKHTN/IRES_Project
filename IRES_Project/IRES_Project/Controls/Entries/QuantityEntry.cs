@@ -41,10 +41,10 @@ namespace IRES_Project.Controls
             {
                 FontFamily = Device.RuntimePlatform == Device.Android ? "icofont.ttf#icofont" : "icofont",
                 BackgroundColor = Color.LightGray,
-                Text = "\uef9a",
+                Text = "\uec7e",
                 TextColor = Color.Black,//.FromHex("#00DFF7"),
                 WidthRequest = 35,
-                FontAttributes = FontAttributes.Bold,
+                FontSize = 13,
                 BorderColor = Color.LightGray,
                 Padding =2,
                 BorderWidth = 1
@@ -57,6 +57,7 @@ namespace IRES_Project.Controls
                 Text = "\uefc2",
                 TextColor = Color.Black,//.FromHex("#00DFF7"),
                 WidthRequest = 35,
+                FontAttributes = FontAttributes.Bold,
                 BorderColor = Color.LightGray,
                 Padding = 2,
                 BorderWidth = 1
