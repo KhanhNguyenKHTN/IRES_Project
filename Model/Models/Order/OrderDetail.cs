@@ -61,7 +61,7 @@ namespace Model.Models.Order
         public int quantity { get; set; }
         public string status { get; set; }
     }
-    
+
 
     public class Order
     {
@@ -87,5 +87,31 @@ namespace Model.Models.Order
         public List<TableModel> tables { get; set; }
         public string timeCheckin { get; set; }
         public string type { get; set; }
+    }
+
+    public class FoodOrder
+    {
+
+        public FoodOrder(Food item)
+        {
+            dishId = item.Id;
+            note = item.Note;
+            quantity = item.OrderQuantity;
+        }
+
+        public int dishId { get; set; }
+
+        public string note { get; set; }
+
+        public int quantity { get; set; }
+    }
+    public class PutOrder : BaseModel
+    {
+       public List<FoodOrder> dishes { get; set; }
+
+        public PutOrder()
+        {
+            dishes = new List<FoodOrder>();
+        }
     }
 }

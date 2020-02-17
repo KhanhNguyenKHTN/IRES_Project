@@ -11,6 +11,8 @@ namespace Model.Models.Menu
         {
             
         }
+        [JsonProperty("dishId")]
+        public int Id { get; set; }
 
         [JsonProperty("name")]
         public string LabName { get; set; }

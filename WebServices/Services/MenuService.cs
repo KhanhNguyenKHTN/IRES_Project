@@ -119,12 +119,19 @@ namespace WebServices.Services
 
         }
 
-        public async Task<Order> PutOrder(Order t)
+        public async Task<Order> PutOrder(Order t, List<Food> dishes)
         {
             try
             {
-                string url = @"/order/update";
-                var json = JsonConvert.SerializeObject(t);
+                string url = @"/order/update/id/" + t.orderId;
+
+                PutOrder listOrder = new PutOrder();
+                foreach (var item in dishes)
+                {
+                    listOrder.dishes.Add(new FoodOrder(item));
+                }
+
+                var json = JsonConvert.SerializeObject(listOrder);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PutAsync(url, content);
                 if (response.IsSuccessStatusCode)

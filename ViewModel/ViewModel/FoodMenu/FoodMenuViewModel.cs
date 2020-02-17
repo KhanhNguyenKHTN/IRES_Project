@@ -157,13 +157,9 @@ namespace ViewModel.ViewModel.FoodMenu
             IsRefresh = false;
         }
 
-        public async Task<Order> PutOrder()
+        public async Task<Order> PutOrder(Order order, List<Food> foods)
         {
-            Order order = new Order()
-            {
-                
-            };
-            return await service.PutOrder(order);
+            return await service.PutOrder(order, foods);
         }
     }
 }

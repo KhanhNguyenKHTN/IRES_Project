@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ViewModel.ViewModel.FoodMenu;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,7 +17,7 @@ namespace IRES_Project.Views.CartPage
 	public partial class CartPage : ContentView
 	{
         ObservableCollection<Food> currentList;
-        
+        FoodMenuViewModel viewmodel;
         bool IsOrder = false;
         public CartPage(ObservableCollection<Food> selectedFood, bool isOrder = false)
 		{
@@ -26,6 +26,7 @@ namespace IRES_Project.Views.CartPage
             lsFoods.ItemsSource = currentList;
             LoadTotal();
             IsOrder = isOrder;
+            viewmodel = new FoodMenuViewModel();
 		}
 
         private void QuantityChange(object sender, EventArgs e)
@@ -53,8 +54,12 @@ namespace IRES_Project.Views.CartPage
                     IRES_Global.GlobalInfo.ListOrders.Add(item);
                 else check.OrderQuantity += item.OrderQuantity;
             }
-           // var order = await 
-
+            var order = await viewmodel.PutOrder(IRES_Global.GlobalInfo.Order, IRES_Global.GlobalInfo.ListOrders.ToList());
+            if(order == null)
+            {
+                await MultiContentPages.Instance.DisplayAlert("Thông báo", "Kết nối lỗi!", "Ok");
+                return;
+            }
             BackgroundWorker wk = new BackgroundWorker();
             if (IsOrder)
             {

@@ -19,7 +19,7 @@ namespace IRES_Project.Views.CartPage
         public MainCartPage ()
 		{
 			InitializeComponent ();
-            lsFoods.ItemsSource = IRES_Global.GlobalClass.ListOrders;
+            lsFoods.ItemsSource = IRES_Global.GlobalInfo.ListOrders;
             listItem = new ObservableCollection<CardItemModel>()
             {
                 new CardItemModel()
@@ -48,7 +48,7 @@ namespace IRES_Project.Views.CartPage
         public MainCartPage(bool isOrder)
         {
             InitializeComponent();
-            lsFoods.ItemsSource = IRES_Global.GlobalClass.ListOrders;
+            lsFoods.ItemsSource = IRES_Global.GlobalInfo.ListOrders;
             gridDefault.IsVisible = false;
             gridOrder.IsVisible = true;
             LoadTotal();
@@ -57,7 +57,7 @@ namespace IRES_Project.Views.CartPage
         private void LoadTotal()
         {
             int total = 0;
-            foreach (var item in IRES_Global.GlobalClass.ListOrders)
+            foreach (var item in IRES_Global.GlobalInfo.ListOrders)
             {
                 total += item.TotalQuantity;
             }

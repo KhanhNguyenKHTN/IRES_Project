@@ -204,7 +204,7 @@ namespace IRES_Project.Views.MainPage
                             await Navigation.PopModalAsync(false);
                             if (result.Text.Contains("TABLE"))
                             {
-                                IRES_Global.GlobalClass.TableCode = result.Text;
+                                IRES_Global.GlobalInfo.TableCode = result.Text;
                                 string s = result.Text.Replace("TABLE", "");                                
                                 var res = await model.OrderTable(int.Parse(s), DateTime.Now);
                                 BtnMenu_Clicked(null, null);
@@ -215,7 +215,7 @@ namespace IRES_Project.Views.MainPage
                             await Navigation.PopModalAsync(false);
                             if (result.Text.Contains("TABLE"))
                             {
-                                IRES_Global.GlobalClass.TableCode = result.Text;
+                                IRES_Global.GlobalInfo.TableCode = result.Text;
                                 string s = result.Text.Replace("TABLE", "");
                                 var res = await model.OrderTable(int.Parse(s), DateTime.Now);
                                 BtnMenu_Clicked(null, null);
