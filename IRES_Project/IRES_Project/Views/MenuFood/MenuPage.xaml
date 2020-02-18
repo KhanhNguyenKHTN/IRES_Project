@@ -10,7 +10,7 @@
         <Color x:Key="buttonTextColor">#ffffff</Color>
         <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
             <On Platform="Android" Value="icofont.ttf#icofont" />
-            <On Platform="iOS" Value="icofont"/>
+            <!--<On Platform="iOS" Value="icofont"/>-->
         </OnPlatform>
     </ContentView.Resources>
     <ContentView.Content>

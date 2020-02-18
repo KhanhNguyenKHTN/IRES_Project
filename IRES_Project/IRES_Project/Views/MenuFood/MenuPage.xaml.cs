@@ -67,18 +67,20 @@ namespace IRES_Project.Views.MenuFood
             var card = button.BindingContext as Food;
 
             card.IsSelected = !card.IsSelected;
+            if (card.IsSelected)
+            {
+                viewModel.SelectedFood.Add(card);
+            } else
+            {
+                var check = viewModel.SelectedFood.FirstOrDefault(x => x.Id == card.Id);
+                if (check != null) viewModel.SelectedFood.Remove(card);
+            }
         }
 
         private void BtnCheckInClick(object sender, EventArgs e)
         {
-            var list = viewModel.GetSelectedFood();
-            if(list.Count == 0)
+            if(viewModel.SelectedFood.Count == 0)
             {
-                //var check = Navigation.ModalStack[Navigation.ModalStack.Count - 1] as MultiContentPages;
-                //if(check != null)
-                //{
-                //    MultiContentPages.Instance.DisplayAlert("Thông báo!", "Vui lòng chọn món!", "OK");
-                //}
                 MultiContentPages.Instance.DisplayAlert("Thông báo!", "Vui lòng chọn món!", "OK");
                 return;
             }
@@ -87,7 +89,7 @@ namespace IRES_Project.Views.MenuFood
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) =>
             {
-                z.Result = new CartPage.CartPage(list, order);
+                z.Result = new CartPage.CartPage(viewModel.SelectedFood, order);
             };
             MultiContentPages.Instance.PushPage(wk);
         }

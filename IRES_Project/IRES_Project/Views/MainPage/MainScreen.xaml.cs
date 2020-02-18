@@ -50,11 +50,11 @@ namespace IRES_Project.Views.MainPage
 
         private async void BtnCart_Clicked(object sender, EventArgs e)
         {
-            //if(IRES_Global.GlobalClass.ListOrders.Count == 0)
-            //{
-            //    HasAlert?.Invoke("Bạn chưa chọn món!", null);
-            //    return;
-            //}
+            if (IRES_Global.GlobalInfo.ListOrders.Count == 0)
+            {
+                HasAlert?.Invoke("Bạn chưa chọn món!", null);
+                return;
+            }
             SingleContentPage.Instance.Content = new CartPage.MainCartPage();
             await Navigation.PushModalAsync(SingleContentPage.Instance);
             //LoadingPageWithContent.Instance.PushPage(wk);
@@ -67,11 +67,11 @@ namespace IRES_Project.Views.MainPage
 
         private async void BtnMenu_Clicked(object sender, EventArgs e)
         {
-            //if (string.IsNullOrEmpty(IRES_Global.GlobalClass.TableCode))
-            //{
-            //    HasAlert?.Invoke("Bạn chưa chọn bàn!", null);
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(IRES_Global.GlobalInfo.TableCode))
+            {
+                HasAlert?.Invoke("Bạn chưa chọn bàn!", null);
+                return;
+            }
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) =>
             {

@@ -58,16 +58,17 @@ namespace ViewModel.ViewModel.FoodMenu
             set { _SelectedType = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<Food> GetSelectedFood()
-        {
-            var result = new ObservableCollection<Food>();
-            var list = ListFoods?.Where(x => x.IsSelected == true);
-            foreach (var item in list)
-            {
-                result.Add(item);
-            }
-            return result;
-        }
+        //public ObservableCollection<Food> GetSelectedFood()
+        //{
+        //    var result = new ObservableCollection<Food>();
+        //    var list = ListFoods?.Where(x => x.IsSelected == true);
+        //    foreach (var item in list)
+        //    {
+        //        result.Add(item);
+        //    }
+        //    return result;
+        //}
+        public ObservableCollection<Food> SelectedFood { get; set; }
 
         public ICommand ItemTappedCommand { get; set; }
 
@@ -86,6 +87,7 @@ namespace ViewModel.ViewModel.FoodMenu
         public FoodMenuViewModel()
         {
             ListFoods = new ObservableCollection<Food>();
+            SelectedFood = new ObservableCollection<Food>();
             service = new WebServices.Services.MenuService();
         }
 
@@ -147,13 +149,24 @@ namespace ViewModel.ViewModel.FoodMenu
             if (SelectedCatagory == null) return;
             if (SelectedCatagory.ToString() == "Tất cả") GetAll();
             else ListFoods = await service.GetFoodByType(SelectedCatagory.ToString().ToUpper());
+            UpdateListFood();
             IsRefresh = false;
+        }
+
+        public void UpdateListFood()
+        {
+            foreach (var item in SelectedFood)
+            {
+                var check = ListFoods.FirstOrDefault(x => x.Id == item.Id);
+                if (check != null) check.IsSelected = true;
+            }
         }
 
         public async void GetFoodByName(string name)
         {
             IsRefresh = true;
             ListFoods = await service.GetFoodByName(name);
+            UpdateListFood();
             IsRefresh = false;
         }
 
