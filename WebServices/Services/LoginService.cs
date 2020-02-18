@@ -26,18 +26,27 @@ namespace WebServices.Services
 
         public async Task<bool> Login(string username, string pass)
         {
-            string url = @"/customer/customer/login";
-            string json = @"{ ""password"": """ + pass + @""", ""userName"": """ + username + @""" }";
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(url, content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var contentData = await response.Content.ReadAsStringAsync();
-                var item = JsonConvert.DeserializeObject<JsonLoginDetach>(contentData);
-                IRES_Global.GlobalInfo.CustomerCurrent = item.Data;
-                return true;
+                string url = @"/customer/customer/login";
+                string json = @"{ ""password"": """ + pass + @""", ""userName"": """ + username + @""" }";
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var contentData = await response.Content.ReadAsStringAsync();
+                    var item = JsonConvert.DeserializeObject<JsonLoginDetach>(contentData);
+                    IRES_Global.GlobalInfo.CustomerCurrent = item.Data;
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+                Console.WriteLine("Không thể kết nối");
+                return false;
+            }
+            
         }
     }
 }

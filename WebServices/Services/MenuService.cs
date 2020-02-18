@@ -58,6 +58,7 @@ namespace WebServices.Services
             }
             catch
             {
+                Console.WriteLine("Không thể kết nối");
                 return null;
             }
             
@@ -86,6 +87,7 @@ namespace WebServices.Services
             }
             catch
             {
+                Console.WriteLine("Không thể kết nối");
                 return null;
             }
             

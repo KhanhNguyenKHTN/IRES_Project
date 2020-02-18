@@ -22,5 +22,11 @@ namespace IRES_Project.Views.Login
         {
             await this.Navigation.PopModalAsync();
         }
-    }
+
+		private async void btnSend_Clicked(object sender, EventArgs e)
+		{
+			IRES_Global.GlobalInfo.BaseUrl = txbMailOrPhone.Text;
+			await this.Navigation.PopModalAsync();
+		}
+	}
 }
