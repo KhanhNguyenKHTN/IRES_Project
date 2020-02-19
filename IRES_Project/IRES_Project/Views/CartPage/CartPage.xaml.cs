@@ -54,7 +54,7 @@ namespace IRES_Project.Views.CartPage
                     IRES_Global.GlobalInfo.ListOrders.Add(item);
                 else check.OrderQuantity += item.OrderQuantity;
             }
-            var order = await viewmodel.PutOrder(IRES_Global.GlobalInfo.Order, IRES_Global.GlobalInfo.ListOrders.ToList());
+            var order = await viewmodel.PutOrder(IRES_Global.GlobalInfo.Order, currentList.ToList());
             if(order == null)
             {
                 await MultiContentPages.Instance.DisplayAlert("Thông báo", "Kết nối lỗi!", "Ok");

@@ -67,7 +67,7 @@ namespace IRES_Project.Views.MainPage
 
         private async void BtnMenu_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(IRES_Global.GlobalInfo.TableCode))
+            if (IRES_Global.GlobalInfo.Order == null)
             {
                 HasAlert?.Invoke("Bạn chưa chọn bàn!", null);
                 return;
