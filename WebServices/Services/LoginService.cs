@@ -21,14 +21,14 @@ namespace WebServices.Services
 
         public LoginService()
         {
-            client = new HttpClient() { BaseAddress = new Uri(IRES_Global.GlobalInfo.BaseUrl) };
+            client = new HttpClient();
         }
 
         public async Task<bool> Login(string username, string pass)
         {
             try
             {
-                string url = @"/customer/customer/login";
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/customer/login";
                 string json = @"{ ""password"": """ + pass + @""", ""userName"": """ + username + @""" }";
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, content);
@@ -41,7 +41,7 @@ namespace WebServices.Services
                 }
                 return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Console.WriteLine("Không thể kết nối");
                 return false;

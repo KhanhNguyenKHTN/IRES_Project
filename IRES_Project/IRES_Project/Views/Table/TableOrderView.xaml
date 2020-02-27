@@ -16,7 +16,7 @@
         <Color x:Key="ColorUnSelected">#bdbfbe</Color>
         <Color x:Key="ColorSelected">#4a9eff</Color>
         <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String">
-            <On Platform="iOS" Value="icofont" />
+            <!--<On Platform="iOS" Value="icofont" />-->
             <On Platform="Android" Value="icofont.ttf#icofont" />
         </OnPlatform>
         <Color x:Key="buttonLessBorderTextColor">#1399f2</Color>

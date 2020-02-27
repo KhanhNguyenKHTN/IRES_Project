@@ -24,14 +24,14 @@ namespace WebServices.Services.Table
 
         public TableService()
         {
-            client = new HttpClient() { BaseAddress = new Uri(IRES_Global.GlobalInfo.BaseUrl) };
+            client = new HttpClient();
         }
         
         public async Task<ObservableCollection<TableModel>> GetTableByPos(string pos)
         {
             try
             {
-                string url = @"/table/position/" + pos;
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/table/position/" + pos;
 
                 var response = await client.GetAsync(url);
 
@@ -58,7 +58,7 @@ namespace WebServices.Services.Table
         {
             try
             {
-                string url = @"/order";
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/order";
                 var json = JsonConvert.SerializeObject(t);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, content);

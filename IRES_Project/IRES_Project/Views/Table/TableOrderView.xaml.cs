@@ -41,8 +41,16 @@ namespace IRES_Project.Views.Table
             waitting.IsVisible = true;
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) => {
-                cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2"};
-                cbbListFloor.Picker.SelectedIndex = 0;
+                if(IRES_Global.GlobalInfo.Order != null)
+                {
+                    contentQrCode.Children.Add(GenerateQR("ORDER" + IRES_Global.GlobalInfo.Order.code));
+                    qrCode.IsVisible = true;
+                }
+                else
+                {
+                    cbbListFloor.ItemSource = new System.Collections.ObjectModel.ObservableCollection<object> { "Tầng 1", "Tầng 2" };
+                    cbbListFloor.Picker.SelectedIndex = 0;
+                }
                 waitting.IsVisible = false;
             };
             wk.RunWorkerAsync();

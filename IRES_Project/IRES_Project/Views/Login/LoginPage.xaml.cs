@@ -39,12 +39,16 @@ namespace IRES_Project.Views.Login
 
         private async void BtnForgotPass_Clicked(object sender, EventArgs e)
         {
+            gridWaiting.IsVisible = true;
             await this.Navigation.PushModalAsync(new ForgotPassPage());
+            gridWaiting.IsVisible = false;
         }
 
         private async void BtnSignUp_Clicked(object sender, EventArgs e)
         {
+            gridWaiting.IsVisible = true;
            await this.Navigation.PushModalAsync(new SignUpPage());
+            gridWaiting.IsVisible = false;
         }
     }
 }

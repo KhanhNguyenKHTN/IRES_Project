@@ -32,14 +32,14 @@ namespace WebServices.Services
 
         public MenuService()
         {
-            client = new HttpClient() { BaseAddress = new Uri( IRES_Global.GlobalInfo.BaseUrl)};
+            client = new HttpClient();
         }
 
         public async Task<ObservableCollection<Food>> GetAllFood()
         {
             try
             {
-                string url = @"/dish/type/KHAI VỊ";
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/dish/type/KHAI VỊ";
 
                 var response = await client.GetAsync(url);
 
@@ -53,13 +53,13 @@ namespace WebServices.Services
                 }
                 else
                 {
-                    return null;
+                    return new ObservableCollection<Food>();
                 }
             }
             catch
             {
                 Console.WriteLine("Không thể kết nối");
-                return null;
+                return new ObservableCollection<Food>();
             }
             
         }
@@ -68,7 +68,7 @@ namespace WebServices.Services
         {
             try
             {
-                string url = @"/dish/type/" + type;
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/dish/type/" + type;
 
                 var response = await client.GetAsync(url);
 
@@ -82,13 +82,13 @@ namespace WebServices.Services
                 }
                 else
                 {
-                    return null;
+                    return new ObservableCollection<Food>();
                 }
             }
             catch
             {
                 Console.WriteLine("Không thể kết nối");
-                return null;
+                return new ObservableCollection<Food>();
             }
             
         }
@@ -97,7 +97,7 @@ namespace WebServices.Services
         {
             try
             {
-                string url = @"/dish/search/" + name;
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/dish/search/" + name;
 
                 var response = await client.GetAsync(url);
 
@@ -111,12 +111,12 @@ namespace WebServices.Services
                 }
                 else
                 {
-                    return null;
+                    return new ObservableCollection<Food>();
                 }
             }
             catch
             {
-                return null;
+                return new ObservableCollection<Food>();
             }
 
         }
@@ -125,7 +125,7 @@ namespace WebServices.Services
         {
             try
             {
-                string url = @"/order/update/id/" + t.orderId;
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/order/update/id/" + t.orderId;
 
                 PutOrder listOrder = new PutOrder();
                 foreach (var item in dishes)
