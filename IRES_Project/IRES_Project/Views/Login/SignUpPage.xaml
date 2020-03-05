@@ -50,24 +50,27 @@
                     <Label Text="SIGN UP" HorizontalOptions="CenterAndExpand" TextColor="{StaticResource TextLoginEntryColor}" FontAttributes="Bold" FontSize="25"/>
                     <Label Text="Create an account to start doing more" HorizontalOptions="CenterAndExpand" TextColor="{StaticResource TextLoginEntryColor}" FontSize="15" Margin="0,10,0,20"/>
 
-                    <control:BorderEntry Style="{StaticResource EntryInfor}" Placeholder="Name"/>
+                    <control:BorderEntry Style="{StaticResource EntryInfor}" x:Name="txbName" Placeholder="Name"/>
 
-                    <control:BorderEntry Style="{StaticResource EntryInfor}" Placeholder="Email"></control:BorderEntry>
+                    <control:BorderEntry Style="{StaticResource EntryInfor}" x:Name="txbEmail" Placeholder="Email"></control:BorderEntry>
 
-                    <control:BorderEntry Style="{StaticResource EntryInfor}" Placeholder="Phone"/>
+                    <control:BorderEntry Style="{StaticResource EntryInfor}" x:Name="txbphone" Placeholder="Phone"/>
 
-                    <control:BorderEntry Style="{StaticResource EntryInfor}" Placeholder="Password"/>
+                    <control:BorderEntry Style="{StaticResource EntryInfor}" x:Name="txbPassWord" Placeholder="Password"/>
 
-                    <control:BorderEntry Style="{StaticResource EntryInfor}" Placeholder="Confirm Password"/>
+                    <control:BorderEntry Style="{StaticResource EntryInfor}" x:Name="txbConfirmPassword" Placeholder="Confirm Password"/>
 
-                    <Button  HeightRequest="45" Margin="0,10,0,0" VerticalOptions="Center" x:Name="btnSignUp" CornerRadius="25" TextColor="{StaticResource buttonTextColor}"
-                     BackgroundColor="{StaticResource buttonBackground}" Text="REGISTER"></Button>
+                    <Button  HeightRequest="45" VerticalOptions="Center" x:Name="btnRegister" CornerRadius="25" TextColor="{StaticResource buttonTextColor}"
+                     BackgroundColor="{StaticResource buttonBackground}" Margin="20" Grid.Row="8" Text="Sign Up"></Button>
                 </StackLayout>
 
                 <StackLayout Grid.Row="1" Grid.RowSpan="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,0,5">
                     <Label Margin="5,0,0,0" Text="Already have an account?" VerticalTextAlignment="Center" TextColor="{StaticResource TextLoginEntryColor}" VerticalOptions="Center" FontSize="17"/>
                     <Button Text="Log In" x:Name="btnLogin" Style="{StaticResource ButtonLessBorder}" Padding="-10,0" Margin="-5,0" VerticalOptions="Center"></Button>
                 </StackLayout>
+            </Grid>
+            <Grid Grid.ColumnSpan="3" BackgroundColor="#99D3D3D3" IsVisible="False" x:Name="gridWaiting">
+                <ActivityIndicator HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Center" IsRunning="True" Color="#4287f5"></ActivityIndicator>
             </Grid>
         </Grid>
     </ContentPage.Content>

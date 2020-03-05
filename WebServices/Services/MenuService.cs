@@ -155,5 +155,29 @@ namespace WebServices.Services
             }
 
         }
+
+        public async Task<bool> Payment(int total)
+        {
+            try
+            {
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/customer/payment/order/" + IRES_Global.GlobalInfo.Order.orderId + @"?total=" + total;
+
+                var response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Không thể kết nối");
+                return false;
+            }
+        }
     }
 }

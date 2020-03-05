@@ -1,6 +1,7 @@
 ﻿using IRES_Project.Views.Home;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,17 +24,31 @@ namespace IRES_Project.Views.Login
             btnLogin.Clicked += BtnLogin_Clicked;
 		}
 
-        private async void BtnLogin_Clicked(object sender, EventArgs e)
+        private void BtnLogin_Clicked(object sender, EventArgs e)
         {
-            var res = await viewmodel.Login(txbUserName.Text, txbPass.Text);
-            if (res)
+            gridWaiting.IsVisible = true;
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += async (s, z) =>
             {
-                await Navigation.PushModalAsync(new HomePage());
-            }
-            else
-            {
-                await DisplayAlert("Thông báo", "Username hoặc password không đúng!", "Ok");
-            }
+                var res = await viewmodel.Login(txbUserName.Text, txbPass.Text);
+                Device.BeginInvokeOnMainThread( async() =>
+                {
+                    if (res)
+                    {
+
+                        await Navigation.PushModalAsync(new HomePage());
+                    }
+                    else
+                    {
+                        await DisplayAlert("Thông báo", "Username hoặc password không đúng!", "Ok");
+                    }
+                    gridWaiting.IsVisible = false;
+                });
+                
+            };
+            wk.RunWorkerAsync();
+
+            
             
         }
 
@@ -47,7 +62,7 @@ namespace IRES_Project.Views.Login
         private async void BtnSignUp_Clicked(object sender, EventArgs e)
         {
             gridWaiting.IsVisible = true;
-           await this.Navigation.PushModalAsync(new SignUpPage());
+            await this.Navigation.PushModalAsync(new SignUpPage());
             gridWaiting.IsVisible = false;
         }
     }

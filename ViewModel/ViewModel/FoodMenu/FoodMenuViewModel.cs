@@ -174,5 +174,10 @@ namespace ViewModel.ViewModel.FoodMenu
         {
             return await service.PutOrder(order, foods);
         }
+
+        public async Task<bool> Payment(int total)
+        {
+            return await service.Payment(total);
+        }
     }
 }

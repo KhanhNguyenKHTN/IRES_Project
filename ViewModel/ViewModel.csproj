@@ -9,4 +9,8 @@
     <ProjectReference Include="..\WebServices\WebServices.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModel\Order\" />
+  </ItemGroup>
+
 </Project>

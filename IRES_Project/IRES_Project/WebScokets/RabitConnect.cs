@@ -35,17 +35,7 @@ namespace IRES_Project.WebScokets
                        
                     }
                 };
-                channel.BasicConsume(queue: "chef_queue",
-                                     autoAck: true,
-                                     consumer: consumer);
-
-                channel.BasicConsume(queue: "cook01",
-                                     autoAck: true,
-                                     consumer: consumer);
-                channel.BasicConsume(queue: "cook02",
-                                     autoAck: true,
-                                     consumer: consumer);
-                channel.BasicConsume(queue: "cook03",
+                channel.BasicConsume(queue: "customer_queue",
                                      autoAck: true,
                                      consumer: consumer);
 

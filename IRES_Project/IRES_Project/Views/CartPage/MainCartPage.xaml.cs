@@ -3,10 +3,11 @@ using Model.Models.Menu;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ViewModel.ViewModel.FoodMenu;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,11 +16,13 @@ namespace IRES_Project.Views.CartPage
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainCartPage : ContentView
 	{
+        FoodMenuViewModel viewmodel;
         ObservableCollection<CardItemModel> listItem;
         public MainCartPage ()
 		{
 			InitializeComponent ();
             lsFoods.ItemsSource = IRES_Global.GlobalInfo.ListOrders;
+            viewmodel = new FoodMenuViewModel();
             listItem = new ObservableCollection<CardItemModel>()
             {
                 new CardItemModel()
@@ -53,10 +56,10 @@ namespace IRES_Project.Views.CartPage
             gridOrder.IsVisible = true;
             LoadTotal();
         }
+        int total = 0;
 
         private void LoadTotal()
         {
-            int total = 0;
             foreach (var item in IRES_Global.GlobalInfo.ListOrders)
             {
                 total += item.TotalQuantity;
@@ -89,10 +92,33 @@ namespace IRES_Project.Views.CartPage
             PopUp.IsVisible = false;
         }
 
-        private async void AcceptPaymentClick(object sender, EventArgs e)
+        private void AcceptPaymentClick(object sender, EventArgs e)
         {
-            await SingleContentPage.Instance.DisplayAlert("Thông báo!", "Yêu cầu thanh toán được gửi đi. Vui lòng đợi nhân viên xác nhận", "OK");
-            await Navigation.PopModalAsync();
+            gridWaiting.IsVisible = true;
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += async (s, z) =>
+            {
+                var res = await viewmodel.Payment(total);
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    if (res)
+                    {
+                        await SingleContentPage.Instance.DisplayAlert("Thông báo!", "Yêu cầu thanh toán được gửi đi. Vui lòng đợi nhân viên xác nhận", "OK");
+                        await Navigation.PopModalAsync();
+                    }
+                    else
+                    {
+                        await MultiContentPages.Instance.DisplayAlert("Thông báo", "Username hoặc password không đúng!", "Ok");
+                    }
+                    gridWaiting.IsVisible = false;
+                });
+
+            };
+            wk.RunWorkerAsync();
+
+
+
+
         }
 
         private void OkOrderClicked(object sender, EventArgs e)

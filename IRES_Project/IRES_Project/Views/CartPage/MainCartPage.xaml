@@ -126,6 +126,11 @@
                     <Button Grid.Column="1" BackgroundColor="LightGreen" Clicked="AcceptPaymentClick" Text="Thanh toán"></Button>
                 </Grid>
             </Grid>
+
+
+            <Grid Grid.RowSpan="3" BackgroundColor="#99D3D3D3" IsVisible="False" x:Name="gridWaiting">
+                <ActivityIndicator HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Center" IsRunning="True" Color="#4287f5"></ActivityIndicator>
+            </Grid>
         </Grid>
     </ContentView.Content>
 </ContentView>
