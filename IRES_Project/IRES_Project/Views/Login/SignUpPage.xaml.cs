@@ -30,7 +30,7 @@ namespace IRES_Project.Views.Login
         private async void BtnSignUp_Clicked(object sender, EventArgs e)
         {
             int temp = 0;
-            if (txbEmail.Text == null || txbEmail.Text.Contains("@"))
+            if (txbEmail.Text == null || !txbEmail.Text.Contains("@"))
             {
                 await DisplayAlert("Thông báo", "Email không đúng!", "OK");
                 return;

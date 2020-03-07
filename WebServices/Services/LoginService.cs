@@ -28,7 +28,7 @@ namespace WebServices.Services
         {
             try
             {
-                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/customer/login";
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/login";
                 string json = @"{ ""password"": """ + pass + @""", ""userName"": """ + username + @""" }";
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, content);
@@ -53,9 +53,10 @@ namespace WebServices.Services
         {
             try
             {
-                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/customer/sign-up";
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/sign-up";
+                var ob = new DataSend() { displayName = cus.userInfo.displayName, email = cus.userInfo.email, password = cus.password, phone = cus.userInfo.phone };
                 //string json = @"{ ""password"": """ + pass + @""", ""userName"": """ + username + @""" }";
-                string json = JsonConvert.SerializeObject(cus);
+                string json = JsonConvert.SerializeObject(ob);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(url, content);
                 if (response.IsSuccessStatusCode)
@@ -68,5 +69,12 @@ namespace WebServices.Services
                 Console.WriteLine("Không thể kết nối");
             }
         }
+    }
+    class DataSend
+    {
+        public string displayName { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public string phone { get; set; }
     }
 }

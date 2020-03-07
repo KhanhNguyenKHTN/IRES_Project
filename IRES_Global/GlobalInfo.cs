@@ -13,7 +13,7 @@ namespace IRES_Global
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
 
-        public static string BaseUrl = @"http://192.168.1.99:8081/";
+        public static string BaseUrl = @"http://10.239.185.171:8081/";
 
         public static string CustomerName = @"";
 

@@ -160,9 +160,9 @@ namespace WebServices.Services
         {
             try
             {
-                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/customer/payment/order/" + IRES_Global.GlobalInfo.Order.orderId + @"?total=" + total;
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/payment/order/" + IRES_Global.GlobalInfo.Order.orderId;
 
-                var response = await client.GetAsync(url);
+                var response = await client.PostAsync(url, null);
 
                 if (response.IsSuccessStatusCode)
                 {
