@@ -1,8 +1,10 @@
-﻿using RabbitMQ.Client;
+﻿using IRES_Project.Interfaces;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace IRES_Project.WebScokets
 {
@@ -22,6 +24,10 @@ namespace IRES_Project.WebScokets
                 var channel = conn.CreateModel();
 
                 var consumer = new EventingBasicConsumer(channel);
+                var queueName = IRES_Global.GlobalInfo.CustomerCurrent.username;
+                var CustomerChanel = channel.QueueDeclare(queueName).QueueName;
+                channel.QueueBind(CustomerChanel, "directExchange", "CUSTOMER");
+
 
                 Console.WriteLine("connecting to listen");
                 consumer.Received += (model, ea) =>
@@ -32,10 +38,10 @@ namespace IRES_Project.WebScokets
 
                     if (message != null)
                     {
-                       
+                        MessagingCenter.Send<RabitConnect, string>(this, "CashSuccess", "thanh toan thanh cong");
                     }
                 };
-                channel.BasicConsume(queue: "customer_queue",
+                channel.BasicConsume(queue: CustomerChanel,
                                      autoAck: true,
                                      consumer: consumer);
 

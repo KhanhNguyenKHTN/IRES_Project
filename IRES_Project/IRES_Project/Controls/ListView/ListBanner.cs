@@ -83,12 +83,10 @@ namespace IRES_Project.Controls
                 SelectedIndex++;
             }
             SelectedItem = ItemSource[SelectedIndex];
-            Console.WriteLine("Vuot qua phai");
         }
 
         private void Left_Swiped(object sender, SwipedEventArgs e)
         {
-            Console.WriteLine("Vuot qua trai");
             if(SelectedIndex == 0)
             {
                 SelectedIndex = ItemSource.Count - 1;

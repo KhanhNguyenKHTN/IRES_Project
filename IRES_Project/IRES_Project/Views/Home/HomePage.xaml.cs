@@ -1,5 +1,7 @@
 ﻿using IRES_Project.Controls;
+using IRES_Project.Interfaces;
 using IRES_Project.Views.MainPage;
+using IRES_Project.WebScokets;
 using Model.Models.Menu;
 using System;
 using System.Collections.Generic;
@@ -17,11 +19,14 @@ namespace IRES_Project.Views.Home
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HomePage : ContentPage
 	{
-		public HomePage ()
+        WebScokets.RabitConnect rabbit;
+        public HomePage ()
 		{
 			InitializeComponent ();
             LoadFirstContent();
-            Console.WriteLine("Het Khoi tao!!!!!!!!");
+            MessagingCenter.Subscribe<RabitConnect, string>(this, "CashSuccess", (s, e) => {
+                DependencyService.Get<IAudioNoti>().NotifiMessage();
+            });
         }
 
         private async void LoadFirstContent()
@@ -69,7 +74,6 @@ namespace IRES_Project.Views.Home
                     LoadSettingPage();
                     break;
             }
-            Console.WriteLine("Het ham change!!!!!!!!");
             
         }
 
@@ -79,13 +83,11 @@ namespace IRES_Project.Views.Home
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) => {
                 z.Result = new DiscoveryPage.DiscoveryPage();
-                Console.WriteLine("Chay background!!!!!!!");
             };
             wk.RunWorkerCompleted += (s, z) =>
             {
                 gridContent.Children.Add(z.Result as DiscoveryPage.DiscoveryPage);
                 waiting.IsVisible = false;
-                Console.WriteLine("Het background!!!!!!!!");
             };
             wk.RunWorkerAsync();
         }
@@ -96,13 +98,11 @@ namespace IRES_Project.Views.Home
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) => {
                 z.Result = new NotificationPage.NotificationPage();
-                Console.WriteLine("Chay background!!!!!!!");
             };
             wk.RunWorkerCompleted += (s, z) =>
             {
                 gridContent.Children.Add(z.Result as NotificationPage.NotificationPage);
                 waiting.IsVisible = false;
-                Console.WriteLine("Het background!!!!!!!!");
             };
             wk.RunWorkerAsync();
         }
@@ -113,13 +113,11 @@ namespace IRES_Project.Views.Home
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork += (s, z) => {
                 z.Result = new GiftPage.GiftPage();
-                Console.WriteLine("Chay background!!!!!!!");
             };
             wk.RunWorkerCompleted += (s, z) =>
             {
                 gridContent.Children.Add(z.Result as GiftPage.GiftPage);
                 waiting.IsVisible = false;
-                Console.WriteLine("Het background!!!!!!!!");
             };
             wk.RunWorkerAsync();
         }
@@ -135,12 +133,13 @@ namespace IRES_Project.Views.Home
                     await DisplayAlert("Thông báo", mess.ToString(), "OK");
                 };
                 z.Result = item;
+                rabbit = new WebScokets.RabitConnect();
+                rabbit.ReceiveNotifyRabbitMQ();
             };
             wk.RunWorkerCompleted += (s, z) =>
             {
                 gridContent.Children.Add(z.Result as MainScreen);
                 waiting.IsVisible = false;
-                Console.WriteLine("Het background!!!!!!!!");
             };
             wk.RunWorkerAsync();
         }
@@ -151,13 +150,11 @@ namespace IRES_Project.Views.Home
             BackgroundWorker wk = new BackgroundWorker();
             wk.DoWork +=  (s,z) => {
                 z.Result = new Settings.SettingPage();
-                Console.WriteLine("Chay background!!!!!!!");
             };
             wk.RunWorkerCompleted += (s, z) =>
             {
                 gridContent.Children.Add(z.Result as Settings.SettingPage);
                 waiting.IsVisible = false;
-                Console.WriteLine("Het background!!!!!!!!");
             };
             wk.RunWorkerAsync();
         }
