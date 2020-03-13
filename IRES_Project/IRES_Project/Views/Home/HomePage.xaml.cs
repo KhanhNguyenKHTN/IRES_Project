@@ -26,6 +26,12 @@ namespace IRES_Project.Views.Home
             LoadFirstContent();
             MessagingCenter.Subscribe<RabitConnect, string>(this, "CashSuccess", (s, e) => {
                 DependencyService.Get<IAudioNoti>().NotifiMessage();
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    CustomerNoti.IsVisible = true;
+                    await Task.Delay(3000);
+                    CustomerNoti.IsVisible = false;
+                });
             });
         }
 

@@ -16,6 +16,13 @@
             <Grid Grid.Row="1">
                 <control:TabMenu x:Name="tmvMainMenu"></control:TabMenu>
             </Grid>
+
+            <Grid Grid.RowSpan="2" x:Name="CustomerNoti" IsVisible="False">
+                <Frame HeightRequest="100" BorderColor="#40eb34" CornerRadius="10" HorizontalOptions="Center" VerticalOptions="Start"
+                       Margin="40 100">
+                    <Label Text="Đơn hàng của bạn đã thanh toán thành công!" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                </Frame>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
