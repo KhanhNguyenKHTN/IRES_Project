@@ -55,8 +55,17 @@ namespace IRES_Project.Views.MainPage
                 HasAlert?.Invoke("Bạn chưa chọn món!", null);
                 return;
             }
-            SingleContentPage.Instance.Content = new CartPage.MainCartPage();
-            await Navigation.PushModalAsync(SingleContentPage.Instance);
+            //SingleContentPage.Instance.Content = new CartPage.MainCartPage();
+            //await Navigation.PushModalAsync(SingleContentPage.Instance);
+
+            BackgroundWorker wk = new BackgroundWorker();
+            wk.DoWork += (s, z) =>
+            {
+                z.Result = new CartPage.MainCartPage();
+            };
+            MultiContentPages.Instance.ClearAll();
+            await Navigation.PushModalAsync(MultiContentPages.Instance as Page);
+            MultiContentPages.Instance.PushPage(wk);
             //LoadingPageWithContent.Instance.PushPage(wk);
         }
 

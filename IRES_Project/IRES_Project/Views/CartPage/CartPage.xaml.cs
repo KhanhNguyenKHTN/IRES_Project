@@ -70,10 +70,10 @@ namespace IRES_Project.Views.CartPage
             }
             else
             {
-                wk.DoWork += (s, z) =>
-                {
-                    z.Result = new MainCartPage();
-                };
+                //wk.DoWork += (s, z) =>
+                //{
+                //    z.Result = new MainCartPage();
+                //};
             }
             MultiContentPages.Instance.PushPage(wk);
             //MultiContentPages.Instance.ClearAll();

@@ -121,9 +121,16 @@ namespace IRES_Project.Views.Table
                 tapItem.IsActived = false;
                 return;
             }
+            var listSelected = viewModel.ListTables.Where(x => x.IsActived == true).ToList();
+
             var fist = viewModel.ListTables.FirstOrDefault(x => x.IsActived == true);
             if (cbMultiSelect.IsChecked)
             {
+                if ((listSelected.Count > 2 && !IRES_Global.GlobalInfo.IsEmployee)
+                || (listSelected.Count > 3 && IRES_Global.GlobalInfo.IsEmployee))
+                {
+                    DisplayAlert("Số lượng bàn chọn quá nhiều!"); return;
+                }
                 var item = viewModel.ListTables.Count(x => x.IsActived == true && Math.Abs(tapItem.Number - x.Number) == 1);
                 if (item != 0) tapItem.IsActived = true;
                 else if(fist == null) tapItem.IsActived = true;
@@ -134,7 +141,10 @@ namespace IRES_Project.Views.Table
             }
             else
             {
-                if(fist != null) fist.IsActived = false;
+                foreach (var item in listSelected)
+                {
+                    item.IsActived = false;
+                }
 
                 tapItem.IsActived = true;
             }

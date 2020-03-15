@@ -82,7 +82,7 @@
             <Grid x:Name="PopUp" Grid.RowSpan="3" IsVisible="False" RowSpacing="0" BackgroundColor="#99D3D3D3">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="120"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" BackgroundColor="Black" Opacity="0.7"></Grid>

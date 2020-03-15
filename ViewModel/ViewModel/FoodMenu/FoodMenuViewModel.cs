@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Input;
 using Model.Models.Order;
 using System.Threading.Tasks;
+using Model.Models;
 
 namespace ViewModel.ViewModel.FoodMenu
 {
@@ -33,6 +34,7 @@ namespace ViewModel.ViewModel.FoodMenu
         }
 
         private ObservableCollection<object> _ListBanners;
+
 
         public ObservableCollection<object> ListBanners
         {
@@ -175,9 +177,9 @@ namespace ViewModel.ViewModel.FoodMenu
             return await service.PutOrder(order, foods);
         }
 
-        public async Task<bool> Payment(int total)
+        public async Task<bool> Payment(PaymentModel viewmodel)
         {
-            return await service.Payment(total);
+            return await service.Payment(viewmodel);
         }
     }
 }

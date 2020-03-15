@@ -35,7 +35,10 @@ namespace IRES_Project.Views.Login
                 {
                     if (res)
                     {
-
+                        if(txbUserName.Text == "nvkhanh@fit.hcmus.edu")
+                        {
+                            IRES_Global.GlobalInfo.IsEmployee = true;
+                        }
                         await Navigation.PushModalAsync(new HomePage());
                     }
                     else

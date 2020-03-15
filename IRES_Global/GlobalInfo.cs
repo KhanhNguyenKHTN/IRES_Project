@@ -25,5 +25,7 @@ namespace IRES_Global
 
         public static string TableCode;
 
+        public static bool IsEmployee = false;
+
     }
 }

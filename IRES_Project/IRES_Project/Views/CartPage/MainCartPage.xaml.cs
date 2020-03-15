@@ -16,33 +16,27 @@ namespace IRES_Project.Views.CartPage
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainCartPage : ContentView
 	{
-        FoodMenuViewModel viewmodel;
+
         ObservableCollection<CardItemModel> listItem;
         public MainCartPage ()
 		{
 			InitializeComponent ();
             lsFoods.ItemsSource = IRES_Global.GlobalInfo.ListOrders;
-            viewmodel = new FoodMenuViewModel();
             listItem = new ObservableCollection<CardItemModel>()
             {
+                                new CardItemModel()
+                {
+                    IsSelected = false,
+                    IconFont="\uf024",
+                    LabName = "Ví Momo",
+                },
                 new CardItemModel()
                 {
                     IsSelected = true,
                     IconFont="\uecc8",
                     LabName = "Tiền mặt",
-                },
-                new CardItemModel()
-                {
-                    IsSelected = false,
-                    IconFont = "\uece7",
-                    LabName = "Thẻ visa",
-                },
-                new CardItemModel()
-                {
-                    IsSelected = false,
-                    IconFont="\uf024",
-                    LabName = "Ví Momo",
                 }
+
             };
             paymentMethod.ItemsSource = listItem;
             LoadTotal();
@@ -94,31 +88,13 @@ namespace IRES_Project.Views.CartPage
 
         private void AcceptPaymentClick(object sender, EventArgs e)
         {
-            gridWaiting.IsVisible = true;
+           
             BackgroundWorker wk = new BackgroundWorker();
-            wk.DoWork += async (s, z) =>
+            wk.DoWork += (s, z) =>
             {
-                var res = await viewmodel.Payment(total);
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    if (res)
-                    {
-                        await SingleContentPage.Instance.DisplayAlert("Thông báo!", "Yêu cầu thanh toán được gửi đi. Vui lòng đợi nhân viên xác nhận", "OK");
-                        await Navigation.PopModalAsync();
-                    }
-                    else
-                    {
-                        await MultiContentPages.Instance.DisplayAlert("Thông báo", "Username hoặc password không đúng!", "Ok");
-                    }
-                    gridWaiting.IsVisible = false;
-                });
-
+                z.Result = new PaymentPage(total, listItem.IndexOf(listItem.FirstOrDefault(x=>x.IsSelected)));
             };
-            wk.RunWorkerAsync();
-
-
-
-
+            MultiContentPages.Instance.PushPage(wk);
         }
 
         private void OkOrderClicked(object sender, EventArgs e)

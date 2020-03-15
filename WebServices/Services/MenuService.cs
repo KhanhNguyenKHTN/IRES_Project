@@ -1,4 +1,5 @@
-﻿using Model.Models.Menu;
+﻿using Model.Models;
+using Model.Models.Menu;
 using Model.Models.Order;
 using Newtonsoft.Json;
 using System;
@@ -156,13 +157,17 @@ namespace WebServices.Services
 
         }
 
-        public async Task<bool> Payment(int total)
+        public async Task<bool> Payment(PaymentModel total)
         {
             try
             {
-                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/payment/order/" + IRES_Global.GlobalInfo.Order.orderId;
+                string url = IRES_Global.GlobalInfo.BaseUrl + @"/customer/payment/order";
+                SenderObject s = new SenderObject(total);
+                s.OrderId = IRES_Global.GlobalInfo.Order.orderId;
+                var body = JsonConvert.SerializeObject(s);
+                var content = new StringContent(body, Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync(url, null);
+                var response = await client.PostAsync(url, content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -179,5 +184,6 @@ namespace WebServices.Services
                 return false;
             }
         }
+        
     }
 }
