@@ -37,6 +37,8 @@ namespace WebServices.Services
                     var contentData = await response.Content.ReadAsStringAsync();
                     var item = JsonConvert.DeserializeObject<JsonLoginDetach>(contentData);
                     IRES_Global.GlobalInfo.CustomerCurrent = item.Data;
+
+
                     return true;
                 }
                 return false;

@@ -28,9 +28,11 @@ namespace IRES_Project.Views.Home
                 DependencyService.Get<IAudioNoti>().NotifiMessage();
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    CustomerNoti.IsVisible = true;
-                    await Task.Delay(3000);
-                    CustomerNoti.IsVisible = false;
+                    IRES_Global.GlobalInfo.ListNotis.Add(new Model.Models.Notification.NotificationModel()
+                    {
+                        Lable = "Thanh tooán hóa đơn",
+                        Description = $"Bạn đã thanh toán thành công hóa đơn {IRES_Global.GlobalInfo.Order.code}"
+                    });
                 });
             });
         }

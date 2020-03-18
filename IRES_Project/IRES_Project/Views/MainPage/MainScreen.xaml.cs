@@ -220,7 +220,7 @@ namespace IRES_Project.Views.MainPage
                             } else if(result.Text.Contains("ORDER"))
                             {
                                 string z = result.Text.Replace("ORDER", "");
-                                
+                                model.getOrderByCode(z);
                             }
                         }
                         catch
@@ -232,6 +232,11 @@ namespace IRES_Project.Views.MainPage
                                 string s = result.Text.Replace("TABLE", "");
                                 var res = await model.OrderTable(int.Parse(s), DateTime.Now);
                                 BtnMenu_Clicked(null, null);
+                            }
+                            else if (result.Text.Contains("ORDER"))
+                            {
+                                string z = result.Text.Replace("ORDER", "");
+                                model.getOrderByCode(z);
                             }
                         }
 

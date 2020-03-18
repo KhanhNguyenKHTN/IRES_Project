@@ -79,5 +79,45 @@ namespace WebServices.Services.Table
             }
             
         }
+
+        public async Task GetOrderByCode(string code)
+        {
+            try
+            {
+                string url = IRES_Global.GlobalInfo.BaseUrl + $"/order/code/{code}";
+                var res = await client.GetAsync(url);
+                if (res.IsSuccessStatusCode)
+                {
+                    var resContent = await res.Content.ReadAsStringAsync();
+
+                    var detach = JsonConvert.DeserializeObject<JsonOrderDetach>(resContent);
+
+                    IRES_Global.GlobalInfo.Order = detach.Data;
+                    IRES_Global.GlobalInfo.ListOrders = new ObservableCollection<Model.Models.Menu.Food>();
+                    foreach (var item in detach.Data.orderDetail)
+                    {
+
+                        var food = new Model.Models.Menu.Food()
+                        {
+                            Id = item.dish.Id,
+                            LabName = item.dish.LabName,
+                            Cost = item.dish.Cost,
+                            Description = item.dish.Description,
+                            ImagesSource = item.dish.ImagesSource,
+                            Note = item.dish.Note,
+                            OrderQuantity = item.quantity,
+                            Quantity = item.quantity,
+                            Type = item.dish.Type,
+                            RealCost = item.dish.RealCost
+                        };
+                        IRES_Global.GlobalInfo.ListOrders.Add(food);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

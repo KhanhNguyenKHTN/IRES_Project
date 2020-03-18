@@ -63,5 +63,10 @@ namespace ViewModel.ViewModel.Table
 
             return resOrder;
         }
+
+        public async void getOrderByCode(string z)
+        {
+            await service.GetOrderByCode(z);
+        }
     }
 }
