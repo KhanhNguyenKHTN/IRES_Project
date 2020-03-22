@@ -43,7 +43,7 @@ namespace IRES_Project.Views.CartPage
                 {
                     if (res)
                     {
-                        await MultiContentPages.Instance.DisplayAlert("Thông báo!", "Yêu cầu thanh toán được gửi đi. Vui lòng ra quầy để thực hiên bức còn lại", "OK");
+                        await MultiContentPages.Instance.DisplayAlert("Thông báo!", "Yêu cầu thanh toán được gửi đi. Vui lòng ra quầy để thực hiên bước còn lại", "OK");
                         await Navigation.PopModalAsync();
                     }
                     else

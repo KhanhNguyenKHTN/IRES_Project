@@ -19,7 +19,7 @@ namespace Model.Models
         private int _Tip = 0;
         public int Tip { get => _Tip; set { _Tip = value; OnPropertyChanged(); OnPropertyChanged("SFinal"); } }
 
-        public int FinalTotal { get { return Total + Total * VAT / 100 + KM + Tip; } }
+        public int FinalTotal { get { return Total + Total * VAT / 100 - KM + Tip; } }
 
         public string STotal { get { return Total.ToString("C").Remove(Total.ToString("C").Length - 2, 2); } }
 

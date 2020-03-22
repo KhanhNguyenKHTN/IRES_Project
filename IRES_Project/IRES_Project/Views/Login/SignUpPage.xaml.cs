@@ -66,8 +66,9 @@ namespace IRES_Project.Views.Login
                 await viewModel.SignUp(cus);
             };
 
-            wk.RunWorkerCompleted += (s, z) =>
+            wk.RunWorkerCompleted += async (s, z) =>
             {
+                await DisplayAlert("Thông báo", "Đăng ký thành công!", "Đăng nhập");
                 gridWaiting.IsVisible = false;
                 BtnLogin_Clicked(sender, e);
             };
